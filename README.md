@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Mi Primer Trabajo Corporate - Course Platform
 
-## Getting Started
+A complete, production-ready web application for selling your Spanish course "Mi Primer Trabajo Corporate" with integrated payment processing and user management.
 
-First, run the development server:
+## ✨ Features
+
+- 🎨 **Beautiful Landing Page** with call-to-action
+- 👤 **User Authentication** (register/login)
+- 💳 **Stripe Payment Integration** for course purchases
+- 📚 **Protected Course Content** (7 modules)
+- 🔐 **User Dashboard** with profile management
+- 📱 **Fully Responsive** design
+- 🇪🇸 **Spanish Language** interface
+- ⚡ **Built with Next.js 15** and Tailwind CSS
+
+## 🚀 Quick Start
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Create .env.local file (see docs/LOCAL_DEVELOPMENT.md for template)
+
+# 3. Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**👉 For detailed setup instructions, see [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Documentation
 
-## Learn More
+**👉 Start here: [docs/README.md](./docs/README.md)** - Complete documentation index
 
-To learn more about Next.js, take a look at the following resources:
+Quick links:
+- **[LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)** - Local setup and environment guide
+- **[NEXT_STEPS.md](./docs/NEXT_STEPS.md)** - What to do after setup
+- **[TECHNICAL_REFERENCE.md](./docs/TECHNICAL_REFERENCE.md)** - Architecture and technical decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏗️ Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── page.tsx                    # Landing page
+│   ├── sobre-mi/                   # About me page
+│   ├── curso/                      # Course page with payment
+│   ├── login/                      # Authentication
+│   ├── success/                    # Payment success
+│   ├── dashboard/                  # User dashboard
+│   │   ├── perfil/                # Profile management
+│   │   └── contenido/[moduleId]/  # Course content
+│   └── api/
+│       ├── auth/                   # Auth endpoints
+│       └── create-checkout-session/ # Stripe checkout
+└── lib/
+    └── users.ts                    # User management
+```
 
-## Deploy on Vercel
+## 🎯 Key Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Page | URL | Description |
+|------|-----|-------------|
+| Landing | `/` | Homepage with CTA |
+| About | `/sobre-mi` | Your bio and story |
+| Course | `/curso` | Course details & purchase |
+| Login | `/login` | Authentication |
+| Dashboard | `/dashboard` | User dashboard |
+| Profile | `/dashboard/perfil` | Edit profile |
+| Content | `/dashboard/contenido/[1-7]` | Course modules |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 💳 Payment Flow
+
+1. User visits course page
+2. Clicks "Comprar Ahora"
+3. Redirected to Stripe Checkout
+4. Completes payment
+5. Redirected to success page
+6. Gets access to course content
+
+## 🔧 Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS
+- **Payments**: Stripe
+- **Authentication**: Custom (file-based)
+- **Language**: TypeScript
+- **Deployment**: Vercel / AWS Lightsail / Netlify
+
+## 🛠️ Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## 🚀 Deployment
+
+**Recommended:** Vercel (easiest for Next.js)
+
+See [docs/TECHNICAL_REFERENCE.md](./docs/TECHNICAL_REFERENCE.md) for detailed deployment instructions for Vercel, AWS Lightsail, and other platforms.
+
+## 🔐 Security Notes
+
+- Passwords are hashed with SHA-256
+- Environment variables for sensitive data
+- Protected API routes
+- Content access control
+- HTTPS required in production
+
+## 📝 Customization
+
+### Change Course Price
+Edit `.env.local`:
+```env
+NEXT_PUBLIC_COURSE_PRICE="14900"  # €149.00 (in cents)
+```
+
+### Update Content
+- **About page**: `src/app/sobre-mi/page.tsx`
+- **Course modules**: `src/app/dashboard/contenido/[moduleId]/page.tsx`
+- **Landing page**: `src/app/page.tsx`
+
+### Change Colors
+Search and replace `indigo-600` with your preferred Tailwind color.
+
+## 🐛 Troubleshooting
+
+See [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md) for detailed troubleshooting steps.
+
+## 📦 Dependencies
+
+- next: ^15.5.6
+- react: ^19
+- stripe: Latest
+- tailwindcss: ^3
+- typescript: ^5
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🤝 Support
+
+For issues or questions, check the documentation files or review the code comments.
+
+---
+
+**Built with ❤️ for your course success!**

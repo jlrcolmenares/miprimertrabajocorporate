@@ -1,0 +1,146 @@
+# 📚 Documentation Index
+
+Welcome to the Mi Primer Trabajo Corporate documentation!
+
+## 📖 Available Guides
+
+### 🛠️ [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md)
+**Start here if you're setting up the project locally**
+
+This guide covers:
+- Prerequisites and environment setup
+- How to check your local environment
+- Step-by-step installation instructions
+- Environment variables configuration
+- Starting the development server
+- Testing your local setup
+- Common troubleshooting issues
+- Development workflow
+
+**Read this first if you're new to the project!**
+
+---
+
+### 🎯 [NEXT_STEPS.md](./NEXT_STEPS.md)
+**What to do after initial setup**
+
+This guide covers:
+- Critical tasks to complete first
+- Content customization instructions
+- How to add your course content
+- Testing the payment flow
+- Customization options
+- Deployment preparation
+- Launch checklist
+
+**Read this after you have the project running locally.**
+
+---
+
+### 🔧 [TECHNICAL_REFERENCE.md](./TECHNICAL_REFERENCE.md)
+**Deep dive into architecture and technical decisions**
+
+This guide covers:
+- Technology stack choices and rationale
+- Project architecture overview
+- Authentication system design
+- Payment integration details
+- Data storage approach
+- API design patterns
+- Security considerations
+- Performance optimizations
+- Deployment architecture
+- Scalability considerations
+- Future enhancement roadmap
+
+**Read this if you want to understand how everything works or need to make technical modifications.**
+
+---
+
+## 🚀 Quick Navigation
+
+### I want to...
+
+**...get started quickly**
+→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) sections 1-4
+
+**...customize my course content**
+→ Read [NEXT_STEPS.md](./NEXT_STEPS.md) section "Content Customization"
+
+**...set up Stripe payments**
+→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) "Environment Variables" + [NEXT_STEPS.md](./NEXT_STEPS.md) "Stripe Configuration"
+
+**...deploy to production**
+→ Read [TECHNICAL_REFERENCE.md](./TECHNICAL_REFERENCE.md) "Deployment Architecture"
+
+**...understand the code**
+→ Read [TECHNICAL_REFERENCE.md](./TECHNICAL_REFERENCE.md) "Architecture Overview"
+
+**...troubleshoot issues**
+→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) "Troubleshooting" section
+
+---
+
+## 📋 Recommended Reading Order
+
+### For Course Creators (Non-Technical)
+1. **LOCAL_DEVELOPMENT.md** - Setup and environment (focus on sections 1-4)
+2. **NEXT_STEPS.md** - Customization and content
+3. Skip TECHNICAL_REFERENCE.md (unless curious)
+
+### For Developers
+1. **LOCAL_DEVELOPMENT.md** - Setup and environment
+2. **TECHNICAL_REFERENCE.md** - Architecture and design
+3. **NEXT_STEPS.md** - Deployment and next steps
+
+### For Quick Setup
+1. **LOCAL_DEVELOPMENT.md** - Sections 1-4 only
+2. **NEXT_STEPS.md** - "Critical Next Steps" section
+3. Come back to other sections as needed
+
+---
+
+## 🎓 Documentation Philosophy
+
+Each document serves a specific purpose:
+
+- **LOCAL_DEVELOPMENT.md** = "How to get it running"
+- **NEXT_STEPS.md** = "What to do next"
+- **TECHNICAL_REFERENCE.md** = "How it works and why"
+
+---
+
+## 💡 Tips for Using This Documentation
+
+1. **Don't read everything at once** - Use the navigation above to find what you need
+2. **Follow the recommended order** - Each guide builds on the previous
+3. **Keep LOCAL_DEVELOPMENT.md handy** - You'll reference it often
+4. **Bookmark sections you use frequently** - Especially troubleshooting
+5. **Update docs as you learn** - Add your own notes and discoveries
+
+---
+
+## 🆘 Still Need Help?
+
+If you can't find what you're looking for:
+
+1. Check the **troubleshooting** sections in each guide
+2. Review the **main README.md** in the project root
+3. Check the **code comments** in the source files
+4. Look at the **environment template** in LOCAL_DEVELOPMENT.md
+
+---
+
+## 📝 Documentation Structure
+
+```
+docs/
+├── README.md                    # This file - documentation index
+├── LOCAL_DEVELOPMENT.md         # Setup and environment guide
+├── NEXT_STEPS.md               # Post-setup instructions
+└── TECHNICAL_REFERENCE.md      # Architecture and technical details
+```
+
+---
+
+**Happy building! 🚀**
