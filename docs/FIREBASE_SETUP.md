@@ -124,11 +124,6 @@ The file will look like:
 Update your `.env.local` file with Firebase credentials:
 
 ```env
-# Existing variables...
-DATABASE_URL="file:./dev.db"
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key"
-
 # Firebase Client Configuration (from Step 4)
 NEXT_PUBLIC_FIREBASE_API_KEY="AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-project.firebaseapp.com"
@@ -355,6 +350,7 @@ users/
       ├── email: string
       ├── name: string
       ├── hasPaid: boolean
+      ├── completedModules?: string[]
       ├── stripeCustomerId?: string
       ├── stripeSessionId?: string
       ├── createdAt: timestamp

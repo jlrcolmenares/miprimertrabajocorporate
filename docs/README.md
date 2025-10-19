@@ -38,6 +38,21 @@ This guide covers:
 
 ---
 
+### 💳 [STRIPE_SETUP.md](./STRIPE_SETUP.md)
+**Set up Stripe payments**
+
+This guide covers:
+- Getting Stripe API keys
+- Setting up webhooks for local development
+- Configuring email receipts
+- Testing payment flow
+- Production webhook setup
+- Troubleshooting payment issues
+
+**Read this after Firebase setup to enable payments.**
+
+---
+
 ### 🎯 [NEXT_STEPS.md](./NEXT_STEPS.md)
 **What to do after initial setup**
 
@@ -88,7 +103,7 @@ This guide covers:
 → Read [NEXT_STEPS.md](./NEXT_STEPS.md) section "Content Customization"
 
 **...set up Stripe payments**
-→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) "Environment Variables" + [NEXT_STEPS.md](./NEXT_STEPS.md) "Stripe Configuration"
+→ Read [STRIPE_SETUP.md](./STRIPE_SETUP.md)
 
 **...deploy to production**
 → Read [TECHNICAL_REFERENCE.md](./TECHNICAL_REFERENCE.md) "Deployment Architecture"
@@ -106,20 +121,23 @@ This guide covers:
 ### For Course Creators (Non-Technical)
 1. **FIREBASE_SETUP.md** - Set up Firebase (REQUIRED)
 2. **LOCAL_DEVELOPMENT.md** - Setup and environment (focus on sections 1-4)
-3. **NEXT_STEPS.md** - Customization and content
-4. Skip TECHNICAL_REFERENCE.md (unless curious)
+3. **STRIPE_SETUP.md** - Set up payments
+4. **NEXT_STEPS.md** - Customization and content
+5. Skip TECHNICAL_REFERENCE.md (unless curious)
 
 ### For Developers
 1. **FIREBASE_SETUP.md** - Set up Firebase (REQUIRED)
 2. **LOCAL_DEVELOPMENT.md** - Setup and environment
-3. **TECHNICAL_REFERENCE.md** - Architecture and design
-4. **NEXT_STEPS.md** - Deployment and next steps
+3. **STRIPE_SETUP.md** - Set up payments
+4. **TECHNICAL_REFERENCE.md** - Architecture and design
+5. **NEXT_STEPS.md** - Deployment and next steps
 
 ### For Quick Setup
 1. **FIREBASE_SETUP.md** - Complete Firebase setup (REQUIRED)
 2. **LOCAL_DEVELOPMENT.md** - Sections 1-4 only
-3. **NEXT_STEPS.md** - "Critical Next Steps" section
-4. Come back to other sections as needed
+3. **STRIPE_SETUP.md** - Set up webhook for payments
+4. **NEXT_STEPS.md** - "Critical Next Steps" section
+5. Come back to other sections as needed
 
 ---
 
@@ -129,6 +147,7 @@ Each document serves a specific purpose:
 
 - **FIREBASE_SETUP.md** = "Set up authentication and database"
 - **LOCAL_DEVELOPMENT.md** = "How to get it running"
+- **STRIPE_SETUP.md** = "Set up payments"
 - **NEXT_STEPS.md** = "What to do next"
 - **TECHNICAL_REFERENCE.md** = "How it works and why"
 
@@ -162,6 +181,7 @@ docs/
 ├── README.md                    # This file - documentation index
 ├── FIREBASE_SETUP.md           # Firebase Authentication & Firestore setup
 ├── LOCAL_DEVELOPMENT.md         # Setup and environment guide
+├── STRIPE_SETUP.md             # Stripe payment integration setup
 ├── NEXT_STEPS.md               # Post-setup instructions
 └── TECHNICAL_REFERENCE.md      # Architecture and technical details
 ```
