@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import PaymentButton from "@/components/PaymentButton";
 
 interface User {
   uid: string;
@@ -17,13 +18,56 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userStr = localStorage.getItem("user");
-    if (!userStr) {
-      router.push("/login");
-      return;
-    }
-    setUser(JSON.parse(userStr));
-    setLoading(false);
+    const loadUser = async () => {
+      const userStr = localStorage.getItem("user");
+      const idToken = localStorage.getItem("idToken");
+      
+      if (!userStr || !idToken) {
+        router.push("/login");
+        return;
+      }
+
+      const localUser = JSON.parse(userStr);
+      setUser(localUser);
+
+      // Check if returning from payment
+      const urlParams = new URLSearchParams(window.location.search);
+      const paymentStatus = urlParams.get("payment");
+
+      if (paymentStatus === "success") {
+        // Refresh user data from Firestore after payment
+        try {
+          const response = await fetch("/api/auth/get-user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${idToken}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setUser(data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            
+            // Show success message
+            alert("¡Pago exitoso! Ahora tienes acceso completo al curso 🎉");
+            
+            // Clean URL
+            window.history.replaceState({}, "", "/dashboard");
+          }
+        } catch (error) {
+          console.error("Error refreshing user data:", error);
+        }
+      } else if (paymentStatus === "cancelled") {
+        alert("Pago cancelado. Puedes intentarlo de nuevo cuando quieras.");
+        window.history.replaceState({}, "", "/dashboard");
+      }
+
+      setLoading(false);
+    };
+
+    loadUser();
   }, [router]);
 
   const handleLogout = () => {
@@ -189,20 +233,8 @@ export default function Dashboard() {
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-md p-12 text-center">
-            <div className="text-6xl mb-4">🔒</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Contenido Bloqueado
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Adquiere el curso para acceder a todo el contenido
-            </p>
-            <Link
-              href="/curso"
-              className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors"
-            >
-              Comprar Curso
-            </Link>
+          <div className="bg-white rounded-xl shadow-md p-8">
+            <PaymentButton hasPaid={user.hasPaid} />
           </div>
         )}
       </main>
