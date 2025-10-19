@@ -9,6 +9,7 @@ export interface FirestoreUser {
   hasPaid: boolean;
   stripeCustomerId?: string;
   stripeSessionId?: string;
+  completedModules?: string[]; // Array of completed module IDs
   createdAt: Date;
   updatedAt: Date;
 }
@@ -153,4 +154,42 @@ export async function getAllUsers(limit: number = 100): Promise<FirestoreUser[]>
     uid: doc.id,
     ...doc.data(),
   })) as FirestoreUser[];
+}
+
+/**
+ * Mark a module as completed for a user
+ */
+export async function markModuleAsCompleted(
+  uid: string,
+  moduleId: string
+): Promise<void> {
+  const userRef = adminDb.collection(USERS_COLLECTION).doc(uid);
+  
+  await userRef.update({
+    completedModules: FieldValue.arrayUnion(moduleId),
+    updatedAt: new Date(),
+  });
+}
+
+/**
+ * Mark a module as incomplete for a user
+ */
+export async function markModuleAsIncomplete(
+  uid: string,
+  moduleId: string
+): Promise<void> {
+  const userRef = adminDb.collection(USERS_COLLECTION).doc(uid);
+  
+  await userRef.update({
+    completedModules: FieldValue.arrayRemove(moduleId),
+    updatedAt: new Date(),
+  });
+}
+
+/**
+ * Get user's completed modules
+ */
+export async function getUserCompletedModules(uid: string): Promise<string[]> {
+  const user = await getUserByUid(uid);
+  return user?.completedModules || [];
 }

@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import PaymentButton from "@/components/PaymentButton";
+import CourseSection from "@/components/CourseSection";
+import { courseStructure, getTotalModuleCount } from "@/data/courseStructure";
 
 interface User {
   uid: string;
   email: string;
   name: string;
   hasPaid: boolean;
+  completedModules?: string[];
 }
 
 export default function Dashboard() {
@@ -72,7 +75,55 @@ export default function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("idToken");
     router.push("/");
+  };
+
+  const handleModuleToggle = async (moduleId: string, completed: boolean) => {
+    const idToken = localStorage.getItem("idToken");
+    
+    if (!idToken) {
+      alert("Sesión expirada. Por favor, inicia sesión de nuevo.");
+      router.push("/login");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/modules/toggle-completion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ moduleId, completed }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Update local user state
+        setUser((prevUser) => {
+          if (!prevUser) return null;
+          return {
+            ...prevUser,
+            completedModules: data.completedModules,
+          };
+        });
+
+        // Update localStorage
+        const userStr = localStorage.getItem("user");
+        if (userStr) {
+          const localUser = JSON.parse(userStr);
+          localUser.completedModules = data.completedModules;
+          localStorage.setItem("user", JSON.stringify(localUser));
+        }
+      } else {
+        alert("Error al actualizar el módulo");
+      }
+    } catch (error) {
+      console.error("Error toggling module:", error);
+      alert("Error al actualizar el módulo");
+    }
   };
 
   if (loading) {
@@ -147,19 +198,11 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl shadow-md p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Estado del Curso</h3>
             {user.hasPaid ? (
-              <div>
-                <div className="flex items-center text-green-600 mb-4">
-                  <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="font-semibold">Acceso Activo</span>
-                </div>
-                <Link
-                  href="/dashboard/contenido"
-                  className="block w-full text-center bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
-                >
-                  Ver Contenido
-                </Link>
+              <div className="flex items-center text-green-600">
+                <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="font-semibold">Acceso Activo</span>
               </div>
             ) : (
               <div>
@@ -183,13 +226,21 @@ export default function Dashboard() {
               <div>
                 <p className="text-sm text-gray-600">Progreso</p>
                 <p className="text-2xl font-bold text-indigo-600">
-                  {user.hasPaid ? "0%" : "N/A"}
+                  {user.hasPaid
+                    ? `${Math.round(
+                        ((user.completedModules?.length || 0) /
+                          getTotalModuleCount()) *
+                          100
+                      )}%`
+                    : "N/A"}
                 </p>
               </div>
               <div>
                 <p className="text-sm text-gray-600">Módulos Completados</p>
                 <p className="text-2xl font-bold text-indigo-600">
-                  {user.hasPaid ? "0/7" : "N/A"}
+                  {user.hasPaid
+                    ? `${user.completedModules?.length || 0}/${getTotalModuleCount()}`
+                    : "N/A"}
                 </p>
               </div>
             </div>
@@ -198,39 +249,15 @@ export default function Dashboard() {
 
         {/* Course Content Section */}
         {user.hasPaid ? (
-          <div className="bg-white rounded-xl shadow-md p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Contenido del Curso
-            </h2>
-            <div className="space-y-4">
-              {[
-                "Módulo 1: Preparación para tu primer día",
-                "Módulo 2: Cultura corporativa y adaptación",
-                "Módulo 3: Comunicación efectiva en el trabajo",
-                "Módulo 4: Gestión del tiempo y productividad",
-                "Módulo 5: Desarrollo de carrera profesional",
-                "Módulo 6: Networking y relaciones laborales",
-                "Módulo 7: Recursos adicionales y conclusiones",
-              ].map((module, index) => (
-                <Link
-                  key={index}
-                  href={`/dashboard/contenido/${index + 1}`}
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-indigo-600 hover:bg-indigo-50 transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold mr-4">
-                        {index + 1}
-                      </div>
-                      <span className="font-medium text-gray-900">{module}</span>
-                    </div>
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </Link>
-              ))}
-            </div>
+          <div className="space-y-6">
+            {courseStructure.map((section) => (
+              <CourseSection
+                key={section.id}
+                section={section}
+                completedModules={user.completedModules || []}
+                onModuleToggle={handleModuleToggle}
+              />
+            ))}
           </div>
         ) : (
           <div className="bg-white rounded-xl shadow-md p-8">

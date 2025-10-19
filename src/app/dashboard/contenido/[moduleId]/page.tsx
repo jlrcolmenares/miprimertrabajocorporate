@@ -3,127 +3,30 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
+import { getModuleById, getSectionByModuleId } from "@/data/courseStructure";
+import { getModuleContent } from "@/data/moduleContent";
 
 interface User {
-  id: string;
+  uid: string;
   email: string;
   name: string;
   hasPaid: boolean;
+  completedModules?: string[];
 }
 
-const modules = [
-  {
-    id: 1,
-    title: "Preparación para tu primer día",
-    description: "Todo lo que necesitas saber antes de empezar",
-    content: `
-# Preparación para tu primer día
-
-## Introducción
-Tu primer día en una empresa corporativa puede ser emocionante y abrumador al mismo tiempo. Esta guía te ayudará a prepararte adecuadamente.
-
-## Antes del primer día
-
-### Documentación
-- Asegúrate de tener todos los documentos necesarios
-- Revisa el email de bienvenida
-- Confirma la hora y lugar de llegada
-
-### Vestimenta
-- Investiga el código de vestimenta de la empresa
-- Prepara tu ropa con anticipación
-- Cuando tengas dudas, es mejor ir más formal
-
-### Mentalidad
-- Descansa bien la noche anterior
-- Llega temprano (15-20 minutos antes)
-- Mantén una actitud positiva y abierta
-
-## Durante el primer día
-
-### Primeras impresiones
-- Saluda a todos con una sonrisa
-- Presenta tu nombre claramente
-- Muestra interés genuino en conocer a tus compañeros
-
-### Toma notas
-- Lleva una libreta contigo
-- Anota nombres, procesos y tareas
-- No tengas miedo de hacer preguntas
-
-### Observa y aprende
-- Presta atención a la cultura de la empresa
-- Observa cómo se comunican los demás
-- Identifica a las personas clave en tu equipo
-
-## Consejos adicionales
-
-1. **Sé puntual**: La puntualidad es fundamental en el ambiente corporativo
-2. **Sé proactivo**: Ofrece ayuda cuando sea apropiado
-3. **Sé paciente**: No esperes entender todo el primer día
-4. **Sé auténtico**: Muestra tu verdadera personalidad profesional
-
-## Tareas para completar
-
-- [ ] Revisar el organigrama de la empresa
-- [ ] Configurar tu estación de trabajo
-- [ ] Conocer a tu equipo inmediato
-- [ ] Entender tus primeras responsabilidades
-- [ ] Programar reuniones 1-on-1 con tu supervisor
-
----
-
-**Recuerda**: Todos han tenido un primer día. Es normal sentirse nervioso, pero con la preparación adecuada, tendrás éxito.
-    `,
-  },
-  {
-    id: 2,
-    title: "Cultura corporativa y adaptación",
-    description: "Cómo integrarte exitosamente en tu nueva empresa",
-    content: `
-# Cultura corporativa y adaptación
-
-## ¿Qué es la cultura corporativa?
-
-La cultura corporativa son los valores, creencias, comportamientos y prácticas que caracterizan a una organización.
-
-## Elementos clave
-
-### Valores de la empresa
-- Identifica los valores fundamentales
-- Observa cómo se manifiestan en el día a día
-- Alinea tus acciones con estos valores
-
-### Comunicación
-- Aprende el estilo de comunicación preferido
-- Entiende la jerarquía y protocolos
-- Adapta tu forma de comunicarte
-
-### Horarios y expectativas
-- Comprende las expectativas de horario
-- Observa los patrones de trabajo del equipo
-- Encuentra el equilibrio entre vida personal y laboral
-
-## Proceso de adaptación
-
-1. **Primeras semanas**: Observa y aprende
-2. **Primer mes**: Comienza a contribuir activamente
-3. **Primeros tres meses**: Establece tu ritmo y estilo
-
----
-
-[Aquí puedes agregar tu contenido específico sobre cultura corporativa]
-    `,
-  },
-  // Add more modules as needed
-];
-
-export default function ModuleContent() {
+export default function ModulePage() {
   const router = useRouter();
   const params = useParams();
-  const moduleId = parseInt(params.moduleId as string);
+  const moduleId = params.moduleId as string;
+  
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [toggleLoading, setToggleLoading] = useState(false);
+
+  const module = getModuleById(moduleId);
+  const section = getSectionByModuleId(moduleId);
+  const content = getModuleContent(moduleId);
 
   useEffect(() => {
     const userStr = localStorage.getItem("user");
@@ -131,20 +34,62 @@ export default function ModuleContent() {
       router.push("/login");
       return;
     }
-    const userData = JSON.parse(userStr);
-    setUser(userData);
 
+    const userData = JSON.parse(userStr);
+    
     if (!userData.hasPaid) {
-      router.push("/curso");
+      router.push("/dashboard");
       return;
     }
 
+    setUser(userData);
+    setIsCompleted(userData.completedModules?.includes(moduleId) || false);
     setLoading(false);
-  }, [router]);
+  }, [router, moduleId]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    router.push("/");
+  const handleToggleCompletion = async () => {
+    const idToken = localStorage.getItem("idToken");
+    
+    if (!idToken) {
+      alert("Sesión expirada. Por favor, inicia sesión de nuevo.");
+      router.push("/login");
+      return;
+    }
+
+    setToggleLoading(true);
+
+    try {
+      const response = await fetch("/api/modules/toggle-completion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ moduleId, completed: !isCompleted }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIsCompleted(!isCompleted);
+        
+        // Update localStorage
+        if (user) {
+          const updatedUser = {
+            ...user,
+            completedModules: data.completedModules,
+          };
+          setUser(updatedUser);
+          localStorage.setItem("user", JSON.stringify(updatedUser));
+        }
+      } else {
+        alert("Error al actualizar el módulo");
+      }
+    } catch (error) {
+      console.error("Error toggling module:", error);
+      alert("Error al actualizar el módulo");
+    } finally {
+      setToggleLoading(false);
+    }
   };
 
   if (loading) {
@@ -158,17 +103,16 @@ export default function ModuleContent() {
     );
   }
 
-  if (!user) return null;
-
-  const module = modules.find((m) => m.id === moduleId);
-
-  if (!module) {
+  if (!module || !content) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Módulo no encontrado</h1>
-          <Link href="/dashboard" className="text-indigo-600 hover:text-indigo-800">
-            Volver al Dashboard
+          <Link
+            href="/dashboard"
+            className="text-indigo-600 hover:text-indigo-700 font-semibold"
+          >
+            ← Volver al dashboard
           </Link>
         </div>
       </div>
@@ -179,88 +123,146 @@ export default function ModuleContent() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0">
-              <Link href="/">
-                <h1 className="text-2xl font-bold text-indigo-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/dashboard" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
-                Dashboard
-              </Link>
-              <span className="text-gray-700">{user.name}</span>
-              <button
-                onClick={handleLogout}
-                className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+            <Link
+              href="/dashboard"
+              className="flex items-center text-indigo-600 hover:text-indigo-700 font-semibold"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                Cerrar Sesión
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Volver al dashboard
+            </Link>
           </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="mb-8">
-          <Link href="/dashboard" className="text-indigo-600 hover:text-indigo-800 mb-4 inline-block">
-            ← Volver al Dashboard
-          </Link>
-          <div className="flex items-center mb-4">
-            <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-              {moduleId}
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Module Header */}
+        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex-1">
+              {section && (
+                <p className="text-sm text-indigo-600 font-semibold mb-2">
+                  {section.title}
+                </p>
+              )}
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {module.title}
               </h1>
-              <p className="text-gray-600 mt-1">
-                {module.description}
-              </p>
+              <p className="text-gray-600 mb-4">{module.description}</p>
+              <div className="flex items-center gap-4 text-sm text-gray-500">
+                <span className="flex items-center gap-1">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  {module.duration}
+                </span>
+              </div>
             </div>
           </div>
+
+          {/* Completion Toggle */}
+          <button
+            onClick={handleToggleCompletion}
+            disabled={toggleLoading}
+            className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all ${
+              isCompleted
+                ? "bg-green-100 text-green-800 hover:bg-green-200"
+                : "bg-indigo-600 text-white hover:bg-indigo-700"
+            } disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            {toggleLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-current"></div>
+                Actualizando...
+              </>
+            ) : isCompleted ? (
+              <>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                Módulo completado
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                Marcar como completado
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Content */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-8">
-          <div className="prose prose-lg max-w-none">
-            <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
-              {module.content}
-            </div>
-          </div>
+        {/* Module Content */}
+        <div className="bg-white rounded-xl shadow-md p-8">
+          {content}
         </div>
 
-        {/* Navigation between modules */}
-        <div className="flex justify-between items-center">
-          {moduleId > 1 ? (
-            <Link
-              href={`/dashboard/contenido/${moduleId - 1}`}
-              className="flex items-center text-indigo-600 hover:text-indigo-800 font-semibold"
+        {/* Navigation Footer */}
+        <div className="mt-6 flex justify-center">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center px-6 py-3 bg-white rounded-lg shadow-md text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Módulo Anterior
-            </Link>
-          ) : (
-            <div></div>
-          )}
-
-          {moduleId < 7 ? (
-            <Link
-              href={`/dashboard/contenido/${moduleId + 1}`}
-              className="flex items-center text-indigo-600 hover:text-indigo-800 font-semibold"
-            >
-              Siguiente Módulo
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          ) : (
-            <div></div>
-          )}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Volver a todos los módulos
+          </Link>
         </div>
       </main>
     </div>
