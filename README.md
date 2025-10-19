@@ -19,21 +19,26 @@ A complete, production-ready web application for selling your Spanish course "Mi
 # 1. Install dependencies
 npm install
 
-# 2. Create .env.local file (see docs/LOCAL_DEVELOPMENT.md for template)
+# 2. Set up Firebase (REQUIRED - see docs/FIREBASE_SETUP.md)
 
-# 3. Start development server
+# 3. Create .env.local file with Firebase credentials
+
+# 4. Start development server
 npm run dev
 ```
 
 Visit http://localhost:3000
 
-**👉 For detailed setup instructions, see [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)**
+**⚠️ IMPORTANT: You MUST set up Firebase first!**
+**👉 See [docs/FIREBASE_SETUP.md](./docs/FIREBASE_SETUP.md) for Firebase setup**
+**👉 See [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md) for detailed instructions**
 
 ## 📖 Documentation
 
 **👉 Start here: [docs/README.md](./docs/README.md)** - Complete documentation index
 
 Quick links:
+- **[FIREBASE_SETUP.md](./docs/FIREBASE_SETUP.md)** - Firebase Authentication & Firestore setup (REQUIRED)
 - **[LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)** - Local setup and environment guide
 - **[NEXT_STEPS.md](./docs/NEXT_STEPS.md)** - What to do after setup
 - **[TECHNICAL_REFERENCE.md](./docs/TECHNICAL_REFERENCE.md)** - Architecture and technical decisions
@@ -84,7 +89,8 @@ src/
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS
 - **Payments**: Stripe
-- **Authentication**: Custom (file-based)
+- **Authentication**: Firebase Authentication
+- **Database**: Cloud Firestore
 - **Language**: TypeScript
 - **Deployment**: Vercel / AWS Lightsail / Netlify
 

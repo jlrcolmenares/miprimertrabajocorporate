@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface User {
-  id: string;
+  uid: string;
   email: string;
   name: string;
   hasPaid: boolean;
@@ -55,7 +55,7 @@ export default function Perfil() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: user?.id,
+          uid: user?.uid,
           name: formData.name,
           email: formData.email,
           currentPassword: formData.currentPassword,

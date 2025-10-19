@@ -4,6 +4,23 @@ Welcome to the Mi Primer Trabajo Corporate documentation!
 
 ## 📖 Available Guides
 
+### 🔥 [FIREBASE_SETUP.md](./FIREBASE_SETUP.md)
+**REQUIRED: Set up Firebase Authentication and Firestore**
+
+This guide covers:
+- Creating a Firebase project
+- Enabling Firebase Authentication
+- Setting up Firestore database
+- Getting Firebase configuration
+- Configuring environment variables
+- Setting up security rules
+- Testing the setup
+- Troubleshooting common issues
+
+**⚠️ You MUST complete this before the app will work!**
+
+---
+
 ### 🛠️ [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md)
 **Start here if you're setting up the project locally**
 
@@ -17,7 +34,7 @@ This guide covers:
 - Common troubleshooting issues
 - Development workflow
 
-**Read this first if you're new to the project!**
+**Read this after Firebase setup!**
 
 ---
 
@@ -62,7 +79,10 @@ This guide covers:
 ### I want to...
 
 **...get started quickly**
-→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) sections 1-4
+→ Read [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) first, then [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) sections 1-4
+
+**...set up Firebase**
+→ Read [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) - REQUIRED FIRST STEP
 
 **...customize my course content**
 → Read [NEXT_STEPS.md](./NEXT_STEPS.md) section "Content Customization"
@@ -77,26 +97,29 @@ This guide covers:
 → Read [TECHNICAL_REFERENCE.md](./TECHNICAL_REFERENCE.md) "Architecture Overview"
 
 **...troubleshoot issues**
-→ Read [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) "Troubleshooting" section
+→ Read [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) or [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md) "Troubleshooting" sections
 
 ---
 
 ## 📋 Recommended Reading Order
 
 ### For Course Creators (Non-Technical)
-1. **LOCAL_DEVELOPMENT.md** - Setup and environment (focus on sections 1-4)
-2. **NEXT_STEPS.md** - Customization and content
-3. Skip TECHNICAL_REFERENCE.md (unless curious)
+1. **FIREBASE_SETUP.md** - Set up Firebase (REQUIRED)
+2. **LOCAL_DEVELOPMENT.md** - Setup and environment (focus on sections 1-4)
+3. **NEXT_STEPS.md** - Customization and content
+4. Skip TECHNICAL_REFERENCE.md (unless curious)
 
 ### For Developers
-1. **LOCAL_DEVELOPMENT.md** - Setup and environment
-2. **TECHNICAL_REFERENCE.md** - Architecture and design
-3. **NEXT_STEPS.md** - Deployment and next steps
+1. **FIREBASE_SETUP.md** - Set up Firebase (REQUIRED)
+2. **LOCAL_DEVELOPMENT.md** - Setup and environment
+3. **TECHNICAL_REFERENCE.md** - Architecture and design
+4. **NEXT_STEPS.md** - Deployment and next steps
 
 ### For Quick Setup
-1. **LOCAL_DEVELOPMENT.md** - Sections 1-4 only
-2. **NEXT_STEPS.md** - "Critical Next Steps" section
-3. Come back to other sections as needed
+1. **FIREBASE_SETUP.md** - Complete Firebase setup (REQUIRED)
+2. **LOCAL_DEVELOPMENT.md** - Sections 1-4 only
+3. **NEXT_STEPS.md** - "Critical Next Steps" section
+4. Come back to other sections as needed
 
 ---
 
@@ -104,6 +127,7 @@ This guide covers:
 
 Each document serves a specific purpose:
 
+- **FIREBASE_SETUP.md** = "Set up authentication and database"
 - **LOCAL_DEVELOPMENT.md** = "How to get it running"
 - **NEXT_STEPS.md** = "What to do next"
 - **TECHNICAL_REFERENCE.md** = "How it works and why"
@@ -136,6 +160,7 @@ If you can't find what you're looking for:
 ```
 docs/
 ├── README.md                    # This file - documentation index
+├── FIREBASE_SETUP.md           # Firebase Authentication & Firestore setup
 ├── LOCAL_DEVELOPMENT.md         # Setup and environment guide
 ├── NEXT_STEPS.md               # Post-setup instructions
 └── TECHNICAL_REFERENCE.md      # Architecture and technical details

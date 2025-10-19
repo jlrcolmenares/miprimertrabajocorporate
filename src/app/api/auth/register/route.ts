@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createUser } from "@/lib/users";
+import { adminAuth } from "@/lib/firebase-admin";
+import { createUserDocument } from "@/lib/firestore-users";
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,24 +20,53 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const user = createUser(email, name, password);
+    // Create user in Firebase Authentication
+    const userRecord = await adminAuth.createUser({
+      email: email.toLowerCase(),
+      password,
+      displayName: name,
+    });
 
-    // Don't send password back
-    const { password: _, ...userWithoutPassword } = user;
+    // Create user document in Firestore
+    const userData = await createUserDocument(userRecord.uid, email, name);
+
+    // Create custom token for immediate login
+    const customToken = await adminAuth.createCustomToken(userRecord.uid);
 
     return NextResponse.json({
       message: "Usuario creado exitosamente",
-      user: userWithoutPassword,
+      user: {
+        uid: userData.uid,
+        email: userData.email,
+        name: userData.name,
+        hasPaid: userData.hasPaid,
+      },
+      token: customToken,
     });
   } catch (error: any) {
-    if (error.message === "User already exists") {
+    console.error("Error creating user:", error);
+    
+    if (error.code === "auth/email-already-exists") {
       return NextResponse.json(
         { error: "Este email ya está registrado" },
         { status: 400 }
       );
     }
+
+    if (error.code === "auth/invalid-email") {
+      return NextResponse.json(
+        { error: "Email inválido" },
+        { status: 400 }
+      );
+    }
+
+    if (error.code === "auth/weak-password") {
+      return NextResponse.json(
+        { error: "La contraseña es muy débil" },
+        { status: 400 }
+      );
+    }
     
-    console.error("Error creating user:", error);
     return NextResponse.json(
       { error: "Error al crear usuario" },
       { status: 500 }

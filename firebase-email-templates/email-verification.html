@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifica tu correo electrónico</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin: 0 0 20px 0;
+        }
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4b5563;
+            margin: 0 0 30px 0;
+        }
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .verify-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            transition: transform 0.2s;
+        }
+        .verify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(79, 70, 229, 0.4);
+        }
+        .alternative-link {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border-left: 4px solid #4f46e5;
+        }
+        .alternative-link p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .link-text {
+            word-break: break-all;
+            font-size: 12px;
+            color: #4f46e5;
+            font-family: monospace;
+        }
+        .footer {
+            background-color: #f9fafb;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        .footer-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 5px 0;
+        }
+        .security-notice {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fef3c7;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+        .security-notice p {
+            margin: 0;
+            font-size: 14px;
+            color: #92400e;
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="icon">✉️</div>
+            <h1 class="logo">Mi Primer Trabajo Corporate</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2 class="greeting">¡Hola %DISPLAY_NAME%!</h2>
+            
+            <p class="message">
+                Gracias por registrarte en <strong>Mi Primer Trabajo Corporate</strong>. 
+                Estamos emocionados de tenerte con nosotros en este viaje hacia tu desarrollo profesional.
+            </p>
+
+            <p class="message">
+                Para completar tu registro y acceder a todo el contenido del curso, 
+                necesitamos verificar tu dirección de correo electrónico.
+            </p>
+
+            <!-- Verify Button -->
+            <div class="button-container">
+                <a href="%LINK%" class="verify-button">
+                    Verificar mi correo electrónico
+                </a>
+            </div>
+
+            <!-- Alternative Link -->
+            <div class="alternative-link">
+                <p><strong>¿El botón no funciona?</strong></p>
+                <p>Copia y pega este enlace en tu navegador:</p>
+                <p class="link-text">%LINK%</p>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <p>
+                    <strong>🔒 Nota de seguridad:</strong> 
+                    Si no creaste una cuenta en Mi Primer Trabajo Corporate, 
+                    puedes ignorar este correo de forma segura.
+                </p>
+            </div>
+
+            <p class="message" style="margin-top: 30px;">
+                Este enlace expirará en <strong>24 horas</strong> por motivos de seguridad.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="footer-text">
+                <strong>Mi Primer Trabajo Corporate</strong>
+            </p>
+            <p class="footer-text">
+                Tu guía para el éxito profesional
+            </p>
+            <p class="footer-text" style="margin-top: 20px; font-size: 12px;">
+                © 2025 Mi Primer Trabajo Corporate. Todos los derechos reservados.
+            </p>
+            <p class="footer-text" style="font-size: 12px; color: #9ca3af;">
+                Este es un correo automático, por favor no respondas a este mensaje.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

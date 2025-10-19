@@ -3,11 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithCustomToken, sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
 export default function Login() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,31 +24,194 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      if (isLogin) {
+        // Login with Firebase Auth
+        console.log('Attempting login with:', formData.email);
+        console.log('Auth object:', auth);
+        
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        
+        console.log('Login successful:', userCredential.user.uid);
 
-      const data = await response.json();
+        // Get ID token
+        const idToken = await userCredential.user.getIdToken();
 
-      if (response.ok) {
-        // Store user session
-        localStorage.setItem("user", JSON.stringify(data.user));
-        router.push("/dashboard");
+        // Fetch user data from Firestore
+        let response = await fetch("/api/auth/get-user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({ uid: userCredential.user.uid }),
+        });
+
+        let data = await response.json();
+
+        // If user not found in Firestore, sync from Firebase Auth
+        if (response.status === 404) {
+          console.log("User not found in Firestore, syncing...");
+          
+          const syncResponse = await fetch("/api/auth/sync-user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${idToken}`,
+            },
+          });
+
+          const syncData = await syncResponse.json();
+          
+          if (syncResponse.ok) {
+            data = syncData;
+          } else {
+            alert("Error al sincronizar usuario. Por favor, intenta de nuevo.");
+            return;
+          }
+        }
+
+        if (response.ok || data.user) {
+          // Store user data
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("idToken", idToken);
+          router.push("/dashboard");
+        } else {
+          alert(data.error || "Error al obtener datos del usuario");
+        }
       } else {
-        alert(data.error || "Error al procesar la solicitud");
+        // Register new user
+        const response = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Sign in with custom token
+          await signInWithCustomToken(auth, data.token);
+          
+          // Get ID token
+          const user = auth.currentUser;
+          if (user) {
+            const idToken = await user.getIdToken();
+            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("idToken", idToken);
+            router.push("/dashboard");
+          }
+        } else {
+          alert(data.error || "Error al crear usuario");
+        }
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Hubo un error. Por favor, intenta de nuevo.");
+    } catch (error: any) {
+      console.error("Full error object:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      
+      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+        alert("Email o contraseña incorrectos");
+      } else if (error.code === "auth/email-already-in-use") {
+        alert("Este email ya está registrado");
+      } else if (error.code === "auth/weak-password") {
+        alert("La contraseña es muy débil");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Email inválido");
+      } else if (error.code === "auth/invalid-api-key") {
+        alert("Error de configuración: API key inválida. Verifica tu .env.local");
+      } else if (error.code === "auth/network-request-failed") {
+        alert("Error de red. Verifica tu conexión a internet.");
+      } else {
+        alert(`Error: ${error.message || "Hubo un error. Por favor, intenta de nuevo."}`);
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetLoading(true);
+
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      alert("✅ Correo de restablecimiento enviado. Revisa tu bandeja de entrada.");
+      setShowResetPassword(false);
+      setResetEmail("");
+    } catch (error: any) {
+      console.error("Error sending password reset:", error);
+      
+      if (error.code === "auth/user-not-found") {
+        alert("No existe una cuenta con este email");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Email inválido");
+      } else {
+        alert("Error al enviar el correo. Intenta de nuevo.");
+      }
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
+  // Password reset modal
+  if (showResetPassword) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
+        <div className="max-w-md w-full">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-indigo-600 mb-2">
+              Restablecer Contraseña
+            </h1>
+            <p className="text-gray-600">
+              Te enviaremos un enlace para restablecer tu contraseña
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <form onSubmit={handlePasswordReset} className="space-y-4">
+              <div>
+                <label htmlFor="reset-email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="reset-email"
+                  required
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  placeholder="tu@email.com"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={resetLoading}
+                className="w-full bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {resetLoading ? "Enviando..." : "Enviar enlace de restablecimiento"}
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowResetPassword(false)}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                ← Volver al inicio de sesión
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
@@ -119,9 +287,20 @@ export default function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                Contraseña
-              </label>
+              <div className="flex justify-between items-center mb-1">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Contraseña
+                </label>
+                {isLogin && (
+                  <button
+                    type="button"
+                    onClick={() => setShowResetPassword(true)}
+                    className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </button>
+                )}
+              </div>
               <input
                 type="password"
                 id="password"
