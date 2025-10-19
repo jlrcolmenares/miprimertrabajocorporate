@@ -1,9 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuth } from "@/lib/firebase-admin";
 import { getUserByEmail } from "@/lib/firestore-users";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting: 5 login attempts per 15 minutes per IP
+    const ip = getClientIp(req);
+    const rateLimitResult = rateLimit(`login:${ip}`, {
+      interval: 15 * 60 * 1000, // 15 minutes
+      maxRequests: 5,
+    });
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        { 
+          error: "Demasiados intentos de inicio de sesión. Por favor, intenta de nuevo más tarde.",
+          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
+        },
+        { 
+          status: 429,
+          headers: {
+            "Retry-After": String(Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000)),
+          },
+        }
+      );
+    }
+
     const { email, password } = await req.json();
 
     if (!email || !password) {

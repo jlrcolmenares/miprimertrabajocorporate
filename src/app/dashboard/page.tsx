@@ -31,14 +31,13 @@ export default function Dashboard() {
       }
 
       const localUser = JSON.parse(userStr);
-      setUser(localUser);
-
+      
       // Check if returning from payment
       const urlParams = new URLSearchParams(window.location.search);
       const paymentStatus = urlParams.get("payment");
 
       if (paymentStatus === "success") {
-        // Refresh user data from Firestore after payment
+        // Only fetch from server after payment to get updated hasPaid status
         try {
           const response = await fetch("/api/auth/get-user", {
             method: "POST",
@@ -61,10 +60,16 @@ export default function Dashboard() {
           }
         } catch (error) {
           console.error("Error refreshing user data:", error);
+          // Fallback to local data if fetch fails
+          setUser(localUser);
         }
       } else if (paymentStatus === "cancelled") {
         alert("Pago cancelado. Puedes intentarlo de nuevo cuando quieras.");
         window.history.replaceState({}, "", "/dashboard");
+        setUser(localUser);
+      } else {
+        // Normal page load - use cached data from localStorage (instant!)
+        setUser(localUser);
       }
 
       setLoading(false);

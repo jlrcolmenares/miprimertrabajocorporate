@@ -1,9 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuth } from "@/lib/firebase-admin";
-import { createUserDocument } from "@/lib/firestore-users";
+import { createUserDocument, getUserByEmail } from "@/lib/firestore-users";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting: 3 registration attempts per hour per IP
+    const ip = getClientIp(req);
+    const rateLimitResult = rateLimit(`register:${ip}`, {
+      interval: 60 * 60 * 1000, // 1 hour
+      maxRequests: 3,
+    });
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        { 
+          error: "Demasiados intentos de registro. Por favor, intenta de nuevo más tarde.",
+          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
+        },
+        { 
+          status: 429,
+          headers: {
+            "Retry-After": String(Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000)),
+          },
+        }
+      );
+    }
+
     const { email, name, password } = await req.json();
 
     if (!email || !name || !password) {
