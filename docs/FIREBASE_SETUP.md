@@ -210,8 +210,8 @@ npm run dev
 2. Click "Registrarse"
 3. Fill in:
    - Name: Test User
-   - Email: test@example.com
-   - Password: test123
+   - Email: jlrcc991@hotmail.com
+   - Password: pruebaTest123
 4. Click "Crear Cuenta"
 
 **Expected result:**

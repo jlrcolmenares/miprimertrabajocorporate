@@ -1,7 +1,7 @@
 // Module 2-2: Gestión del tiempo y productividad
 
 export const module22Content = (
-  <div className="prose max-w-none">
+  <>
     <h1>Gestión del tiempo y productividad</h1>
     
     <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
@@ -192,5 +192,5 @@ export const module22Content = (
         hábitos se volverán naturales y verás un gran aumento en tu productividad.
       </p>
     </div>
-  </div>
+  </>
 );

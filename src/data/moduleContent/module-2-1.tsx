@@ -1,7 +1,7 @@
 // Module 2-1: Comunicación efectiva en el trabajo
 
 export const module21Content = (
-  <div className="prose max-w-none">
+  <>
     <h1>Comunicación efectiva en el trabajo</h1>
     
     <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
@@ -143,5 +143,5 @@ export const module21Content = (
         bien será clave para tu éxito profesional.
       </p>
     </div>
-  </div>
+  </>
 );

@@ -116,7 +116,7 @@ export default function Curso() {
                 Módulos del Curso
               </h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• Preparación para tu primer día</li>
+                <li>• Cuál es el objetivo de un empresa</li>
                 <li>• Cultura corporativa y adaptación</li>
                 <li>• Comunicación efectiva en el trabajo</li>
                 <li>• Gestión del tiempo y productividad</li>
