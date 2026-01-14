@@ -34,7 +34,7 @@ export default function ModuleCard({
       className={`border rounded-lg p-4 transition-all ${
         isCompleted
           ? "border-green-300 bg-green-50"
-          : "border-gray-200 hover:border-indigo-600 hover:bg-indigo-50"
+          : "border-gray-200 hover:border-blue-600 hover:bg-blue-50"
       }`}
     >
       <div className="flex items-start gap-4">
@@ -45,7 +45,7 @@ export default function ModuleCard({
             checked={isCompleted}
             onChange={handleCheckboxChange}
             disabled={loading}
-            className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer disabled:opacity-50"
+            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer disabled:opacity-50"
           />
         </div>
 

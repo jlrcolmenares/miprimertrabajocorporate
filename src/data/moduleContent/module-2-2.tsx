@@ -184,11 +184,11 @@ export const module22Content = (
       </ul>
     </div>
 
-    <div className="bg-indigo-50 border-l-4 border-indigo-500 p-4 my-6">
-      <p className="font-semibold text-indigo-900">🎯 Conclusión</p>
-      <p className="text-indigo-800">
-        La gestión del tiempo no se trata de hacer más cosas, sino de hacer las cosas correctas. 
-        Prioriza, planifica, elimina distracciones y mantén el enfoque. Con práctica, estos 
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+      <p className="font-semibold text-blue-900">🎯 Conclusión</p>
+      <p className="text-blue-800">
+        La gestión del tiempo no se trata de hacer más cosas, sino de hacer las cosas correctas.
+        Prioriza, planifica, elimina distracciones y mantén el enfoque. Con práctica, estos
         hábitos se volverán naturales y verás un gran aumento en tu productividad.
       </p>
     </div>

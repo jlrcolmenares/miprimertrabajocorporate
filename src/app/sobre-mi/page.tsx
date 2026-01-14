@@ -2,27 +2,27 @@ import Link from "next/link";
 
 export default function SobreMi() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-indigo-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
               </Link>
             </div>
             <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+              <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 Inicio
               </Link>
-              <Link href="/sobre-mi" className="text-indigo-600 px-3 py-2 text-sm font-medium border-b-2 border-indigo-600">
+              <Link href="/sobre-mi" className="text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-blue-600">
                 Sobre Mí
               </Link>
-              <Link href="/curso" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+              <Link href="/curso" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 El Curso
               </Link>
-              <Link href="/login" className="text-indigo-600 hover:text-indigo-800 px-3 py-2 text-sm font-medium">
+              <Link href="/login" className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium">
                 Iniciar Sesión
               </Link>
             </div>
@@ -32,14 +32,14 @@ export default function SobreMi() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <div className="bg-white rounded-lg shadow p-8 md:p-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
             Sobre Mí
           </h1>
           
           {/* Profile Section */}
           <div className="mb-12">
-            <div className="w-32 h-32 bg-indigo-600 rounded-full flex items-center justify-center text-white text-5xl font-bold mb-6">
+            <div className="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center text-white text-5xl font-bold mb-6">
               TU
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -82,29 +82,29 @@ export default function SobreMi() {
           </div>
 
           {/* What You'll Learn Section */}
-          <div className="bg-indigo-50 rounded-xl p-8 mb-12">
+          <div className="bg-blue-50 rounded-xl p-8 mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Lo que aprenderás en este curso
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-xl">✓</span>
+                <span className="text-blue-600 mr-3 text-xl">✓</span>
                 <span className="text-gray-700">Cómo prepararte para tu primer día en una empresa corporativa</span>
               </li>
               <li className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-xl">✓</span>
+                <span className="text-blue-600 mr-3 text-xl">✓</span>
                 <span className="text-gray-700">Estrategias para destacar y crecer profesionalmente</span>
               </li>
               <li className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-xl">✓</span>
+                <span className="text-blue-600 mr-3 text-xl">✓</span>
                 <span className="text-gray-700">Cómo navegar la cultura corporativa y las relaciones laborales</span>
               </li>
               <li className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-xl">✓</span>
+                <span className="text-blue-600 mr-3 text-xl">✓</span>
                 <span className="text-gray-700">Consejos prácticos basados en experiencias reales</span>
               </li>
               <li className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-xl">✓</span>
+                <span className="text-blue-600 mr-3 text-xl">✓</span>
                 <span className="text-gray-700">Y mucho más contenido valioso para tu desarrollo profesional</span>
               </li>
             </ul>
@@ -120,7 +120,7 @@ export default function SobreMi() {
             </p>
             <Link 
               href="/curso"
-              className="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors shadow-lg"
+              className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
             >
               Ver el Curso
             </Link>

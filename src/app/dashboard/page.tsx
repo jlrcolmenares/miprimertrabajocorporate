@@ -133,9 +133,9 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -145,21 +145,21 @@ export default function Dashboard() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-indigo-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-700">Hola, {user.name}</span>
               <button
                 onClick={handleLogout}
-                className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
                 Cerrar Sesión
               </button>
@@ -181,9 +181,9 @@ export default function Dashboard() {
 
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           {/* Profile Card */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="ml-4">
@@ -193,14 +193,14 @@ export default function Dashboard() {
             </div>
             <Link
               href="/dashboard/perfil"
-              className="block w-full text-center bg-indigo-50 text-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-100 transition-colors"
+              className="block w-full text-center bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors"
             >
               Editar Perfil
             </Link>
           </div>
 
           {/* Course Status Card */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-lg shadow p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Estado del Curso</h3>
             {user.hasPaid ? (
               <div className="flex items-center text-green-600">
@@ -216,7 +216,7 @@ export default function Dashboard() {
                 </p>
                 <Link
                   href="/curso"
-                  className="block w-full text-center bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                  className="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Comprar Curso
                 </Link>
@@ -225,12 +225,12 @@ export default function Dashboard() {
           </div>
 
           {/* Quick Stats Card */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-lg shadow p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Estadísticas</h3>
             <div className="space-y-3">
               <div>
                 <p className="text-sm text-gray-600">Progreso</p>
-                <p className="text-2xl font-bold text-indigo-600">
+                <p className="text-2xl font-bold text-blue-600">
                   {user.hasPaid
                     ? `${Math.round(
                         ((user.completedModules?.length || 0) /
@@ -242,7 +242,7 @@ export default function Dashboard() {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Módulos Completados</p>
-                <p className="text-2xl font-bold text-indigo-600">
+                <p className="text-2xl font-bold text-blue-600">
                   {user.hasPaid
                     ? `${user.completedModules?.length || 0}/${getTotalModuleCount()}`
                     : "N/A"}
@@ -265,7 +265,7 @@ export default function Dashboard() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow p-8">
             <PaymentButton hasPaid={user.hasPaid} />
           </div>
         )}

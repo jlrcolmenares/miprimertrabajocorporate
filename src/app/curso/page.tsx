@@ -31,27 +31,27 @@ export default function Curso() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-indigo-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
               </Link>
             </div>
             <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+              <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 Inicio
               </Link>
-              <Link href="/sobre-mi" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+              <Link href="/sobre-mi" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 Sobre Mí
               </Link>
-              <Link href="/curso" className="text-indigo-600 px-3 py-2 text-sm font-medium border-b-2 border-indigo-600">
+              <Link href="/curso" className="text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-blue-600">
                 El Curso
               </Link>
-              <Link href="/login" className="text-indigo-600 hover:text-indigo-800 px-3 py-2 text-sm font-medium">
+              <Link href="/login" className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium">
                 Iniciar Sesión
               </Link>
             </div>
@@ -72,14 +72,14 @@ export default function Curso() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Course Details */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-lg shadow p-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               ¿Qué incluye el curso?
             </h2>
             
             <div className="space-y-4 mb-8">
               <div className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-2xl">📖</span>
+                <span className="text-blue-600 mr-3 text-2xl">📖</span>
                 <div>
                   <h3 className="font-semibold text-gray-900">Contenido Completo</h3>
                   <p className="text-gray-600">Acceso a todo el material del curso organizado por módulos</p>
@@ -87,7 +87,7 @@ export default function Curso() {
               </div>
               
               <div className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-2xl">♾️</span>
+                <span className="text-blue-600 mr-3 text-2xl">♾️</span>
                 <div>
                   <h3 className="font-semibold text-gray-900">Acceso de por Vida</h3>
                   <p className="text-gray-600">Una vez que compres el curso, es tuyo para siempre</p>
@@ -95,7 +95,7 @@ export default function Curso() {
               </div>
               
               <div className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-2xl">📝</span>
+                <span className="text-blue-600 mr-3 text-2xl">📝</span>
                 <div>
                   <h3 className="font-semibold text-gray-900">Documentos Descargables</h3>
                   <p className="text-gray-600">Material de apoyo que puedes descargar y consultar</p>
@@ -103,7 +103,7 @@ export default function Curso() {
               </div>
               
               <div className="flex items-start">
-                <span className="text-indigo-600 mr-3 text-2xl">🔄</span>
+                <span className="text-blue-600 mr-3 text-2xl">🔄</span>
                 <div>
                   <h3 className="font-semibold text-gray-900">Actualizaciones Incluidas</h3>
                   <p className="text-gray-600">Recibe nuevas actualizaciones del contenido sin costo adicional</p>
@@ -111,7 +111,7 @@ export default function Curso() {
               </div>
             </div>
 
-            <div className="bg-indigo-50 rounded-xl p-6">
+            <div className="bg-blue-50 rounded-xl p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-3">
                 Módulos del Curso
               </h3>
@@ -128,13 +128,13 @@ export default function Curso() {
           </div>
 
           {/* Pricing Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col">
+          <div className="bg-white rounded-lg shadow p-8 flex flex-col">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Inversión en tu Futuro
               </h2>
               <div className="mb-6">
-                <span className="text-5xl font-bold text-indigo-600">€99</span>
+                <span className="text-5xl font-bold text-blue-600">€99</span>
                 <span className="text-gray-600 ml-2">pago único</span>
               </div>
               <p className="text-gray-600">
@@ -164,7 +164,7 @@ export default function Curso() {
             <button
               onClick={handlePurchase}
               disabled={loading}
-              className="w-full bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Procesando..." : "Comprar Ahora"}
             </button>
@@ -176,7 +176,7 @@ export default function Curso() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16 bg-white rounded-2xl shadow-xl p-8">
+        <div className="mt-16 bg-white rounded-lg shadow p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Preguntas Frecuentes
           </h2>

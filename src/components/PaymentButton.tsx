@@ -61,7 +61,7 @@ export default function PaymentButton({ hasPaid }: PaymentButtonProps) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-6">
+    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
       <div className="text-center mb-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-2">
           Desbloquea el Curso Completo
@@ -71,7 +71,7 @@ export default function PaymentButton({ hasPaid }: PaymentButtonProps) {
         </p>
         
         <div className="flex items-baseline justify-center gap-2 mb-6">
-          <span className="text-5xl font-bold text-indigo-600">
+          <span className="text-5xl font-bold text-blue-600">
             {(parseInt(process.env.NEXT_PUBLIC_COURSE_PRICE || "9900") / 100).toFixed(2)}
           </span>
           <span className="text-2xl text-gray-600">
@@ -102,7 +102,7 @@ export default function PaymentButton({ hasPaid }: PaymentButtonProps) {
       <button
         onClick={handlePayment}
         disabled={loading}
-        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+        className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow hover:shadow-md"
       >
         {loading ? "Procesando..." : "Comprar Ahora 🚀"}
       </button>

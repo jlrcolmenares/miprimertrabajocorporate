@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f9fafb;
   --foreground: #171717;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #dbeafe;
 }
 
 @theme inline {
@@ -10,13 +13,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -106,13 +102,13 @@ body {
 }
 
 .module-content a {
-  color: #4f46e5;
+  color: #2563eb;
   text-decoration: underline;
   font-weight: 500;
 }
 
 .module-content a:hover {
-  color: #4338ca;
+  color: #1d4ed8;
 }
 
 .module-content code {

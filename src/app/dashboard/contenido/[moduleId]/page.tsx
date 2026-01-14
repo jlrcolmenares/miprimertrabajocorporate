@@ -94,9 +94,9 @@ export default function ModulePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -105,12 +105,12 @@ export default function ModulePage() {
 
   if (!module || !content) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Módulo no encontrado</h1>
           <Link
             href="/dashboard"
-            className="text-indigo-600 hover:text-indigo-700 font-semibold"
+            className="text-blue-600 hover:text-blue-700 font-semibold"
           >
             ← Volver al dashboard
           </Link>
@@ -120,14 +120,14 @@ export default function ModulePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link
               href="/dashboard"
-              className="flex items-center text-indigo-600 hover:text-indigo-700 font-semibold"
+              className="flex items-center text-blue-600 hover:text-blue-700 font-semibold"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -151,11 +151,11 @@ export default function ModulePage() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Module Header */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
               {section && (
-                <p className="text-sm text-indigo-600 font-semibold mb-2">
+                <p className="text-sm text-blue-600 font-semibold mb-2">
                   {section.title}
                 </p>
               )}
@@ -186,7 +186,7 @@ export default function ModulePage() {
         </div>
 
         {/* Module Content */}
-        <div className="bg-white rounded-xl shadow-md p-8 module-content">
+        <div className="bg-white rounded-lg shadow p-8 module-content">
           {content}
         </div>
 

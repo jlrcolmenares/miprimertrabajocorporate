@@ -135,11 +135,11 @@ export const module21Content = (
       </ul>
     </div>
 
-    <div className="bg-indigo-50 border-l-4 border-indigo-500 p-4 my-6">
-      <p className="font-semibold text-indigo-900">🎯 Conclusión</p>
-      <p className="text-indigo-800">
-        La comunicación efectiva es una habilidad que se desarrolla con práctica. Sé claro, 
-        escucha activamente y adapta tu estilo según el contexto. Tu capacidad de comunicarte 
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+      <p className="font-semibold text-blue-900">🎯 Conclusión</p>
+      <p className="text-blue-800">
+        La comunicación efectiva es una habilidad que se desarrolla con práctica. Sé claro,
+        escucha activamente y adapta tu estilo según el contexto. Tu capacidad de comunicarte
         bien será clave para tu éxito profesional.
       </p>
     </div>

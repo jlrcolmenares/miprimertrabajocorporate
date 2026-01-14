@@ -94,9 +94,9 @@ export default function Perfil() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -106,24 +106,24 @@ export default function Perfil() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-indigo-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/dashboard" className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">
+              <Link href="/dashboard" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 Dashboard
               </Link>
               <span className="text-gray-700">{user.name}</span>
               <button
                 onClick={handleLogout}
-                className="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
                 Cerrar Sesión
               </button>
@@ -135,7 +135,7 @@ export default function Perfil() {
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-8">
-          <Link href="/dashboard" className="text-indigo-600 hover:text-indigo-800 mb-4 inline-block">
+          <Link href="/dashboard" className="text-blue-600 hover:text-blue-800 mb-4 inline-block">
             ← Volver al Dashboard
           </Link>
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
@@ -146,7 +146,7 @@ export default function Perfil() {
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-8">
+        <div className="bg-white rounded-lg shadow p-8">
           {message && (
             <div className={`mb-6 p-4 rounded-lg ${
               message.includes("exitosamente") 
@@ -160,7 +160,7 @@ export default function Perfil() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Profile Picture */}
             <div className="flex items-center mb-6">
-              <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
+              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="ml-6">
@@ -180,7 +180,7 @@ export default function Perfil() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
@@ -195,7 +195,7 @@ export default function Perfil() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
@@ -218,7 +218,7 @@ export default function Perfil() {
                     id="currentPassword"
                     value={formData.currentPassword}
                     onChange={(e) => setFormData({ ...formData, currentPassword: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -231,7 +231,7 @@ export default function Perfil() {
                     id="newPassword"
                     value={formData.newPassword}
                     onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     minLength={6}
                   />
                 </div>
@@ -245,7 +245,7 @@ export default function Perfil() {
                     id="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     minLength={6}
                   />
                 </div>
@@ -256,7 +256,7 @@ export default function Perfil() {
             <button
               type="submit"
               disabled={saving}
-              className="w-full bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? "Guardando..." : "Guardar Cambios"}
             </button>

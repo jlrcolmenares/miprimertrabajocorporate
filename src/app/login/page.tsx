@@ -162,10 +162,10 @@ export default function Login() {
   // Password reset modal
   if (showResetPassword) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="max-w-md w-full">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-indigo-600 mb-2">
+            <h1 className="text-3xl font-bold text-blue-600 mb-2">
               Restablecer Contraseña
             </h1>
             <p className="text-gray-600">
@@ -173,7 +173,7 @@ export default function Login() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-lg shadow p-8">
             <form onSubmit={handlePasswordReset} className="space-y-4">
               <div>
                 <label htmlFor="reset-email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -185,7 +185,7 @@ export default function Login() {
                   required
                   value={resetEmail}
                   onChange={(e) => setResetEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="tu@email.com"
                 />
               </div>
@@ -193,7 +193,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={resetLoading}
-                className="w-full bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {resetLoading ? "Enviando..." : "Enviar enlace de restablecimiento"}
               </button>
@@ -214,12 +214,12 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         {/* Logo/Title */}
         <div className="text-center mb-8">
           <Link href="/">
-            <h1 className="text-3xl font-bold text-indigo-600 cursor-pointer mb-2">
+            <h1 className="text-3xl font-bold text-blue-600 cursor-pointer mb-2">
               Mi Primer Trabajo Corporate
             </h1>
           </Link>
@@ -229,13 +229,13 @@ export default function Login() {
         </div>
 
         {/* Login/Register Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-lg shadow p-8">
           <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
             <button
               onClick={() => setIsLogin(true)}
               className={`flex-1 py-2 rounded-md transition-colors ${
                 isLogin
-                  ? "bg-white text-indigo-600 shadow-sm font-semibold"
+                  ? "bg-white text-blue-600 shadow-sm font-semibold"
                   : "text-gray-600"
               }`}
             >
@@ -245,7 +245,7 @@ export default function Login() {
               onClick={() => setIsLogin(false)}
               className={`flex-1 py-2 rounded-md transition-colors ${
                 !isLogin
-                  ? "bg-white text-indigo-600 shadow-sm font-semibold"
+                  ? "bg-white text-blue-600 shadow-sm font-semibold"
                   : "text-gray-600"
               }`}
             >
@@ -265,7 +265,7 @@ export default function Login() {
                   required={!isLogin}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Tu nombre"
                 />
               </div>
@@ -281,7 +281,7 @@ export default function Login() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="tu@email.com"
               />
             </div>
@@ -295,7 +295,7 @@ export default function Login() {
                   <button
                     type="button"
                     onClick={() => setShowResetPassword(true)}
-                    className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
                   >
                     ¿Olvidaste tu contraseña?
                   </button>
@@ -307,7 +307,7 @@ export default function Login() {
                 required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 minLength={6}
               />
@@ -316,7 +316,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Procesando..." : isLogin ? "Iniciar Sesión" : "Crear Cuenta"}
             </button>
@@ -328,7 +328,7 @@ export default function Login() {
                 ¿No tienes cuenta?{" "}
                 <button
                   onClick={() => setIsLogin(false)}
-                  className="text-indigo-600 hover:text-indigo-800 font-semibold"
+                  className="text-blue-600 hover:text-blue-800 font-semibold"
                 >
                   Regístrate aquí
                 </button>
@@ -338,7 +338,7 @@ export default function Login() {
                 ¿Ya tienes cuenta?{" "}
                 <button
                   onClick={() => setIsLogin(true)}
-                  className="text-indigo-600 hover:text-indigo-800 font-semibold"
+                  className="text-blue-600 hover:text-blue-800 font-semibold"
                 >
                   Inicia sesión
                 </button>
