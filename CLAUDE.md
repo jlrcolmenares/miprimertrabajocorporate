@@ -94,3 +94,7 @@ Required variables (configured in `.env.local`):
 ## Testing Payments
 
 Use Stripe test mode with card: `4242 4242 4242 4242`, any future date, any CVC.
+
+## Writing Style Guide
+
+For text correction and editing tasks, follow the rules defined in `.claude/writing-style.md`. This preserves the author's Venezuelan Spanish voice while correcting only technical errors (spelling, grammar, punctuation).
