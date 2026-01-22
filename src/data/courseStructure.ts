@@ -18,6 +18,21 @@ export interface Section {
 
 export const courseStructure: Section[] = [
   {
+    id: "section-0",
+    title: "Introducción",
+    description: "Bienvenida al curso y presentación del taller",
+    order: 0,
+    modules: [
+      {
+        id: "module-0-1",
+        title: "Presentación",
+        description: "Introducción al curso y objetivos",
+        duration: "10 min",
+        order: 1,
+      },
+    ],
+  },
+  {
     id: "section-1",
     title: "Análisis del perfil profesional",
     description: "Identifica tus fortalezas, habilidades y áreas de mejora para construir un perfil profesional sólido",
@@ -25,17 +40,10 @@ export const courseStructure: Section[] = [
     modules: [
       {
         id: "module-1-1",
-        title: "Presentación",
-        description: "Introducción al curso y objetivos",
-        duration: "10 min",
-        order: 1,
-      },
-      {
-        id: "module-1-2",
         title: "Tu historia personal y laboral",
         description: "Documenta todo lo que has hecho y lo que te ha gustado hacer",
         duration: "30 min",
-        order: 2,
+        order: 1,
       },
     ],
   },

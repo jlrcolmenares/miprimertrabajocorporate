@@ -1,47 +1,63 @@
-// Módulo 1-1: Presentación
+// Módulo 1-1: Tu historia personal y laboral
 
 export const module11Content = (
   <>
-    <h2>Bienvenido al curso</h2>
+    <h2>Tu historia personal y laboral</h2>
 
-    <p>Querido/a alumno/a,</p>
-
-    <p>
-      Bienvenido a <strong>&quot;Mi Primer Trabajo Corporate&quot;</strong>, un
-      taller que creé con un objetivo muy específico: ayudarte a contar tu
-      historia personal y habilidades para encontrar un buen trabajo, sobre el
-      cual construir estabilidad y progreso para ti y los tuyos.
-    </p>
-
-    <p>
-      El curso es el resultado de casi{" "}
-      <strong>15 años de experiencia</strong> trabajando, buscando y
-      consiguiendo empleos bien pagados y con estabilidad. Además, los últimos 3
-      años yo mismo he tenido que contratar personas y sé identificar qué
-      errores suelen cometer al momento de una entrevista, qué hace que no pasen
-      las pruebas.
-    </p>
-
-    <p>
-      El taller tiene un enfoque directo y práctico. En cada uno de los módulos
-      te voy a dar una tarea que tienes que realizar. Cada una de las tareas te
-      otorga herramientas que utilizarás durante tu búsqueda de trabajo, no solo
-      ahora, sino en el futuro.
-    </p>
-
-    <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-6">
-      <p className="font-semibold text-yellow-900 mb-2">Importante</p>
-      <p className="text-yellow-800 m-0">
-        Al pagar tienes acceso a todas las herramientas y recursos que te iré
-        compartiendo. Mi idea no es darte el pescado, es{" "}
-        <strong>enseñarte a pescar</strong>. Que sabiendo cómo buscar un buen
-        empleo puedas identificar las oportunidades y entrenar a otros.
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+      <p className="font-semibold text-blue-900">Objetivo de esta tarea</p>
+      <p className="text-blue-800">
+        Escribir en un archivo de texto o documento de Word todo lo que has hecho por lo cual has recibido dinero,
+        y también aquello que te ha gustado hacer.
       </p>
     </div>
 
+    <h3>Cómo hacerlo: Un recorrido temporal</h3>
+
     <p>
-      Sin más dilación, empezamos con el contenido del primer capítulo:{" "}
-      <strong>Tu historia personal</strong>.
+      Te recomiendo hacerlo de forma temporal, siguiendo el orden cronológico de tu vida.
+      Esto te ayudará a recordar mejor y a ver tu evolución.
     </p>
+
+    <h4>1. Primeras experiencias</h4>
+    <p>
+      Usualmente empezamos ayudando a familiares en el trabajo: tíos, padres, conocidos.
+      Son cosas que sabes porque las viste hacer a otros. <strong>Empieza escribiendo eso.</strong>
+    </p>
+
+    <h4>2. Proyectos académicos</h4>
+    <p>
+      Luego escribe sobre pequeños proyectos que hiciste en la universidad o en tu carrera.
+      Trata de que sean cosas que disfrutaste, que recuerdes y digas: <em>&quot;esto estuvo bien&quot;</em>.
+    </p>
+
+    <h4>3. Experiencia laboral formal</h4>
+    <p>
+      Finalmente, entra en lo que la mayoría de la gente piensa que es &quot;la experiencia laboral&quot;.
+      Es decir, todas aquellas labores o emprendimientos que has tenido.
+    </p>
+
+    <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-6">
+      <p className="font-semibold text-yellow-900">Importante: Sé lo más descriptiva posible</p>
+      <ul className="text-yellow-800 mt-2 space-y-1">
+        <li>• Cuenta lo que aprendiste</li>
+        <li>• Las herramientas que utilizaste</li>
+        <li>• Las metodologías que seguiste (si las hubo)</li>
+        <li>• Es un volcado total de lo que has hecho</li>
+      </ul>
+    </div>
+
+    <h3>Recomendación práctica</h3>
+
+    <div className="bg-green-50 border-l-4 border-green-500 p-4 my-6">
+      <p className="text-green-800">
+        <strong>Hazlo en un Google Doc y a través de varios días.</strong> Al menos un par de días.
+        Esto te permite ir recordando cosas que de otra forma olvidarías.
+      </p>
+      <p className="text-green-800 mt-2">
+        Una vez que lo tengas todo completo, lo pasaremos a un LLM con un prompt
+        específico que te daré más adelante para convertirlo en un perfil profesional estructurado.
+      </p>
+    </div>
   </>
 );
