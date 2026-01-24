@@ -200,3 +200,23 @@ export function getSectionByModuleId(moduleId: string): Section | undefined {
 export function getTotalModuleCount(): number {
   return getAllModules().length;
 }
+
+// Helper function to get next module
+export function getNextModule(moduleId: string): Module | undefined {
+  const allModules = getAllModules();
+  const currentIndex = allModules.findIndex((m) => m.id === moduleId);
+  if (currentIndex === -1 || currentIndex === allModules.length - 1) {
+    return undefined;
+  }
+  return allModules[currentIndex + 1];
+}
+
+// Helper function to get previous module
+export function getPreviousModule(moduleId: string): Module | undefined {
+  const allModules = getAllModules();
+  const currentIndex = allModules.findIndex((m) => m.id === moduleId);
+  if (currentIndex <= 0) {
+    return undefined;
+  }
+  return allModules[currentIndex - 1];
+}
