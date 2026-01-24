@@ -8,25 +8,30 @@ export const module01Content = (
 
     <p>
       Bienvenido a <strong>&quot;Mi Primer Trabajo Corporate&quot;</strong>, un
-      taller que creé con un objetivo muy específico: ayudarte a contar tu
-      historia personal y habilidades para encontrar un buen trabajo, sobre el
-      cual construir estabilidad y progreso para ti y los tuyos.
+      taller que creé con un objetivo muy específico: ayudarte a poner en valor
+      tu historia personal y habilidades, para así encontrar un buen trabajo,
+      sobre el cual construir estabilidad y progreso para ti y los tuyos.
     </p>
 
     <p>
-      El curso es el resultado de casi{" "}
-      <strong>15 años de experiencia</strong> trabajando, buscando y
-      consiguiendo empleos bien pagados y con estabilidad. Además, los últimos 3
-      años yo mismo he tenido que contratar personas y sé identificar qué
-      errores suelen cometer al momento de una entrevista, qué hace que no pasen
-      las pruebas.
+      El curso es el resultado de casi <strong>15 años de experiencia</strong>{" "}
+      trabajando, buscando y consiguiendo empleos bien pagados y con
+      estabilidad. Además, los últimos 3 años yo mismo he tenido que contratar
+      personas y sé identificar qué errores suelen cometer al momento de una
+      entrevista, qué hace que no pasen las pruebas.
     </p>
 
     <p>
       El taller tiene un enfoque directo y práctico. En cada uno de los módulos
-      te voy a dar una tarea que tienes que realizar. Cada una de las tareas te
-      otorga herramientas que utilizarás durante tu búsqueda de trabajo, no solo
-      ahora, sino en el futuro.
+      te voy a dar una tarea que tienes que realizar. Este curso fue diseñado
+      entre 2025 y 2026 Cada una de las tareas nos apoyaremos de AI (
+      especificamente LLMs) para apoyarnos a sacar y completar lo que hacemos
+    </p>
+
+    <p>
+      Mi objetivo es entregarte herramientas y flujos de trabajo que puedas
+      utilizar no solo durante esta búsqueda de trabajo, sino tambien a futuro
+      el futuro.
     </p>
 
     <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-6">
