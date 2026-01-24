@@ -45,6 +45,13 @@ export const courseStructure: Section[] = [
         duration: "30 min",
         order: 1,
       },
+      {
+        id: "module-1-2",
+        title: "Hacer match con tus talentos",
+        description: "Entiende qué es la empleabilidad y cómo conectar tus habilidades con el mercado",
+        duration: "15 min",
+        order: 2,
+      },
     ],
   },
   {
