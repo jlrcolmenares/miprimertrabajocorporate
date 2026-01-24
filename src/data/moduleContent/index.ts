@@ -3,6 +3,7 @@
 import { module01Content } from "./module-0-1";
 import { module11Content } from "./module-1-1";
 import { module12Content } from "./module-1-2";
+import { module13Content } from "./module-1-3";
 import { module21Content } from "./module-2-1";
 import { module22Content } from "./module-2-2";
 import { module23Content } from "./module-2-3";
@@ -22,6 +23,7 @@ export const moduleContent: Record<string, React.ReactNode> = {
   // Sesión 1: Análisis del perfil profesional
   "module-1-1": module11Content,
   "module-1-2": module12Content,
+  "module-1-3": module13Content,
   // Sesión 2: Análisis del mercado laboral y oportunidades
   "module-2-1": module21Content,
   "module-2-2": module22Content,

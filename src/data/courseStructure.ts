@@ -52,6 +52,13 @@ export const courseStructure: Section[] = [
         duration: "15 min",
         order: 2,
       },
+      {
+        id: "module-1-3",
+        title: "Un abanico de oportunidades",
+        description: "Descubre puestos corporativos compatibles con tu perfil usando AI",
+        duration: "20 min",
+        order: 3,
+      },
     ],
   },
   {
