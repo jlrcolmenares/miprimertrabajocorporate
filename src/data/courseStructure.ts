@@ -69,9 +69,9 @@ export const courseStructure: Section[] = [
     modules: [
       {
         id: "module-2-1",
-        title: "Panorama del mercado laboral",
-        description: "Entiende las tendencias actuales del mercado",
-        duration: "25 min",
+        title: "Diseñar tu carrera profesional",
+        description: "Aprende a ser intencional con tus decisiones profesionales",
+        duration: "20 min",
         order: 1,
       },
       {
