@@ -7,6 +7,7 @@ import { module13Content } from "./module-1-3";
 import { module21Content } from "./module-2-1";
 import { module22Content } from "./module-2-2";
 import { module23Content } from "./module-2-3";
+import { module24Content } from "./module-2-4";
 import { module31Content } from "./module-3-1";
 import { module32Content } from "./module-3-2";
 import { module33Content } from "./module-3-3";
@@ -20,14 +21,15 @@ import { module53Content } from "./module-5-3";
 export const moduleContent: Record<string, React.ReactNode> = {
   // Sesión 0: Presentación
   "module-0-1": module01Content,
-  // Sesión 1: Análisis del perfil profesional
+  // Sesión 1: Tu historia personal
   "module-1-1": module11Content,
   "module-1-2": module12Content,
   "module-1-3": module13Content,
-  // Sesión 2: Análisis del mercado laboral y oportunidades
+  // Sesión 2: Conócete a ti mismo
   "module-2-1": module21Content,
   "module-2-2": module22Content,
   "module-2-3": module23Content,
+  "module-2-4": module24Content,
   // Sesión 3: Optimización del CV y posicionamiento
   "module-3-1": module31Content,
   "module-3-2": module32Content,
