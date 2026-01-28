@@ -80,6 +80,21 @@ export const module43Content = (
       </li>
     </ul>
 
+    <h3>El crecimiento en espiral</h3>
+
+    <p>
+      Cuando tienes clara tu línea conductora, puedes presentar tu carrera como
+      un <strong>crecimiento en espiral</strong>: cada experiencia es una
+      evolución de la anterior, donde vas ganando complejidad y responsabilidad
+      sobre el mismo eje.
+    </p>
+
+    <p>
+      No se trata de inventar nada. Se trata de encontrar el hilo que ya existe
+      y hacerlo visible. Cuando presentas tu historia así, el reclutador ve a
+      alguien que sabe hacia dónde va, no a alguien que ha ido dando tumbos.
+    </p>
+
     <div className="bg-green-50 border-l-4 border-green-500 p-4 my-6">
       <p className="text-green-800 m-0">
         <strong>Tu ejercicio:</strong> Revisa tu historia personal del módulo

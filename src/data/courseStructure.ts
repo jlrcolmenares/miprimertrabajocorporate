@@ -167,6 +167,13 @@ export const courseStructure: Section[] = [
         duration: "20 min",
         order: 4,
       },
+      {
+        id: "module-4-5",
+        title: "Estructura del CV",
+        description: "Las partes esenciales de un CV efectivo y cómo organizarlas",
+        duration: "15 min",
+        order: 5,
+      },
     ],
   },
   {
