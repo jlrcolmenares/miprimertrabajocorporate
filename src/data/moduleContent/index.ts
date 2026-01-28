@@ -15,6 +15,7 @@ import { module34Content } from "./module-3-4";
 import { module41Content } from "./module-4-1";
 import { module42Content } from "./module-4-2";
 import { module43Content } from "./module-4-3";
+import { module44Content } from "./module-4-4";
 import { module51Content } from "./module-5-1";
 import { module52Content } from "./module-5-2";
 import { module53Content } from "./module-5-3";
@@ -36,10 +37,11 @@ export const moduleContent: Record<string, React.ReactNode> = {
   "module-3-2": module32Content,
   "module-3-3": module33Content,
   "module-3-4": module34Content,
-  // Sesión 4: Preparación de entrevistas
+  // Sesión 4: Preparación del CV
   "module-4-1": module41Content,
   "module-4-2": module42Content,
   "module-4-3": module43Content,
+  "module-4-4": module44Content,
   // Sesión 5: Iteración y visibilidad profesional
   "module-5-1": module51Content,
   "module-5-2": module52Content,
