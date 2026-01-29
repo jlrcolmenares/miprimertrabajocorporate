@@ -135,7 +135,7 @@ export const module45Content = (
         tener tu currículum para cada posición.
       </p>
       <p className="text-green-900 mt-4 mb-0">
-        Ahora viene la segunda batalla:{" "}
+        Ahora viene la segunda etapa:{" "}
         <strong>superar la entrevista</strong>. En el siguiente módulo vamos a
         prepararte para ese momento. Nos vemos ahí.
       </p>

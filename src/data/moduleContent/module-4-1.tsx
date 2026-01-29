@@ -22,27 +22,27 @@ export const module41Content = (
       entrevista.
     </p>
 
-    <h3>Dos batallas diferentes</h3>
+    <h3>Dos etapas diferentes</h3>
 
     <p>
-      Piensa en el proceso de selección como dos batallas completamente
+      Piensa en el proceso de selección como dos etapas completamente
       distintas:
     </p>
 
     <ul>
       <li>
-        <strong>Batalla 1: Conseguir la entrevista</strong> — Aquí compites
-        contra decenas o cientos de CVs. Tu arma es un documento de una o dos
+        <strong>Etapa 1: Conseguir la entrevista</strong> — Aquí compites
+        contra decenas o cientos de CVs. Tu herramienta es un documento de una o dos
         páginas que tiene que captar la atención en segundos.
       </li>
       <li>
-        <strong>Batalla 2: Superar la entrevista</strong> — Aquí compites cara a
-        cara. Tu arma eres tú: tu comunicación, tu actitud, tu conocimiento.
+        <strong>Etapa 2: Superar la entrevista</strong> — Aquí compites cara a
+        cara. Tu herramienta eres tú: tu comunicación, tu actitud, tu conocimiento.
       </li>
     </ul>
 
     <p>
-      En este módulo nos vamos a enfocar en la primera batalla:{" "}
+      En este módulo nos vamos a enfocar en la primera etapa:{" "}
       <strong>construir un CV que te abra las puertas</strong>.
     </p>
 

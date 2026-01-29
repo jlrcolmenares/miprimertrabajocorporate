@@ -5,7 +5,7 @@ export const module51Content = (
     <h2>Qué buscan los reclutadores</h2>
 
     <p>
-      Bienvenido a la segunda batalla: <strong>superar la entrevista</strong>.
+      Bienvenido a la segunda etapa: <strong>superar la entrevista</strong>.
     </p>
 
     <p>

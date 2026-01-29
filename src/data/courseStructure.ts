@@ -226,6 +226,42 @@ export const courseStructure: Section[] = [
       },
     ],
   },
+  {
+    id: "section-6",
+    title: "Hacer ruido en la web",
+    description: "Estrategias activas y pasivas para aumentar tu visibilidad profesional",
+    order: 6,
+    modules: [
+      {
+        id: "module-6-1",
+        title: "Estrategia activa",
+        description: "Crea alertas y mantente aplicando mientras practicas",
+        duration: "10 min",
+        order: 1,
+      },
+      {
+        id: "module-6-2",
+        title: "Estrategia pasiva",
+        description: "Optimiza tu perfil de LinkedIn para ser encontrado",
+        duration: "15 min",
+        order: 2,
+      },
+      {
+        id: "module-6-3",
+        title: "Ser creativo se premia",
+        description: "Destaca con contenido y liderazgo de opinión",
+        duration: "10 min",
+        order: 3,
+      },
+      {
+        id: "module-6-4",
+        title: "Tu portafolio",
+        description: "Muestra tu trabajo en la economía de creadores",
+        duration: "15 min",
+        order: 4,
+      },
+    ],
+  },
 ];
 
 // Helper function to get all modules across all sections

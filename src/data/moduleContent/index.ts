@@ -23,6 +23,10 @@ import { module53Content } from "./module-5-3";
 import { module54Content } from "./module-5-4";
 import { module55Content } from "./module-5-5";
 import { module56Content } from "./module-5-6";
+import { module61Content } from "./module-6-1";
+import { module62Content } from "./module-6-2";
+import { module63Content } from "./module-6-3";
+import { module64Content } from "./module-6-4";
 
 export const moduleContent: Record<string, React.ReactNode> = {
   // Sesión 0: Presentación
@@ -54,6 +58,11 @@ export const moduleContent: Record<string, React.ReactNode> = {
   "module-5-4": module54Content,
   "module-5-5": module55Content,
   "module-5-6": module56Content,
+  // Sesión 6: Hacer ruido en la web
+  "module-6-1": module61Content,
+  "module-6-2": module62Content,
+  "module-6-3": module63Content,
+  "module-6-4": module64Content,
 };
 
 // Helper function to get module content by ID
