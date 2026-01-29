@@ -10,6 +10,7 @@ import {
   getPreviousModule,
 } from "@/data/courseStructure";
 import { getModuleContent } from "@/data/moduleContent";
+import CourseSidebar from "@/components/CourseSidebar";
 
 interface User {
   uid: string;
@@ -23,7 +24,7 @@ export default function ModulePage() {
   const router = useRouter();
   const params = useParams();
   const moduleId = params.moduleId as string;
-  
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -43,7 +44,7 @@ export default function ModulePage() {
     }
 
     const userData = JSON.parse(userStr);
-    
+
     if (!userData.hasPaid) {
       router.push("/dashboard");
       return;
@@ -56,9 +57,9 @@ export default function ModulePage() {
 
   const handleToggleCompletion = async () => {
     const idToken = localStorage.getItem("idToken");
-    
+
     if (!idToken) {
-      alert("Sesión expirada. Por favor, inicia sesión de nuevo.");
+      alert("Sesion expirada. Por favor, inicia sesion de nuevo.");
       router.push("/login");
       return;
     }
@@ -70,7 +71,7 @@ export default function ModulePage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${idToken}`,
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify({ moduleId, completed: !isCompleted }),
       });
@@ -78,7 +79,7 @@ export default function ModulePage() {
       if (response.ok) {
         const data = await response.json();
         setIsCompleted(!isCompleted);
-        
+
         // Update localStorage
         if (user) {
           const updatedUser = {
@@ -89,11 +90,11 @@ export default function ModulePage() {
           localStorage.setItem("user", JSON.stringify(updatedUser));
         }
       } else {
-        alert("Error al actualizar el módulo");
+        alert("Error al actualizar el modulo");
       }
     } catch (error) {
       console.error("Error toggling module:", error);
-      alert("Error al actualizar el módulo");
+      alert("Error al actualizar el modulo");
     } finally {
       setToggleLoading(false);
     }
@@ -114,7 +115,9 @@ export default function ModulePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Módulo no encontrado</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Modulo no encontrado
+          </h1>
           <Link
             href="/dashboard"
             className="text-blue-600 hover:text-blue-700 font-semibold"
@@ -127,172 +130,152 @@ export default function ModulePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <Link
-              href="/dashboard"
-              className="flex items-center text-blue-600 hover:text-blue-700 font-semibold"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Volver al dashboard
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <CourseSidebar completedModules={user?.completedModules || []} />
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Module Header */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              {section && (
-                <p className="text-sm text-blue-600 font-semibold mb-2">
-                  {section.title}
-                </p>
-              )}
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {module.title}
-              </h1>
-              <p className="text-gray-600 mb-4">{module.description}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+      <main className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 py-8 pt-16 lg:pt-8">
+          {/* Module Header */}
+          <div className="mb-8">
+            {section && (
+              <p className="text-sm text-blue-600 font-semibold mb-2">
+                {section.title}
+              </p>
+            )}
+            <h1 className="text-3xl font-bold text-gray-900 mb-3">
+              {module.title}
+            </h1>
+            <p className="text-gray-600 mb-4">{module.description}</p>
+            <div className="flex items-center gap-4 text-sm text-gray-500">
+              <span className="flex items-center gap-1">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                {module.duration}
+              </span>
+              {/* Completion toggle */}
+              <button
+                onClick={handleToggleCompletion}
+                disabled={toggleLoading}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  isCompleted
+                    ? "bg-green-100 text-green-700 hover:bg-green-200"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {toggleLoading ? (
+                  <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                ) : isCompleted ? (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
                     />
                   </svg>
-                  {module.duration}
-                </span>
-              </div>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+                {isCompleted ? "Completado" : "Marcar como completado"}
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* Module Content */}
-        <div className="bg-white rounded-lg shadow p-8 module-content">
-          {content}
-        </div>
+          {/* Module Content */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 module-content">
+            {content}
+          </div>
 
-        {/* Navigation Footer */}
-        <div className="mt-6 flex justify-between items-center gap-4">
-          {/* Previous Button */}
-          {previousModule ? (
-            <Link
-              href={`/dashboard/contenido/${previousModule.id}`}
-              className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white rounded-lg shadow-md text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          {/* Navigation Footer */}
+          <div className="mt-8 flex justify-between items-center gap-4">
+            {/* Previous Button */}
+            {previousModule ? (
+              <Link
+                href={`/dashboard/contenido/${previousModule.id}`}
+                className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              <span className="hidden sm:inline">Anterior:</span>
-              <span className="ml-1 truncate max-w-[150px]">
-                {previousModule.title}
-              </span>
-            </Link>
-          ) : (
-            <div className="flex-1" />
-          )}
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span className="hidden sm:inline">Anterior:</span>
+                <span className="ml-1 truncate max-w-[150px]">
+                  {previousModule.title}
+                </span>
+              </Link>
+            ) : (
+              <div className="flex-1" />
+            )}
 
-          {/* Dashboard Button */}
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center px-4 py-3 bg-gray-100 rounded-lg text-gray-600 hover:bg-gray-200 transition-colors"
-            title="Volver al dashboard"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-              />
-            </svg>
-          </Link>
-
-          {/* Next Button */}
-          {nextModule ? (
-            <Link
-              href={`/dashboard/contenido/${nextModule.id}`}
-              className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-lg shadow-md text-white hover:bg-blue-700 transition-colors"
-            >
-              <span className="hidden sm:inline">Siguiente:</span>
-              <span className="ml-1 truncate max-w-[150px]">
-                {nextModule.title}
-              </span>
-              <svg
-                className="w-5 h-5 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {/* Next Button */}
+            {nextModule ? (
+              <Link
+                href={`/dashboard/contenido/${nextModule.id}`}
+                className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-lg text-white hover:bg-blue-700 transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          ) : (
-            <Link
-              href="/dashboard"
-              className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-green-600 rounded-lg shadow-md text-white hover:bg-green-700 transition-colors"
-            >
-              <span>Curso completado</span>
-              <svg
-                className="w-5 h-5 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                <span className="hidden sm:inline">Siguiente:</span>
+                <span className="ml-1 truncate max-w-[150px]">
+                  {nextModule.title}
+                </span>
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            ) : (
+              <Link
+                href="/dashboard"
+                className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-green-600 rounded-lg text-white hover:bg-green-700 transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </Link>
-          )}
+                <span>Curso completado</span>
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </Link>
+            )}
+          </div>
         </div>
       </main>
     </div>
