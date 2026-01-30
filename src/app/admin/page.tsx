@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@/lib/firebase";
@@ -32,6 +32,31 @@ export default function AdminPanel() {
   const [filterPaid, setFilterPaid] = useState<"all" | "paid" | "unpaid">("all");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
+
+  const fetchUsers = useCallback(async () => {
+    try {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const idToken = await user.getIdToken();
+
+      const response = await fetch("/api/admin/users", {
+        headers: {
+          "Authorization": `Bearer ${idToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setStats(data);
+        setUsers(data.users);
+      } else {
+        console.error("Error fetching users");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -65,32 +90,7 @@ export default function AdminPanel() {
     });
 
     return () => unsubscribe();
-  }, [router]);
-
-  const fetchUsers = async () => {
-    try {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      const idToken = await user.getIdToken();
-      
-      const response = await fetch("/api/admin/users", {
-        headers: {
-          "Authorization": `Bearer ${idToken}`,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data);
-        setUsers(data.users);
-      } else {
-        console.error("Error fetching users");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  }, [router, fetchUsers]);
 
   const toggleUserPayment = async (uid: string) => {
     try {

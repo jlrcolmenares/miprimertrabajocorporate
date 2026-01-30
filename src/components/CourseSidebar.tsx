@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { courseStructure, Section } from "@/data/courseStructure";
@@ -18,21 +18,29 @@ export default function CourseSidebar({
 }: CourseSidebarProps) {
   const pathname = usePathname();
   const currentModuleId = pathname?.split("/").pop() || "";
+  const previousPathRef = useRef(pathname);
 
-  // Track which sections are expanded
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  // Track which sections are expanded - initialize with current section expanded
+  const initialExpandedSections = useMemo(() => {
+    const currentSection = courseStructure.find((section) =>
+      section.modules.some((module) => module.id === currentModuleId)
+    );
+    return currentSection ? new Set([currentSection.id]) : new Set<string>();
+  }, [currentModuleId]);
+
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(initialExpandedSections);
   // Mobile menu state
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  // Auto-expand section containing current module
+  // Auto-expand section containing current module when moduleId changes
   useEffect(() => {
     const currentSection = courseStructure.find((section) =>
       section.modules.some((module) => module.id === currentModuleId)
     );
-    if (currentSection) {
+    if (currentSection && !expandedSections.has(currentSection.id)) {
       setExpandedSections((prev) => new Set(prev).add(currentSection.id));
     }
-  }, [currentModuleId]);
+  }, [currentModuleId, expandedSections]);
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) => {
@@ -52,7 +60,10 @@ export default function CourseSidebar({
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setIsMobileOpen(false);
+    if (previousPathRef.current !== pathname) {
+      previousPathRef.current = pathname;
+      setIsMobileOpen(false);
+    }
   }, [pathname]);
 
   return (
