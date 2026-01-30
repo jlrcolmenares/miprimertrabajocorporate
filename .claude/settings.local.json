@@ -15,7 +15,11 @@
       "Bash(git push:*)",
       "Bash(npm install:*)",
       "Bash(npx husky init)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(npm outdated:*)",
+      "Bash(node:*)",
+      "Bash(npm update:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
