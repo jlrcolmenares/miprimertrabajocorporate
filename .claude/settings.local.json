@@ -14,7 +14,8 @@
       "Bash(timeout 15 npm run dev:*)",
       "Bash(git push:*)",
       "Bash(npm install:*)",
-      "Bash(npx husky init)"
+      "Bash(npx husky init)",
+      "Bash(git config:*)"
     ]
   }
 }

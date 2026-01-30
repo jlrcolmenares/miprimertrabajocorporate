@@ -2,8 +2,7 @@
 
 Plataforma de curso online para preparar a personas para su primer trabajo en el mundo corporativo.
 
-**Autor:** Jose Luis Colmenares
-**Contacto:** jlrcc991@hotmail.com
+**Autor:** jlrcolmenares
 
 ## Inicio Rápido
 
