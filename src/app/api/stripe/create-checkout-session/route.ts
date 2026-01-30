@@ -4,6 +4,14 @@ import { adminAuth } from "@/lib/firebase-admin";
 import { getUserByUid } from "@/lib/firestore-users";
 
 export async function POST(req: NextRequest) {
+  // Stripe is currently disabled - payments are handled manually via email
+  if (!stripe) {
+    return NextResponse.json(
+      { error: "Los pagos en línea están temporalmente deshabilitados. Por favor, contacta por email para acceder al curso." },
+      { status: 503 }
+    );
+  }
+
   try {
     const authHeader = req.headers.get("authorization");
     

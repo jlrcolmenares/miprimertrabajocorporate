@@ -7,6 +7,14 @@ import Stripe from "stripe";
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
+  // Stripe is currently disabled
+  if (!stripe) {
+    return NextResponse.json(
+      { error: "Stripe no está configurado" },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await req.text();
     const signature = req.headers.get("stripe-signature");
