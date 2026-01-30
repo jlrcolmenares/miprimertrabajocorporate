@@ -19,7 +19,8 @@
       "Bash(npm outdated:*)",
       "Bash(node:*)",
       "Bash(npm update:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(git tag:*)"
     ]
   }
 }
