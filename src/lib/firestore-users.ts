@@ -7,6 +7,7 @@ export interface FirestoreUser {
   email: string;
   name: string;
   hasPaid: boolean;
+  isAdmin?: boolean; // Admin status stored in Firestore
   stripeCustomerId?: string;
   stripeSessionId?: string;
   completedModules?: string[]; // Array of completed module IDs
@@ -132,6 +133,21 @@ export async function updateUserProfile(
 export async function hasUserPaid(uid: string): Promise<boolean> {
   const user = await getUserByUid(uid);
   return user?.hasPaid || false;
+}
+
+/**
+ * Check if user is an admin
+ */
+export async function isUserAdmin(uid: string): Promise<boolean> {
+  const user = await getUserByUid(uid);
+  return user?.isAdmin || false;
+}
+
+/**
+ * Set user as admin
+ */
+export async function setUserAsAdmin(uid: string, isAdmin: boolean = true): Promise<void> {
+  await updateUserDocument(uid, { isAdmin });
 }
 
 /**

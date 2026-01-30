@@ -83,15 +83,18 @@ export default function Login() {
             const adminData = await adminResponse.json();
             if (adminData.isAdmin) {
               localStorage.setItem("isAdmin", "true");
-              router.push("/admin");
-              return;
+            } else {
+              localStorage.setItem("isAdmin", "false");
             }
+          } else {
+            localStorage.setItem("isAdmin", "false");
           }
         } catch {
           // Not admin or error checking - continue to dashboard
+          localStorage.setItem("isAdmin", "false");
         }
 
-        localStorage.setItem("isAdmin", "false");
+        // Always redirect to /dashboard - the router will handle the rest
         router.push("/dashboard");
       } else {
         alert(data.error || "Error al obtener datos del usuario");

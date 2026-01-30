@@ -54,7 +54,6 @@ STRIPE_SECRET_KEY="sk_test_your_key"
 STRIPE_WEBHOOK_SECRET="whsec_your_webhook"
 NEXT_PUBLIC_COURSE_PRICE="9900"
 NEXT_PUBLIC_CURRENCY="EUR"
-ADMIN_EMAIL="your-email@example.com"
 ```
 
 ### 3. Generate NEXTAUTH_SECRET
@@ -109,7 +108,6 @@ You should see the landing page.
 - [x] Dependencies installed (`node_modules/` exists)
 - [x] `.env.local` file created
 - [x] `NEXTAUTH_SECRET` generated and set
-- [x] `ADMIN_EMAIL` set to your email
 - [x] Server starts without errors
 - [x] Can access http://localhost:3000
 
@@ -336,10 +334,9 @@ NEXTAUTH_URL="http://localhost:3000"
 
 # Secret key - for session encryption
 NEXTAUTH_SECRET="generate-with-openssl-rand"
-
-# Your email - identifies you as admin
-ADMIN_EMAIL="your-email@example.com"
 ```
+
+**Note:** Admin users are configured in Firestore by setting `isAdmin: true` on the user document.
 
 ### Required for Payments
 

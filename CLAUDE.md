@@ -148,8 +148,15 @@ The Stripe infrastructure exists and can be re-enabled:
                        Note: register endpoint exists but public registration is disabled
 /api/stripe/         - Payment (create-checkout-session, webhook) - Currently disabled
 /api/modules/        - Course progress (toggle-completion)
-/api/admin/          - Admin operations (setup, users, validate)
+/api/admin/          - Admin operations (users, validate)
 ```
+
+### Admin Configuration
+
+Admin status is determined by the `isAdmin` field in Firestore user documents:
+- To make a user an admin, set `isAdmin: true` in their Firestore document
+- Admin validation happens server-side via `/api/admin/validate`
+- No environment variables needed for admin configuration
 
 ## Environment Variables
 
@@ -169,6 +176,7 @@ Optional (for future Stripe integration):
   email: string;
   name: string;
   hasPaid: boolean;
+  isAdmin?: boolean;            // Admin status (set manually in Firestore)
   completedModules?: string[];  // Array of module IDs
   stripeCustomerId?: string;
   stripeSessionId?: string;
@@ -191,7 +199,10 @@ For text correction and editing tasks, follow the rules defined in `.claude/writ
 src/
 ├── app/
 │   ├── dashboard/
-│   │   ├── page.tsx              # Main dashboard (different views for paid/unpaid)
+│   │   ├── page.tsx              # Dashboard router (redirects by user type)
+│   │   ├── course/page.tsx       # Course dashboard for paid users & admins
+│   │   ├── preview/page.tsx      # Preview for unpaid users
+│   │   ├── admin/page.tsx        # Admin panel for user management
 │   │   ├── contenido/[moduleId]/ # Module content pages
 │   │   └── perfil/               # User profile editing
 │   └── api/                      # API routes
@@ -207,5 +218,6 @@ src/
 └── lib/
     ├── firebase.ts               # Client-side Firebase
     ├── firebase-admin.ts         # Server-side Firebase Admin
-    └── firestore-users.ts        # User CRUD operations
+    ├── firestore-users.ts        # User CRUD operations
+    └── admin-config.ts           # Admin validation (checks Firestore)
 ```

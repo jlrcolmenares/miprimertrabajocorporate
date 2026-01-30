@@ -148,8 +148,9 @@ STRIPE_WEBHOOK_SECRET="whsec_..."
 # Course Configuration (keep existing)
 NEXT_PUBLIC_COURSE_PRICE="9900"
 NEXT_PUBLIC_CURRENCY="EUR"
-ADMIN_EMAIL="your-email@example.com"
 ```
+
+**Note:** Admin users are configured via Firestore by setting `isAdmin: true` on their user document.
 
 ### Important Notes:
 
@@ -350,12 +351,21 @@ users/
       ├── email: string
       ├── name: string
       ├── hasPaid: boolean
+      ├── isAdmin?: boolean          ← Set to true for admin users
       ├── completedModules?: string[]
       ├── stripeCustomerId?: string
       ├── stripeSessionId?: string
       ├── createdAt: timestamp
       └── updatedAt: timestamp
 ```
+
+### Making a User an Admin
+
+To make a user an admin:
+1. Go to Firebase Console > Firestore Database
+2. Find the user document in the `users` collection
+3. Add or edit the field `isAdmin` and set it to `true`
+4. The user will need to log out and log back in for the change to take effect
 
 ### Future Collections (Optional)
 

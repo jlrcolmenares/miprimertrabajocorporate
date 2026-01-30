@@ -1,19 +1,10 @@
-// Admin configuration using environment variables only
-export function getAdminCredentials() {
-  const email = process.env.ADMIN_EMAIL;
-  const password = process.env.ADMIN_PASSWORD;
-  
-  if (!email || !password) {
-    throw new Error("Admin credentials not configured in environment variables");
-  }
-  
-  return { email, password };
-}
+// Admin configuration - checks Firestore for admin status
+import { isUserAdmin } from "./firestore-users";
 
-export function isAdminEmail(email: string): boolean {
-  const adminEmail = process.env.ADMIN_EMAIL;
-  if (!adminEmail) {
-    return false;
-  }
-  return email.toLowerCase() === adminEmail.toLowerCase();
+/**
+ * Check if a user is an admin by their UID
+ * Looks up the isAdmin field in the user's Firestore document
+ */
+export async function checkIsAdmin(uid: string): Promise<boolean> {
+  return isUserAdmin(uid);
 }

@@ -1,21 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuth, adminDb } from "@/lib/firebase-admin";
 import { FirestoreUser, markUserAsPaid, updateUserDocument } from "@/lib/firestore-users";
-import { isAdminEmail } from "@/lib/admin-config";
+import { checkIsAdmin } from "@/lib/admin-config";
 
-async function isAdmin(req: NextRequest): Promise<boolean> {
+async function verifyAdmin(req: NextRequest): Promise<boolean> {
   try {
     const authHeader = req.headers.get("authorization");
-    
+
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return false;
     }
 
     const idToken = authHeader.split("Bearer ")[1];
     const decodedToken = await adminAuth.verifyIdToken(idToken);
-    
-    // Check if user is admin using the admin config
-    return decodedToken.email ? isAdminEmail(decodedToken.email) : false;
+
+    // Check if user is admin using Firestore
+    return checkIsAdmin(decodedToken.uid);
   } catch (error) {
     return false;
   }
@@ -25,7 +25,7 @@ async function isAdmin(req: NextRequest): Promise<boolean> {
 export async function GET(req: NextRequest) {
   try {
     // Check admin authentication
-    if (!(await isAdmin(req))) {
+    if (!(await verifyAdmin(req))) {
       return NextResponse.json(
         { error: "No autorizado - Solo administradores" },
         { status: 403 }
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       total: users.length,
       paidUsers: users.filter(u => u.hasPaid).length,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching users:", error);
     return NextResponse.json(
       { error: "Error al obtener usuarios" },
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     // Check admin authentication
-    if (!(await isAdmin(req))) {
+    if (!(await verifyAdmin(req))) {
       return NextResponse.json(
         { error: "No autorizado - Solo administradores" },
         { status: 403 }
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
         if (newPaymentStatus) {
           await markUserAsPaid(uid, "admin-manual", "admin-session");
         } else {
-          await updateUserDocument(uid, { 
+          await updateUserDocument(uid, {
             hasPaid: false,
             stripeCustomerId: undefined,
             stripeSessionId: undefined,
@@ -115,11 +115,11 @@ export async function POST(req: NextRequest) {
 
       default:
         return NextResponse.json(
-          { error: "Acción no válida" },
+          { error: "Accion no valida" },
           { status: 400 }
         );
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error updating user:", error);
     return NextResponse.json(
       { error: "Error al actualizar usuario" },
@@ -132,7 +132,7 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     // Check admin authentication
-    if (!(await isAdmin(req))) {
+    if (!(await verifyAdmin(req))) {
       return NextResponse.json(
         { error: "No autorizado - Solo administradores" },
         { status: 403 }
@@ -158,7 +158,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({
       message: "Usuario eliminado exitosamente",
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error deleting user:", error);
     return NextResponse.json(
       { error: "Error al eliminar usuario" },

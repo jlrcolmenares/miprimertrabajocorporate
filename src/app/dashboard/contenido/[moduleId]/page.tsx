@@ -44,9 +44,11 @@ export default function ModulePage() {
     }
 
     const userData = JSON.parse(userStr);
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-    if (!userData.hasPaid) {
-      router.push("/dashboard");
+    // Only allow paid users or admins
+    if (!userData.hasPaid && !isAdmin) {
+      router.push("/dashboard/preview");
       return;
     }
 

@@ -101,15 +101,15 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 FIREBASE_SERVICE_ACCOUNT_KEY=
 
-# Admin (opcional)
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
-
 # Stripe (opcional - actualmente deshabilitado)
 STRIPE_SECRET_KEY=
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_WEBHOOK_SECRET=
 ```
+
+## Configuracion de Admin
+
+Para hacer un usuario administrador, establece `isAdmin: true` en su documento de Firestore en la coleccion `users`.
 
 ## Deploy
 
