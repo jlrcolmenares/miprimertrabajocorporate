@@ -262,6 +262,49 @@ export const courseStructure: Section[] = [
       },
     ],
   },
+  {
+    id: "section-7",
+    title: "Cierre",
+    description: "Reflexiones finales, recursos adicionales y próximos pasos",
+    order: 7,
+    modules: [
+      {
+        id: "module-7-1",
+        title: "Tu caja de herramientas",
+        description: "Reflexión sobre todo lo aprendido y cómo combinarlo",
+        duration: "10 min",
+        order: 1,
+      },
+      {
+        id: "module-7-2",
+        title: "El cambio de mentalidad",
+        description: "La transformación interna que requiere este proceso",
+        duration: "10 min",
+        order: 2,
+      },
+      {
+        id: "module-7-3",
+        title: "Entender el sistema",
+        description: "Cómo funciona la creación de riqueza y tu rol en ella",
+        duration: "10 min",
+        order: 3,
+      },
+      {
+        id: "module-7-4",
+        title: "Recursos adicionales",
+        description: "Influencers y fuentes de información actualizadas",
+        duration: "5 min",
+        order: 4,
+      },
+      {
+        id: "module-7-5",
+        title: "Gracias y próximos pasos",
+        description: "Cierre del taller y cómo seguir en contacto",
+        duration: "5 min",
+        order: 5,
+      },
+    ],
+  },
 ];
 
 // Helper function to get all modules across all sections
