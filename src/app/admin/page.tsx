@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { auth } from "@/lib/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 interface User {
   uid: string;
@@ -30,6 +31,7 @@ export default function AdminPanel() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterPaid, setFilterPaid] = useState<"all" | "paid" | "unpaid">("all");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -158,13 +160,53 @@ export default function AdminPanel() {
   const filteredUsers = users.filter(user => {
     const matchesSearch = user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          user.name.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesFilter = filterPaid === "all" || 
+
+    const matchesFilter = filterPaid === "all" ||
                          (filterPaid === "paid" && user.hasPaid) ||
                          (filterPaid === "unpaid" && !user.hasPaid);
 
     return matchesSearch && matchesFilter;
   });
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem("user");
+      localStorage.removeItem("idToken");
+      localStorage.removeItem("isAdmin");
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const sendInvitation = () => {
+    if (!inviteEmail) {
+      alert("Introduce un email");
+      return;
+    }
+
+    const baseUrl = window.location.origin;
+    const registroUrl = `${baseUrl}/register`;
+
+    const subject = encodeURIComponent("Invitacion al curso Mi Primer Trabajo Corporate");
+    const body = encodeURIComponent(
+`Hola,
+
+Has sido invitado al curso "Mi Primer Trabajo Corporate".
+
+Para crear tu cuenta, haz clic en el siguiente enlace:
+${registroUrl}
+
+Una vez registrado, tu acceso sera activado y podras comenzar el curso.
+
+Saludos,
+Jose Luis Colmenares`
+    );
+
+    window.open(`mailto:${inviteEmail}?subject=${subject}&body=${body}`, "_blank");
+    setInviteEmail("");
+  };
 
   if (loading) {
     return (
@@ -183,10 +225,42 @@ export default function AdminPanel() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="flex items-center gap-4">
+              <Link href="/">
+                <h1 className="text-xl font-bold text-blue-600 cursor-pointer">
+                  Mi Primer Trabajo
+                </h1>
+              </Link>
+              <span className="hidden sm:inline-block px-2 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded">
+                ADMIN
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/dashboard"
+                className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-gray-600 hover:text-gray-900 text-sm font-medium"
+              >
+                Cerrar Sesion
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Panel de Administración</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Panel de Administracion</h1>
           <p className="mt-2 text-gray-600">Gestiona usuarios y pagos del curso</p>
         </div>
 
@@ -238,6 +312,34 @@ export default function AdminPanel() {
             </div>
           </div>
         )}
+
+        {/* Invite User */}
+        <div className="bg-white rounded-lg shadow mb-6">
+          <div className="p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Invitar Usuario</h2>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <input
+                  type="email"
+                  placeholder="Email del usuario a invitar..."
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  value={inviteEmail}
+                  onChange={(e) => setInviteEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && sendInvitation()}
+                />
+              </div>
+              <button
+                onClick={sendInvitation}
+                className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+              >
+                Enviar Invitacion
+              </button>
+            </div>
+            <p className="mt-2 text-sm text-gray-500">
+              Se abrira tu cliente de correo con un mensaje pre-llenado.
+            </p>
+          </div>
+        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow mb-6">

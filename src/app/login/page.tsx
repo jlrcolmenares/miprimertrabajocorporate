@@ -68,6 +68,30 @@ export default function Login() {
         // Store user data
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("idToken", idToken);
+
+        // Check if user is admin
+        try {
+          const adminResponse = await fetch("/api/admin/validate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${idToken}`,
+            },
+          });
+
+          if (adminResponse.ok) {
+            const adminData = await adminResponse.json();
+            if (adminData.isAdmin) {
+              localStorage.setItem("isAdmin", "true");
+              router.push("/admin");
+              return;
+            }
+          }
+        } catch {
+          // Not admin or error checking - continue to dashboard
+        }
+
+        localStorage.setItem("isAdmin", "false");
         router.push("/dashboard");
       } else {
         alert(data.error || "Error al obtener datos del usuario");

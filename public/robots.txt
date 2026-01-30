@@ -12,6 +12,7 @@ Allow: /curso$
 Disallow: /dashboard
 Disallow: /dashboard/
 Disallow: /login
+Disallow: /register
 Disallow: /success
 Disallow: /api/
 Disallow: /admin
@@ -23,4 +24,4 @@ Disallow: /static/
 Disallow: /*?*
 
 # Sitemap
-# Sitemap: https://tu-dominio.com/sitemap.xml
+# Sitemap: https://miprimertrabajocorporate.vercel.app/
