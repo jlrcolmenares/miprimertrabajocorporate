@@ -1,10 +1,10 @@
 # Mi Primer Trabajo Corporate
 
-Plataforma de curso online para preparar a personas para su primer trabajo en el mundo corporativo.
+**Version 1.0.0** | Plataforma de curso online para preparar a personas para su primer trabajo en el mundo corporativo.
 
-**Autor:** jlrcolmenares
+**Autor:** Jose Luis Colmenares (jlrcolmenares)
 
-## Inicio Rápido
+## Inicio Rapido
 
 ```bash
 # Instalar dependencias
@@ -20,36 +20,22 @@ Visita http://localhost:3000
 
 ```bash
 npm run dev      # Servidor de desarrollo (localhost:3000)
-npm run build    # Build de producción
-npm run start    # Iniciar servidor de producción
+npm run build    # Build de produccion
+npm run start    # Iniciar servidor de produccion
 npm run lint     # Ejecutar ESLint
 npm run lint:fix # Ejecutar ESLint con auto-fix
 ```
 
-## Pre-commit Hook
+## Estructura del Dashboard (v1.0.0)
 
-El proyecto usa **Husky** + **lint-staged** para ejecutar ESLint automáticamente antes de cada commit.
+El dashboard tiene tres experiencias distintas segun el tipo de usuario:
 
-**El hook se ejecuta automáticamente** cuando haces `git commit`. No necesitas hacer nada extra.
-
-```bash
-# Cuando haces commit, automáticamente:
-git commit -m "tu mensaje"
-# 1. lint-staged se ejecuta
-# 2. ESLint verifica los archivos .ts/.tsx modificados
-# 3. Si hay errores, el commit se bloquea
-# 4. Si todo está bien, el commit procede
-```
-
-**Si necesitas reinstalar los hooks:**
-```bash
-npm run prepare   # Reinstala husky
-```
-
-**Si necesitas saltar el hook (no recomendado):**
-```bash
-git commit -m "mensaje" --no-verify
-```
+| Ruta | Tipo de Usuario | Descripcion |
+|------|-----------------|-------------|
+| `/dashboard` | Todos | Router que redirige segun tipo de usuario |
+| `/dashboard/course` | Pagados + Admin | Curso completo con sidebar y progreso |
+| `/dashboard/preview` | No pagados | Vista previa de secciones + boton "Solicitar Acceso" |
+| `/dashboard/admin` | Solo Admin | Panel de gestion de usuarios |
 
 ## Estructura del Proyecto
 
@@ -57,35 +43,56 @@ git commit -m "mensaje" --no-verify
 src/
 ├── app/
 │   ├── page.tsx              # Landing page
-│   ├── sobre-mi/             # Página "Sobre mí"
-│   ├── curso/                # Página del curso
-│   ├── login/                # Inicio de sesión
-│   ├── dashboard/            # Dashboard del usuario
+│   ├── sobre-mi/             # Pagina "Sobre mi"
+│   ├── curso/                # Pagina del curso
+│   ├── login/                # Inicio de sesion
+│   ├── register/             # Registro (via invitacion)
+│   ├── dashboard/
+│   │   ├── page.tsx          # Router del dashboard
+│   │   ├── course/           # Dashboard para usuarios pagados
+│   │   ├── preview/          # Preview para usuarios no pagados
+│   │   ├── admin/            # Panel de administracion
 │   │   ├── perfil/           # Editar perfil
 │   │   └── contenido/        # Contenido del curso
 │   └── api/                  # API routes
 ├── components/
 │   ├── Footer.tsx            # Footer global
-│   └── CourseSidebar.tsx     # Navegación del curso
+│   └── CourseSidebar.tsx     # Navegacion del curso
 ├── data/
 │   ├── courseStructure.ts    # Estructura del curso
-│   └── moduleContent/        # Contenido de módulos
+│   └── moduleContent/        # Contenido de modulos
 └── lib/
     ├── firebase.ts           # Firebase client
     ├── firebase-admin.ts     # Firebase Admin SDK
-    └── firestore-users.ts    # Operaciones de usuarios
+    ├── firestore-users.ts    # Operaciones de usuarios
+    └── admin-config.ts       # Validacion de admin
 ```
 
-## Flujo de Registro y Pago (Actual)
+## Flujo de Usuarios
 
-> **Nota:** Los pagos se procesan manualmente. Stripe está preparado pero deshabilitado.
+### Flujo del Admin (Invitacion y Activacion)
 
-1. Usuario visita `/curso` y hace clic en "Solicitar Acceso"
-2. Se abre su cliente de correo con mensaje pre-llenado a jlrcc991@hotmail.com
-3. Admin procesa el pago manualmente
-4. Admin crea cuenta de usuario en Firebase
-5. Admin envía credenciales al usuario
-6. Usuario inicia sesión en `/login`
+1. Admin va a `/dashboard/admin`
+2. Admin introduce email en "Invitar Usuario" y envia
+3. Se abre cliente de correo con invitacion a `/register`
+4. Usuario recibe email y crea cuenta
+5. Admin ve nuevo usuario en panel (hasPaid: false)
+6. Admin hace clic en "Marcar Pagado" tras recibir pago
+7. Usuario cierra sesion y vuelve a entrar para tener acceso
+
+### Flujo de Usuario Pagado
+
+1. Usuario inicia sesion en `/login`
+2. Redirigido a `/dashboard/course`
+3. Ve progreso, tarjeta "Continuar Aprendiendo" y contenido
+4. Navega modulos via sidebar
+
+### Flujo de Usuario No Pagado
+
+1. Usuario inicia sesion en `/login`
+2. Redirigido a `/dashboard/preview`
+3. Ve solo titulos de secciones (sin enlaces a modulos)
+4. Boton "Solicitar Acceso" abre email para pedir acceso
 
 ## Variables de Entorno
 
@@ -109,15 +116,32 @@ STRIPE_WEBHOOK_SECRET=
 
 ## Configuracion de Admin
 
-Para hacer un usuario administrador, establece `isAdmin: true` en su documento de Firestore en la coleccion `users`.
+El estado de admin se almacena en Firestore, no en variables de entorno.
+
+**Para hacer un usuario administrador:**
+1. Ve a Firebase Console > Firestore Database
+2. Encuentra el documento del usuario en la coleccion `users`
+3. Agrega el campo `isAdmin: true`
+4. El usuario debe cerrar sesion y volver a entrar
+
+## Pre-commit Hook
+
+El proyecto usa **Husky** + **lint-staged** para ejecutar ESLint automaticamente antes de cada commit.
+
+```bash
+# Si necesitas reinstalar los hooks:
+npm run prepare
+
+# Si necesitas saltar el hook (no recomendado):
+git commit -m "mensaje" --no-verify
+```
 
 ## Deploy
 
-El proyecto está desplegado en **Vercel**.
+El proyecto esta desplegado en **Vercel** (auto-deploy en push a main).
 
-Para hacer deploy manual:
 ```bash
-git push origin main   # Vercel despliega automáticamente
+git push origin main   # Vercel despliega automaticamente
 ```
 
 ## Tech Stack
@@ -130,12 +154,14 @@ git push origin main   # Vercel despliega automáticamente
 - **Deploy:** Vercel
 - **Pre-commit:** Husky + lint-staged
 
-## Documentación Adicional
+## Documentacion Adicional
 
-- `CLAUDE.md` - Guía para Claude Code
-- `docs/FIREBASE_SETUP.md` - Configuración de Firebase
+- `CLAUDE.md` - Guia completa para Claude Code
+- `docs/FIREBASE_SETUP.md` - Configuracion de Firebase
 - `docs/LOCAL_DEVELOPMENT.md` - Desarrollo local
 
 ---
 
-**Curso:** 8 secciones, 33 módulos
+**Curso:** 8 secciones, 33 modulos
+
+**Version:** 1.0.0 (Enero 2026)

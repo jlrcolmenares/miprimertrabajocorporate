@@ -4,9 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Mi Primer Trabajo Corporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication and protected course content.
+**Version:** 1.0.0 (January 2026)
+
+Mi Primer Trabajo Corporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication, protected course content, and an admin panel for user management.
 
 **Author:** Jose Luis Colmenares (jlrcc991@hotmail.com)
+**Repository:** github.com/jlrcolmenares/miprimertrabajocorporate (public)
+**Production:** Deployed on Vercel (auto-deploys on push to main)
 
 ## Common Commands
 
@@ -38,19 +42,6 @@ The project uses **Husky + lint-staged** to run ESLint automatically before each
 git commit -m "message" --no-verify
 ```
 
-## Deployment
-
-**Platform:** Vercel (auto-deploys on push to main)
-**Repository:** github.com/jlrcolmenares/miprimertrabajocorporate (public)
-
-```bash
-git push origin main   # Triggers automatic Vercel deploy
-```
-
-**Required Vercel Environment Variables:**
-- All `NEXT_PUBLIC_FIREBASE_*` variables
-- `FIREBASE_SERVICE_ACCOUNT_KEY`
-
 ## Architecture
 
 ### Tech Stack
@@ -60,6 +51,37 @@ git push origin main   # Triggers automatic Vercel deploy
 - **Payments**: Manual (via email) - Stripe infrastructure exists but is disabled
 - **Styling**: Tailwind CSS v4
 - **Language**: TypeScript, React 19
+
+### Dashboard Structure (v1.0.0)
+
+The dashboard is split into three distinct experiences based on user type:
+
+| Route | User Type | Description |
+|-------|-----------|-------------|
+| `/dashboard` | All | Smart router that redirects based on user type |
+| `/dashboard/course` | Paid + Admin | Full course access with sidebar and progress |
+| `/dashboard/preview` | Unpaid only | Section titles preview + "Solicitar Acceso" button |
+| `/dashboard/admin` | Admin only | User management panel |
+| `/dashboard/contenido/[moduleId]` | Paid + Admin | Module content pages |
+| `/dashboard/perfil` | All authenticated | Profile editing |
+
+**Access Control:**
+- **Admin**: Can access all dashboard routes including `/dashboard/admin`
+- **Paid users**: Can access `/dashboard/course`, `/dashboard/contenido/*`, `/dashboard/perfil`
+- **Unpaid users**: Can ONLY access `/dashboard/preview` and `/dashboard/perfil`
+
+**Redirect Flow After Login:**
+```
+Login successful
+    ↓
+Redirect to /dashboard
+    ↓
+Router checks user type (localStorage: isAdmin, user.hasPaid)
+    ↓
+├─ isAdmin=true → /dashboard/admin
+├─ hasPaid=true → /dashboard/course
+└─ hasPaid=false → /dashboard/preview
+```
 
 ### Key Architectural Patterns
 
@@ -73,22 +95,35 @@ git push origin main   # Triggers automatic Vercel deploy
 3. Server API routes use Admin SDK to read/write user data
 4. `src/lib/firestore-users.ts` contains all Firestore user operations
 
-**Current Registration & Payment Flow (Manual - Temporary):**
-> This flow will change in the future when Stripe integration is re-enabled.
+**Client-Side State:**
+- User data cached in `localStorage.user` (JSON string)
+- Auth token in `localStorage.idToken`
+- Admin status in `localStorage.isAdmin` ("true" or "false")
 
-1. User visits `/curso` and clicks "Solicitar Acceso"
-2. This opens their email client with a pre-filled message to jlrcc991@hotmail.com
-3. Admin (Jose Luis) receives the email and processes payment manually
-4. Admin creates user account in Firebase Console or via admin panel
-5. Admin sends login credentials to the user
-6. User logs in at `/login` (public registration is disabled)
+### User Flows
 
-**Future Payment Flow (Stripe - Currently Disabled):**
-The Stripe infrastructure exists and can be re-enabled:
-1. `PaymentButton` component initiates checkout
-2. `/api/stripe/create-checkout-session` creates Stripe session with user ID in metadata
-3. Stripe redirects to `/success` after payment
-4. `/api/stripe/webhook` receives `checkout.session.completed` event and marks user as paid via `markUserAsPaid()`
+**Admin Flow (Invitation & Activation):**
+1. Admin goes to `/dashboard/admin`
+2. Admin enters user email in "Invitar Usuario" and clicks send
+3. Email client opens with pre-filled invitation to `/register`
+4. User receives email and creates account at `/register`
+5. Admin sees new user in admin panel (hasPaid: false)
+6. Admin clicks "Marcar Pagado" after receiving payment
+7. User logs out/in or refreshes to get updated access
+
+**Paid User Flow:**
+1. User logs in at `/login`
+2. Redirected to `/dashboard` → `/dashboard/course`
+3. Sees progress, "Continue Learning" card, and course content
+4. Can navigate modules via sidebar or direct links
+5. Progress tracked via `completedModules` array
+
+**Unpaid User Flow:**
+1. User logs in at `/login`
+2. Redirected to `/dashboard` → `/dashboard/preview`
+3. Sees section titles only (no module links)
+4. "Solicitar Acceso" button opens email to request access
+5. Cannot access `/dashboard/course` or `/dashboard/contenido/*`
 
 ### Course Content Structure
 
@@ -100,12 +135,12 @@ The Stripe infrastructure exists and can be re-enabled:
 - Progress tracked via `completedModules` array on user document
 
 **Current Sections:**
-0. Introducción (1 module) - Welcome and course overview
-1. Análisis del perfil profesional (3 modules)
-2. Conócete a ti mismo (4 modules)
-3. Análisis del mercado laboral (4 modules)
-4. Preparación del CV (5 modules)
-5. Preparación de entrevistas (6 modules)
+0. Introduccion (1 module) - Welcome and course overview
+1. Analisis del perfil profesional (3 modules)
+2. Conocete a ti mismo (4 modules)
+3. Analisis del mercado laboral (4 modules)
+4. Preparacion del CV (5 modules)
+5. Preparacion de entrevistas (6 modules)
 6. Hacer ruido en la web (4 modules)
 7. Cierre (5 modules) - Closing, resources, and next steps
 
@@ -126,21 +161,17 @@ The Stripe infrastructure exists and can be re-enabled:
 - Responsive: hamburger menu on mobile
 - Props: `completedModules`, `showBackLink`, `headerTitle`
 
-**Layout Structure:**
-- Dashboard (paid users): Two-column layout with CourseSidebar + main content
-- Dashboard (unpaid users): Simple layout with course preview and payment button
-- Module pages: Two-column layout with CourseSidebar + module content
-
 **Color Scheme:**
 - Primary: Blue (`blue-600`, `blue-700`)
 - Success/Completed: Green (`green-500`, `green-600`)
-- Warnings: Amber (`amber-500`)
+- Admin accent: Amber (`amber-500`, `amber-600`)
 - Background: Gray (`gray-50`, `gray-100`)
 
 ### Security
 - Middleware (`src/middleware.ts`) adds security headers and CSP to all routes
 - Rate limiting available via `src/lib/rate-limit.ts`
 - Stripe webhooks verify signature before processing
+- Admin validation happens server-side via `/api/admin/validate`
 
 ### API Routes Structure
 ```
@@ -158,9 +189,16 @@ Admin status is determined by the `isAdmin` field in Firestore user documents:
 - Admin validation happens server-side via `/api/admin/validate`
 - No environment variables needed for admin configuration
 
+**To create the first admin:**
+1. Create a user account via Firebase Console or `/register`
+2. Go to Firebase Console > Firestore Database
+3. Find the user in `users` collection
+4. Add field `isAdmin: true`
+5. User logs out and back in to get admin access
+
 ## Environment Variables
 
-Required variables (configured in `.env.local`):
+Required variables (configured in `.env.local` and Vercel):
 - `NEXT_PUBLIC_FIREBASE_*` - Firebase client config (6 variables)
 - `FIREBASE_SERVICE_ACCOUNT_KEY` or `FIREBASE_CLIENT_EMAIL` + `FIREBASE_PRIVATE_KEY` - Firebase Admin
 
@@ -205,13 +243,14 @@ src/
 │   │   ├── admin/page.tsx        # Admin panel for user management
 │   │   ├── contenido/[moduleId]/ # Module content pages
 │   │   └── perfil/               # User profile editing
+│   ├── login/page.tsx            # Login page (main entry point)
+│   ├── register/page.tsx         # Registration (via admin invitation)
+│   ├── curso/page.tsx            # Public course info page
 │   └── api/                      # API routes
 ├── components/
 │   ├── CourseSidebar.tsx         # Navigation sidebar for course
 │   ├── Footer.tsx                # Global footer (included in layout)
-│   ├── PaymentButton.tsx         # Stripe checkout button (currently disabled)
-│   ├── CourseSection.tsx         # Section card (legacy)
-│   └── ModuleCard.tsx            # Module card (legacy)
+│   └── PaymentButton.tsx         # Stripe checkout button (currently disabled)
 ├── data/
 │   ├── courseStructure.ts        # Section/module definitions
 │   └── moduleContent/            # Module content files (module-X-Y.tsx)
@@ -221,3 +260,13 @@ src/
     ├── firestore-users.ts        # User CRUD operations
     └── admin-config.ts           # Admin validation (checks Firestore)
 ```
+
+## Version History
+
+- **v1.0.0** (January 2026): Production-ready release
+  - Dashboard split by user type (admin/paid/unpaid)
+  - Admin panel for user management
+  - Firestore-based admin configuration
+  - Manual payment flow via email
+  - Course content with 8 sections, 33 modules
+  - Progress tracking with module completion
