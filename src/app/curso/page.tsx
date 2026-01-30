@@ -4,43 +4,41 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Curso() {
-  const [loading, setLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handlePurchase = async () => {
-    setLoading(true);
-    try {
-      // This will call our Stripe checkout API
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const { url } = await response.json();
-      
-      if (url) {
-        window.location.href = url;
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const emailSubject = encodeURIComponent("Quiero acceder al curso Mi Primer Trabajo Corporate");
+  const emailBody = encodeURIComponent(
+    "Hola Jose Luis,\n\nEstoy interesado/a en adquirir el curso 'Mi Primer Trabajo Corporate'.\n\nMis datos:\n- Nombre: \n- Email: \n\nQuedo atento/a a tu respuesta.\n\nSaludos."
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
+      <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
+          <div className="flex justify-between h-14 sm:h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-lg sm:text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
               </Link>
             </div>
+
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Abrir menú"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {menuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+
+            {/* Desktop menu */}
             <div className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
                 Inicio
@@ -56,163 +54,256 @@ export default function Curso() {
               </Link>
             </div>
           </div>
+
+          {/* Mobile menu */}
+          {menuOpen && (
+            <div className="md:hidden border-t border-gray-200 py-2">
+              <Link
+                href="/"
+                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                onClick={() => setMenuOpen(false)}
+              >
+                Inicio
+              </Link>
+              <Link
+                href="/sobre-mi"
+                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                onClick={() => setMenuOpen(false)}
+              >
+                Sobre Mí
+              </Link>
+              <Link
+                href="/curso"
+                className="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-gray-50"
+                onClick={() => setMenuOpen(false)}
+              >
+                El Curso
+              </Link>
+              <Link
+                href="/login"
+                className="block px-4 py-3 text-base font-medium text-blue-600 hover:text-blue-800 hover:bg-gray-50"
+                onClick={() => setMenuOpen(false)}
+              >
+                Iniciar Sesión
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
             Mi Primer Trabajo Corporate
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600">
             Todo lo que necesitas saber para triunfar en el mundo corporativo
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Course Details */}
-          <div className="bg-white rounded-lg shadow p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <div className="bg-white rounded-lg shadow p-5 sm:p-6 md:p-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
               ¿Qué incluye el curso?
             </h2>
-            
-            <div className="space-y-4 mb-8">
+
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               <div className="flex items-start">
-                <span className="text-blue-600 mr-3 text-2xl">📖</span>
+                <span className="text-blue-600 mr-2 sm:mr-3 text-xl sm:text-2xl flex-shrink-0">📚</span>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Contenido Completo</h3>
-                  <p className="text-gray-600">Acceso a todo el material del curso organizado por módulos</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">8 Secciones Completas</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">33 módulos de contenido estructurado y práctico</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
-                <span className="text-blue-600 mr-3 text-2xl">♾️</span>
+                <span className="text-blue-600 mr-2 sm:mr-3 text-xl sm:text-2xl flex-shrink-0">♾️</span>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Acceso de por Vida</h3>
-                  <p className="text-gray-600">Una vez que compres el curso, es tuyo para siempre</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Acceso de por Vida</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">Una vez que compres el curso, es tuyo para siempre</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
-                <span className="text-blue-600 mr-3 text-2xl">📝</span>
+                <span className="text-blue-600 mr-2 sm:mr-3 text-xl sm:text-2xl flex-shrink-0">📝</span>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Documentos Descargables</h3>
-                  <p className="text-gray-600">Material de apoyo que puedes descargar y consultar</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Material Descargable</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">Recursos y plantillas para tu búsqueda de empleo</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
-                <span className="text-blue-600 mr-3 text-2xl">🔄</span>
+                <span className="text-blue-600 mr-2 sm:mr-3 text-xl sm:text-2xl flex-shrink-0">🔄</span>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Actualizaciones Incluidas</h3>
-                  <p className="text-gray-600">Recibe nuevas actualizaciones del contenido sin costo adicional</p>
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Actualizaciones Incluidas</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">Contenido nuevo sin costo adicional</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-blue-50 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Módulos del Curso
+            {/* Course Structure */}
+            <div className="bg-blue-50 rounded-xl p-4 sm:p-5 md:p-6">
+              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
+                Estructura del Curso
               </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Cuál es el objetivo de un empresa</li>
-                <li>• Cultura corporativa y adaptación</li>
-                <li>• Comunicación efectiva en el trabajo</li>
-                <li>• Gestión del tiempo y productividad</li>
-                <li>• Desarrollo de carrera profesional</li>
-                <li>• Networking y relaciones laborales</li>
-                <li>• Y mucho más...</li>
-              </ul>
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">0</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Introducción</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">Bienvenida y visión general del curso</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">1</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Análisis del perfil profesional</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">3 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">2</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Conócete a ti mismo</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">4 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">3</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Análisis del mercado laboral</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">4 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">4</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Preparación del CV</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">5 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">5</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Preparación de entrevistas</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">6 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">6</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Hacer ruido en la web</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">4 módulos</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">7</span>
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Cierre</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">5 módulos - Recursos y próximos pasos</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Pricing Card */}
-          <div className="bg-white rounded-lg shadow p-8 flex flex-col">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-white rounded-lg shadow p-5 sm:p-6 md:p-8 flex flex-col">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
                 Inversión en tu Futuro
               </h2>
-              <div className="mb-6">
-                <span className="text-5xl font-bold text-blue-600">€99</span>
-                <span className="text-gray-600 ml-2">pago único</span>
+              <div className="mb-4 sm:mb-6">
+                <span className="text-4xl sm:text-5xl font-bold text-blue-600">€99</span>
+                <span className="text-gray-600 ml-2 text-sm sm:text-base">pago único</span>
               </div>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm sm:text-base">
                 Acceso completo y permanente al curso
               </p>
             </div>
 
-            <div className="space-y-4 mb-8 flex-grow">
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 flex-grow">
               <div className="flex items-center">
-                <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Acceso inmediato al contenido</span>
+                <span className="text-green-500 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-sm sm:text-base">33 módulos de contenido</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Sin suscripciones mensuales</span>
+                <span className="text-green-500 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-sm sm:text-base">Acceso inmediato tras confirmación</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Actualizaciones gratuitas</span>
+                <span className="text-green-500 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-sm sm:text-base">Sin suscripciones mensuales</span>
               </div>
               <div className="flex items-center">
-                <span className="text-green-500 mr-3 text-xl">✓</span>
-                <span className="text-gray-700">Soporte por email</span>
+                <span className="text-green-500 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-sm sm:text-base">Actualizaciones gratuitas</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="text-gray-700 text-sm sm:text-base">Soporte directo por email</span>
               </div>
             </div>
 
-            <button
-              onClick={handlePurchase}
-              disabled={loading}
-              className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            <a
+              href={`mailto:jlrcc991@hotmail.com?subject=${emailSubject}&body=${emailBody}`}
+              className="w-full bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl text-center block"
             >
-              {loading ? "Procesando..." : "Comprar Ahora"}
-            </button>
+              Solicitar Acceso
+            </a>
 
-            <p className="text-sm text-gray-500 text-center mt-4">
-              Pago seguro procesado por Stripe
-            </p>
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600 text-center">
+                Al hacer clic, se abrirá tu correo electrónico para enviarme un mensaje.
+                Te responderé con las instrucciones de pago y acceso al curso.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16 bg-white rounded-lg shadow p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+        <div className="mt-10 sm:mt-12 md:mt-16 bg-white rounded-lg shadow p-5 sm:p-6 md:p-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
             Preguntas Frecuentes
           </h2>
-          
-          <div className="space-y-6 max-w-3xl mx-auto">
+
+          <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">¿Cuánto tiempo tengo acceso al curso?</h3>
-              <p className="text-gray-600">Tienes acceso de por vida. Una vez que compres el curso, es tuyo para siempre.</p>
+              <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Cómo funciona el proceso de compra?</h3>
+              <p className="text-gray-600 text-sm sm:text-base">Haz clic en "Solicitar Acceso" para enviarme un correo. Te responderé con las instrucciones de pago y, una vez confirmado, te enviaré la invitación para acceder al curso.</p>
             </div>
-            
+
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">¿Puedo descargar el contenido?</h3>
-              <p className="text-gray-600">Sí, todos los documentos y materiales del curso están disponibles para descarga.</p>
+              <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Cuánto tiempo tengo acceso al curso?</h3>
+              <p className="text-gray-600 text-sm sm:text-base">Tienes acceso de por vida. Una vez que compres el curso, es tuyo para siempre.</p>
             </div>
-            
+
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">¿Hay algún costo adicional?</h3>
-              <p className="text-gray-600">No, el precio que ves es el precio final. No hay costos ocultos ni suscripciones mensuales.</p>
+              <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Puedo descargar el contenido?</h3>
+              <p className="text-gray-600 text-sm sm:text-base">Sí, todos los documentos y materiales del curso están disponibles para descarga.</p>
             </div>
-            
+
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">¿Qué métodos de pago aceptan?</h3>
-              <p className="text-gray-600">Aceptamos todas las tarjetas de crédito y débito principales a través de Stripe.</p>
+              <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Hay algún costo adicional?</h3>
+              <p className="text-gray-600 text-sm sm:text-base">No, el precio que ves es el precio final. No hay costos ocultos ni suscripciones mensuales.</p>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Qué métodos de pago aceptas?</h3>
+              <p className="text-gray-600 text-sm sm:text-base">Te indicaré las opciones de pago disponibles cuando me contactes por correo.</p>
             </div>
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white mt-24 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center text-gray-600">
-            <p>&copy; 2025 Mi Primer Trabajo Corporate. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Mi Primer Trabajo Corporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication, Stripe payment integration, and protected course content.
+Mi Primer Trabajo Corporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication and protected course content.
+
+**Author:** Jose Luis Colmenares (jlrcc991@hotmail.com)
 
 ## Common Commands
 
@@ -26,7 +28,7 @@ rm -rf .next && npm run dev
 - **Framework**: Next.js 15 with App Router and Turbopack
 - **Authentication**: Firebase Authentication (client-side + Admin SDK server-side)
 - **Database**: Cloud Firestore
-- **Payments**: Stripe (checkout sessions + webhooks)
+- **Payments**: Manual (via email) - Stripe infrastructure exists but is disabled
 - **Styling**: Tailwind CSS v4
 - **Language**: TypeScript, React 19
 
@@ -42,7 +44,18 @@ rm -rf .next && npm run dev
 3. Server API routes use Admin SDK to read/write user data
 4. `src/lib/firestore-users.ts` contains all Firestore user operations
 
-**Payment Flow:**
+**Current Registration & Payment Flow (Manual - Temporary):**
+> This flow will change in the future when Stripe integration is re-enabled.
+
+1. User visits `/curso` and clicks "Solicitar Acceso"
+2. This opens their email client with a pre-filled message to jlrcc991@hotmail.com
+3. Admin (Jose Luis) receives the email and processes payment manually
+4. Admin creates user account in Firebase Console or via admin panel
+5. Admin sends login credentials to the user
+6. User logs in at `/login` (public registration is disabled)
+
+**Future Payment Flow (Stripe - Currently Disabled):**
+The Stripe infrastructure exists and can be re-enabled:
 1. `PaymentButton` component initiates checkout
 2. `/api/stripe/create-checkout-session` creates Stripe session with user ID in metadata
 3. Stripe redirects to `/success` after payment
@@ -102,8 +115,9 @@ rm -rf .next && npm run dev
 
 ### API Routes Structure
 ```
-/api/auth/           - Authentication (register, login, sync-user, get-user, update-profile)
-/api/stripe/         - Payment (create-checkout-session, webhook)
+/api/auth/           - Authentication (sync-user, get-user, update-profile)
+                       Note: register endpoint exists but public registration is disabled
+/api/stripe/         - Payment (create-checkout-session, webhook) - Currently disabled
 /api/modules/        - Course progress (toggle-completion)
 /api/admin/          - Admin operations (setup, users, validate)
 ```
@@ -113,6 +127,8 @@ rm -rf .next && npm run dev
 Required variables (configured in `.env.local`):
 - `NEXT_PUBLIC_FIREBASE_*` - Firebase client config (6 variables)
 - `FIREBASE_SERVICE_ACCOUNT_KEY` or `FIREBASE_CLIENT_EMAIL` + `FIREBASE_PRIVATE_KEY` - Firebase Admin
+
+Optional (for future Stripe integration):
 - `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` - Stripe
 - `NEXT_PUBLIC_COURSE_PRICE` - Price in cents (e.g., "9900" for €99.00)
 
@@ -132,7 +148,7 @@ Required variables (configured in `.env.local`):
 }
 ```
 
-## Testing Payments
+## Testing Payments (When Stripe is Re-enabled)
 
 Use Stripe test mode with card: `4242 4242 4242 4242`, any future date, any CVC.
 
@@ -152,8 +168,9 @@ src/
 │   └── api/                      # API routes
 ├── components/
 │   ├── CourseSidebar.tsx         # Navigation sidebar for course
-│   ├── PaymentButton.tsx         # Stripe checkout button
-│   ├── CourseSection.tsx         # Section card (legacy, used in old dashboard)
+│   ├── Footer.tsx                # Global footer (included in layout)
+│   ├── PaymentButton.tsx         # Stripe checkout button (currently disabled)
+│   ├── CourseSection.tsx         # Section card (legacy)
 │   └── ModuleCard.tsx            # Module card (legacy)
 ├── data/
 │   ├── courseStructure.ts        # Section/module definitions
