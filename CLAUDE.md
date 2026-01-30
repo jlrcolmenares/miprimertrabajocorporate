@@ -15,12 +15,41 @@ npm run dev          # Start development server with Turbopack (localhost:3000)
 npm run build        # Build for production with Turbopack
 npm run start        # Start production server
 npm run lint         # Run ESLint
+npm run lint:fix     # Run ESLint with auto-fix
+npm run prepare      # Reinstall Husky hooks
 ```
 
 **Clear cache and restart:**
 ```bash
 rm -rf .next && npm run dev
 ```
+
+## Pre-commit Hook
+
+The project uses **Husky + lint-staged** to run ESLint automatically before each commit.
+
+- Configured in `package.json` under `lint-staged`
+- Hook file: `.husky/pre-commit`
+- Runs `eslint --fix` on staged `.ts/.tsx` files
+- Blocks commit if there are unfixable errors
+
+**Skip hook (not recommended):**
+```bash
+git commit -m "message" --no-verify
+```
+
+## Deployment
+
+**Platform:** Vercel (auto-deploys on push to main)
+**Repository:** github.com/jlrcolmenares/miprimertrabajocorporate (public)
+
+```bash
+git push origin main   # Triggers automatic Vercel deploy
+```
+
+**Required Vercel Environment Variables:**
+- All `NEXT_PUBLIC_FIREBASE_*` variables
+- `FIREBASE_SERVICE_ACCOUNT_KEY`
 
 ## Architecture
 

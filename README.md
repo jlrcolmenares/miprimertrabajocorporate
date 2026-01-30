@@ -1,165 +1,142 @@
-# 🎓 Mi Primer Trabajo Corporate - Course Platform
+# Mi Primer Trabajo Corporate
 
-A complete, production-ready web application for selling your Spanish course "Mi Primer Trabajo Corporate" with integrated payment processing and user management.
+Plataforma de curso online para preparar a personas para su primer trabajo en el mundo corporativo.
 
-## ✨ Features
+**Autor:** Jose Luis Colmenares
+**Contacto:** jlrcc991@hotmail.com
 
-- 🎨 **Beautiful Landing Page** with call-to-action
-- 👤 **User Authentication** (register/login)
-- 💳 **Stripe Payment Integration** for course purchases
-- 📚 **Protected Course Content** (7 modules)
-- 🔐 **User Dashboard** with profile management
-- 📱 **Fully Responsive** design
-- 🇪🇸 **Spanish Language** interface
-- ⚡ **Built with Next.js 15** and Tailwind CSS
-
-## 🚀 Quick Start
+## Inicio Rápido
 
 ```bash
-# 1. Install dependencies
+# Instalar dependencias
 npm install
 
-# 2. Set up Firebase (REQUIRED - see docs/FIREBASE_SETUP.md)
-
-# 3. Create .env.local file with Firebase credentials
-
-# 4. Start development server
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-Visit http://localhost:3000
+Visita http://localhost:3000
 
-**⚠️ IMPORTANT: You MUST set up Firebase first!**
-**👉 See [docs/FIREBASE_SETUP.md](./docs/FIREBASE_SETUP.md) for Firebase setup**
-**👉 See [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md) for detailed instructions**
+## Comandos Disponibles
 
-## 📖 Documentation
+```bash
+npm run dev      # Servidor de desarrollo (localhost:3000)
+npm run build    # Build de producción
+npm run start    # Iniciar servidor de producción
+npm run lint     # Ejecutar ESLint
+npm run lint:fix # Ejecutar ESLint con auto-fix
+```
 
-**👉 Start here: [docs/README.md](./docs/README.md)** - Complete documentation index
+## Pre-commit Hook
 
-Quick links:
-- **[FIREBASE_SETUP.md](./docs/FIREBASE_SETUP.md)** - Firebase Authentication & Firestore setup (REQUIRED)
-- **[LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)** - Local setup and environment guide
-- **[NEXT_STEPS.md](./docs/NEXT_STEPS.md)** - What to do after setup
-- **[TECHNICAL_REFERENCE.md](./docs/TECHNICAL_REFERENCE.md)** - Architecture and technical decisions
+El proyecto usa **Husky** + **lint-staged** para ejecutar ESLint automáticamente antes de cada commit.
 
-## 🏗️ Project Structure
+**El hook se ejecuta automáticamente** cuando haces `git commit`. No necesitas hacer nada extra.
+
+```bash
+# Cuando haces commit, automáticamente:
+git commit -m "tu mensaje"
+# 1. lint-staged se ejecuta
+# 2. ESLint verifica los archivos .ts/.tsx modificados
+# 3. Si hay errores, el commit se bloquea
+# 4. Si todo está bien, el commit procede
+```
+
+**Si necesitas reinstalar los hooks:**
+```bash
+npm run prepare   # Reinstala husky
+```
+
+**Si necesitas saltar el hook (no recomendado):**
+```bash
+git commit -m "mensaje" --no-verify
+```
+
+## Estructura del Proyecto
 
 ```
 src/
 ├── app/
-│   ├── page.tsx                    # Landing page
-│   ├── sobre-mi/                   # About me page
-│   ├── curso/                      # Course page with payment
-│   ├── login/                      # Authentication
-│   ├── success/                    # Payment success
-│   ├── dashboard/                  # User dashboard
-│   │   ├── perfil/                # Profile management
-│   │   └── contenido/[moduleId]/  # Course content
-│   └── api/
-│       ├── auth/                   # Auth endpoints
-│       └── create-checkout-session/ # Stripe checkout
+│   ├── page.tsx              # Landing page
+│   ├── sobre-mi/             # Página "Sobre mí"
+│   ├── curso/                # Página del curso
+│   ├── login/                # Inicio de sesión
+│   ├── dashboard/            # Dashboard del usuario
+│   │   ├── perfil/           # Editar perfil
+│   │   └── contenido/        # Contenido del curso
+│   └── api/                  # API routes
+├── components/
+│   ├── Footer.tsx            # Footer global
+│   └── CourseSidebar.tsx     # Navegación del curso
+├── data/
+│   ├── courseStructure.ts    # Estructura del curso
+│   └── moduleContent/        # Contenido de módulos
 └── lib/
-    └── users.ts                    # User management
+    ├── firebase.ts           # Firebase client
+    ├── firebase-admin.ts     # Firebase Admin SDK
+    └── firestore-users.ts    # Operaciones de usuarios
 ```
 
-## 🎯 Key Pages
+## Flujo de Registro y Pago (Actual)
 
-| Page | URL | Description |
-|------|-----|-------------|
-| Landing | `/` | Homepage with CTA |
-| About | `/sobre-mi` | Your bio and story |
-| Course | `/curso` | Course details & purchase |
-| Login | `/login` | Authentication |
-| Dashboard | `/dashboard` | User dashboard |
-| Profile | `/dashboard/perfil` | Edit profile |
-| Content | `/dashboard/contenido/[1-7]` | Course modules |
+> **Nota:** Los pagos se procesan manualmente. Stripe está preparado pero deshabilitado.
 
-## 💳 Payment Flow
+1. Usuario visita `/curso` y hace clic en "Solicitar Acceso"
+2. Se abre su cliente de correo con mensaje pre-llenado a jlrcc991@hotmail.com
+3. Admin procesa el pago manualmente
+4. Admin crea cuenta de usuario en Firebase
+5. Admin envía credenciales al usuario
+6. Usuario inicia sesión en `/login`
 
-1. User visits course page
-2. Clicks "Comprar Ahora"
-3. Redirected to Stripe Checkout
-4. Completes payment
-5. Redirected to success page
-6. Gets access to course content
+## Variables de Entorno
 
-## 🔧 Tech Stack
+Crea un archivo `.env.local` con:
 
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS
-- **Payments**: Stripe
-- **Authentication**: Firebase Authentication
-- **Database**: Cloud Firestore
-- **Language**: TypeScript
-- **Deployment**: Vercel / AWS Lightsail / Netlify
-
-## 🛠️ Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
-
-## 🚀 Deployment
-
-**Recommended:** Vercel (easiest for Next.js)
-
-See [docs/TECHNICAL_REFERENCE.md](./docs/TECHNICAL_REFERENCE.md) for detailed deployment instructions for Vercel, AWS Lightsail, and other platforms.
-
-## 🔐 Security Notes
-
-- Passwords are hashed with SHA-256
-- Environment variables for sensitive data
-- Protected API routes
-- Content access control
-- HTTPS required in production
-
-## 📝 Customization
-
-### Change Course Price
-Edit `.env.local`:
 ```env
-NEXT_PUBLIC_COURSE_PRICE="14900"  # €149.00 (in cents)
+# Firebase (obligatorio)
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+FIREBASE_SERVICE_ACCOUNT_KEY=
+
+# Admin (opcional)
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+
+# Stripe (opcional - actualmente deshabilitado)
+STRIPE_SECRET_KEY=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_WEBHOOK_SECRET=
 ```
 
-### Update Content
-- **About page**: `src/app/sobre-mi/page.tsx`
-- **Course modules**: `src/app/dashboard/contenido/[moduleId]/page.tsx`
-- **Landing page**: `src/app/page.tsx`
+## Deploy
 
-### Change Colors
-Search and replace `indigo-600` with your preferred Tailwind color.
+El proyecto está desplegado en **Vercel**.
 
-## 🐛 Troubleshooting
+Para hacer deploy manual:
+```bash
+git push origin main   # Vercel despliega automáticamente
+```
 
-See [docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md) for detailed troubleshooting steps.
+## Tech Stack
 
-## 📦 Dependencies
+- **Framework:** Next.js 15 (App Router + Turbopack)
+- **Styling:** Tailwind CSS v4
+- **Auth:** Firebase Authentication
+- **Database:** Cloud Firestore
+- **Pagos:** Manual (Stripe preparado)
+- **Deploy:** Vercel
+- **Pre-commit:** Husky + lint-staged
 
-- next: ^15.5.6
-- react: ^19
-- stripe: Latest
-- tailwindcss: ^3
-- typescript: ^5
+## Documentación Adicional
 
-## 📄 License
-
-This project is private and proprietary.
-
-## 🤝 Support
-
-For issues or questions, check the documentation files or review the code comments.
+- `CLAUDE.md` - Guía para Claude Code
+- `docs/FIREBASE_SETUP.md` - Configuración de Firebase
+- `docs/LOCAL_DEVELOPMENT.md` - Desarrollo local
 
 ---
 
-**Built with ❤️ for your course success!**
+**Curso:** 8 secciones, 33 módulos
