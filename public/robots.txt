@@ -1,22 +1,26 @@
 # Robots.txt for Mi Primer Trabajo Corporate
-# Control what search engines can index
+# Solo las páginas públicas deben ser indexadas
 
-# Allow indexing of public pages
 User-agent: *
-Allow: /
-Allow: /sobre-mi
-Allow: /curso
 
-# Block private/protected pages from indexing
+# Páginas públicas permitidas
+Allow: /$
+Allow: /sobre-mi$
+Allow: /curso$
+
+# Bloquear todo el contenido protegido
 Disallow: /dashboard
-Disallow: /dashboard/*
+Disallow: /dashboard/
 Disallow: /login
+Disallow: /success
 Disallow: /api/
-
-# Block admin and internal paths
 Disallow: /admin
+Disallow: /admin/
 Disallow: /_next/
 Disallow: /static/
 
-# Sitemap (create this later)
-# Sitemap: https://your-domain.com/sitemap.xml
+# Bloquear parámetros de URL
+Disallow: /*?*
+
+# Sitemap
+# Sitemap: https://tu-dominio.com/sitemap.xml
