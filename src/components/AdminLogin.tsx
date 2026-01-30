@@ -42,12 +42,13 @@ export default function AdminLogin() {
         alert("No tienes permisos de administrador");
         await auth.signOut();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error logging in:", error);
-      
-      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+      const firebaseError = error as { code?: string };
+
+      if (firebaseError.code === "auth/wrong-password" || firebaseError.code === "auth/user-not-found") {
         alert("Email o contraseña incorrectos");
-      } else if (error.code === "auth/invalid-email") {
+      } else if (firebaseError.code === "auth/invalid-email") {
         alert("Email inválido");
       } else {
         alert("Error al iniciar sesión");

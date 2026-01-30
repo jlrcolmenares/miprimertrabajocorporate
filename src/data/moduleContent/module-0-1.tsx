@@ -7,7 +7,7 @@ export const module01Content = (
     <p>Querido/a alumno/a,</p>
 
     <p>
-      Bienvenido a <strong>"Mi Primer Trabajo Corporate"</strong>, un
+      Bienvenido a <strong>&quot;Mi Primer Trabajo Corporate&quot;</strong>, un
       taller que creé con un objetivo muy específico: ayudarte a poner en valor
       tu historia personal y habilidades, para así encontrar un buen trabajo,
       sobre el cual construir estabilidad y progreso para ti y los tuyos.

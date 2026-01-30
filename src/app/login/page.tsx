@@ -33,7 +33,7 @@ export default function Login() {
       const idToken = await userCredential.user.getIdToken();
 
       // Fetch user data from Firestore
-      let response = await fetch("/api/auth/get-user", {
+      const response = await fetch("/api/auth/get-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

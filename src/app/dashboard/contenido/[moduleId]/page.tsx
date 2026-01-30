@@ -30,7 +30,7 @@ export default function ModulePage() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [toggleLoading, setToggleLoading] = useState(false);
 
-  const module = getModuleById(moduleId);
+  const currentModule = getModuleById(moduleId);
   const section = getSectionByModuleId(moduleId);
   const content = getModuleContent(moduleId);
   const nextModule = getNextModule(moduleId);
@@ -111,7 +111,7 @@ export default function ModulePage() {
     );
   }
 
-  if (!module || !content) {
+  if (!currentModule || !content) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -145,9 +145,9 @@ export default function ModulePage() {
               </p>
             )}
             <h1 className="text-3xl font-bold text-gray-900 mb-3">
-              {module.title}
+              {currentModule.title}
             </h1>
-            <p className="text-gray-600 mb-4">{module.description}</p>
+            <p className="text-gray-600 mb-4">{currentModule.description}</p>
             <div className="flex items-center gap-4 text-sm text-gray-500">
               <span className="flex items-center gap-1">
                 <svg
@@ -163,7 +163,7 @@ export default function ModulePage() {
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                {module.duration}
+                {currentModule.duration}
               </span>
               {/* Completion toggle */}
               <button

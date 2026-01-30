@@ -91,7 +91,7 @@ export const module74Content = (
       <p className="text-green-800 m-0">
         <strong>Tu ejercicio:</strong> Sigue al menos una cuenta de recursos
         humanos o empleabilidad en tus redes sociales. Exponerte constantemente
-        a este contenido te mantiene en "modo búsqueda" y aprendes cosas nuevas
+        a este contenido te mantiene en &quot;modo búsqueda&quot; y aprendes cosas nuevas
         sin esfuerzo.
       </p>
     </div>

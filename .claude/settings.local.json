@@ -9,7 +9,10 @@
       "Bash(npm run build:*)",
       "Bash(git reset:*)",
       "Bash(git commit:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 15 npm run dev:*)",
+      "Bash(git push:*)"
     ]
   }
 }

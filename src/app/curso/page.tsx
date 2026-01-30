@@ -279,7 +279,7 @@ export default function Curso() {
           <div className="space-y-4 sm:space-y-6 max-w-3xl mx-auto">
             <div>
               <h3 className="font-bold text-gray-900 mb-1.5 sm:mb-2 text-sm sm:text-base">¿Cómo funciona el proceso de compra?</h3>
-              <p className="text-gray-600 text-sm sm:text-base">Haz clic en "Solicitar Acceso" para enviarme un correo. Te responderé con las instrucciones de pago y, una vez confirmado, te enviaré la invitación para acceder al curso.</p>
+              <p className="text-gray-600 text-sm sm:text-base">Haz clic en &quot;Solicitar Acceso&quot; para enviarme un correo. Te responderé con las instrucciones de pago y, una vez confirmado, te enviaré la invitación para acceder al curso.</p>
             </div>
 
             <div>
