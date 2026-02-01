@@ -180,32 +180,42 @@ export default function AdminPanel() {
     }
   };
 
-  const sendInvitation = () => {
+  const sendInvitation = async () => {
     if (!inviteEmail) {
       alert("Introduce un email");
       return;
     }
 
-    const baseUrl = window.location.origin;
-    const registroUrl = `${baseUrl}/register`;
+    try {
+      const user = auth.currentUser;
+      if (!user) return;
 
-    const subject = encodeURIComponent("Invitacion al curso Mi Primer Trabajo Corporate");
-    const body = encodeURIComponent(
-`Hola,
+      const idToken = await user.getIdToken();
 
-Has sido invitado al curso "Mi Primer Trabajo Corporate".
+      const response = await fetch("/api/admin/invite-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          email: inviteEmail,
+        }),
+      });
 
-Para crear tu cuenta, haz clic en el siguiente enlace:
-${registroUrl}
-
-Una vez registrado, tu acceso sera activado y podras comenzar el curso.
-
-Saludos,
-Jose Luis Colmenares`
-    );
-
-    window.open(`mailto:${inviteEmail}?subject=${subject}&body=${body}`, "_blank");
-    setInviteEmail("");
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+        setInviteEmail("");
+        fetchUsers(); // Refresh the user list
+      } else {
+        const error = await response.json();
+        alert(error.error || "Error al enviar la invitacion");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error al enviar la invitacion");
+    }
   };
 
   if (loading) {
@@ -336,7 +346,7 @@ Jose Luis Colmenares`
               </button>
             </div>
             <p className="mt-2 text-sm text-gray-500">
-              Se abrira tu cliente de correo con un mensaje pre-llenado.
+              Se enviara automaticamente un email profesional con el enlace de invitacion.
             </p>
           </div>
         </div>
