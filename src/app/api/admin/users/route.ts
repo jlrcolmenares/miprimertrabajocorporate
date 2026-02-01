@@ -36,9 +36,13 @@ export async function GET(req: NextRequest) {
     const users: FirestoreUser[] = [];
 
     usersSnapshot.forEach((doc) => {
+      const data = doc.data();
       users.push({
         uid: doc.id,
-        ...doc.data(),
+        ...data,
+        // Convert Firestore Timestamps to ISO strings for JSON serialization
+        createdAt: data.createdAt?.toDate?.() || data.createdAt,
+        updatedAt: data.updatedAt?.toDate?.() || data.updatedAt,
       } as FirestoreUser);
     });
 
