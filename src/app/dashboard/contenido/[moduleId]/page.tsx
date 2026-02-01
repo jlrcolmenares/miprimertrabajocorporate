@@ -160,7 +160,17 @@ export default function ModulePage() {
           {/* Module Header */}
           <div className="mb-8">
             {section && (
-              <p className="text-sm text-blue-600 font-semibold mb-2">
+              <p className={`text-sm font-semibold mb-2 ${
+                section.color === "blue-600" ? "text-blue-600" :
+                section.color === "emerald-600" ? "text-emerald-600" :
+                section.color === "purple-600" ? "text-purple-600" :
+                section.color === "orange-600" ? "text-orange-600" :
+                section.color === "rose-600" ? "text-rose-600" :
+                section.color === "indigo-600" ? "text-indigo-600" :
+                section.color === "teal-600" ? "text-teal-600" :
+                section.color === "amber-600" ? "text-amber-600" :
+                "text-blue-600"
+              }`}>
                 {section.title}
               </p>
             )}

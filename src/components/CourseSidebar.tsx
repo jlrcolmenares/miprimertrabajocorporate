@@ -58,6 +58,30 @@ export default function CourseSidebar({
     return section.modules.filter((m) => completedModules.includes(m.id)).length;
   };
 
+  // Get color classes for a section
+  const getSectionColorClasses = (section: Section, isActive: boolean, isCompleted: boolean) => {
+    const colorMap: Record<string, { bg: string; text: string; lightBg: string; border: string }> = {
+      "blue-600": { bg: "bg-blue-600", text: "text-blue-900", lightBg: "bg-blue-50", border: "border-blue-600" },
+      "emerald-600": { bg: "bg-emerald-600", text: "text-emerald-900", lightBg: "bg-emerald-50", border: "border-emerald-600" },
+      "purple-600": { bg: "bg-purple-600", text: "text-purple-900", lightBg: "bg-purple-50", border: "border-purple-600" },
+      "orange-600": { bg: "bg-orange-600", text: "text-orange-900", lightBg: "bg-orange-50", border: "border-orange-600" },
+      "rose-600": { bg: "bg-rose-600", text: "text-rose-900", lightBg: "bg-rose-50", border: "border-rose-600" },
+      "indigo-600": { bg: "bg-indigo-600", text: "text-indigo-900", lightBg: "bg-indigo-50", border: "border-indigo-600" },
+      "teal-600": { bg: "bg-teal-600", text: "text-teal-900", lightBg: "bg-teal-50", border: "border-teal-600" },
+      "amber-600": { bg: "bg-amber-600", text: "text-amber-900", lightBg: "bg-amber-50", border: "border-amber-600" },
+    };
+
+    const colors = colorMap[section.color] || colorMap["blue-600"];
+
+    if (isActive) {
+      return { badge: `${colors.bg} text-white`, background: colors.lightBg, textColor: colors.text };
+    } else if (isCompleted) {
+      return { badge: "bg-green-500 text-white", background: "", textColor: "text-gray-700" };
+    } else {
+      return { badge: "bg-gray-200 text-gray-600", background: "", textColor: "text-gray-700" };
+    }
+  };
+
   // Close mobile menu when route changes
   useEffect(() => {
     if (previousPathRef.current !== pathname) {
@@ -129,6 +153,8 @@ export default function CourseSidebar({
           const totalModules = section.modules.length;
           const hasCurrentModule = section.modules.some((m) => m.id === currentModuleId);
 
+          const sectionColors = getSectionColorClasses(section, hasCurrentModule, completedCount === totalModules);
+
           return (
             <div key={section.id} className="mb-1">
               {/* Section Header */}
@@ -136,20 +162,14 @@ export default function CourseSidebar({
                 onClick={() => toggleSection(section.id)}
                 className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
                   hasCurrentModule
-                    ? "bg-blue-50 text-blue-900"
+                    ? `${sectionColors.background} ${sectionColors.textColor}`
                     : "hover:bg-gray-50 text-gray-700"
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   {/* Section number */}
                   <span
-                    className={`flex-shrink-0 w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center ${
-                      hasCurrentModule
-                        ? "bg-blue-600 text-white"
-                        : completedCount === totalModules
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
+                    className={`flex-shrink-0 w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center ${sectionColors.badge}`}
                   >
                     {section.order}
                   </span>
