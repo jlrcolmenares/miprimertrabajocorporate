@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useInView } from "@/hooks/useInView";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [featuresRef, featuresInView] = useInView({ threshold: 0.2 });
+  const [valueRef, valueInView] = useInView({ threshold: 0.2 });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -87,17 +90,17 @@ export default function Home() {
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight animate-[fadeInUp_0.6s_ease-out]">
             Tu Primer Trabajo Corporate
             <span className="block text-blue-600 mt-1 sm:mt-2">Comienza Aquí</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-[fadeInUp_0.6s_ease-out_0.2s] opacity-0 [animation-fill-mode:forwards]">
             Descubre todo lo que necesitas saber para triunfar en el mundo corporativo.
             Información valiosa, práctica y directa al punto.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-[fadeInUp_0.6s_ease-out_0.4s] opacity-0 [animation-fill-mode:forwards]">
             <Link
               href="/curso"
               className="w-full sm:w-auto bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
@@ -114,8 +117,10 @@ export default function Home() {
         </div>
 
         {/* Features Section */}
-        <div className="mt-12 sm:mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-lg shadow hover:shadow-md transition-shadow">
+        <div ref={featuresRef} className="mt-12 sm:mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className={`bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 ${
+            featuresInView ? "animate-[fadeInScale_0.6s_ease-out]" : "opacity-0"
+          }`}>
             <div className="text-blue-600 text-3xl sm:text-4xl mb-3 sm:mb-4">📚</div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Contenido Completo</h3>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -123,7 +128,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-lg shadow hover:shadow-md transition-shadow">
+          <div className={`bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 ${
+            featuresInView ? "animate-[fadeInScale_0.6s_ease-out_0.15s] [animation-fill-mode:forwards]" : "opacity-0"
+          }`}>
             <div className="text-blue-600 text-3xl sm:text-4xl mb-3 sm:mb-4">💼</div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Experiencia Real</h3>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -131,7 +138,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white p-5 sm:p-6 md:p-8 rounded-lg shadow hover:shadow-md transition-shadow">
+          <div className={`bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 ${
+            featuresInView ? "animate-[fadeInScale_0.6s_ease-out_0.3s] [animation-fill-mode:forwards]" : "opacity-0"
+          }`}>
             <div className="text-blue-600 text-3xl sm:text-4xl mb-3 sm:mb-4">🎯</div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Acceso Inmediato</h3>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -141,7 +150,9 @@ export default function Home() {
         </div>
 
         {/* Testimonial/Value Proposition */}
-        <div className="mt-12 sm:mt-16 md:mt-24 bg-white rounded-lg shadow p-6 sm:p-8 md:p-12 text-center">
+        <div ref={valueRef} className={`mt-12 sm:mt-16 md:mt-24 bg-white rounded-xl shadow-md p-6 sm:p-8 md:p-12 text-center transition-all duration-300 ${
+          valueInView ? "animate-[fadeInScale_0.6s_ease-out]" : "opacity-0"
+        }`}>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
             ¿Por qué este curso?
           </h3>
