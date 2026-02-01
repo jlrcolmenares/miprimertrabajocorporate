@@ -159,22 +159,83 @@ Router checks user type (localStorage: isAdmin, user.hasPaid)
 - `getSectionByModuleId(moduleId)` - Get section containing a module
 - `getTotalModuleCount()` - Returns total module count
 - `getNextModule(moduleId)` / `getPreviousModule(moduleId)` - Navigation
+- `getSectionColor(sectionId)` - Returns the color class for a section
+
+### Visual Enhancements & Animations
+
+**Animation System (`src/app/globals.css`):**
+The platform uses CSS keyframe animations (no external libraries) for smooth, performant effects:
+- `celebrate` - Scale pulse animation for celebration modal
+- `confettiPop` - Confetti particle effect (translate + fade)
+- `fadeInUp` - Fade in with upward slide (landing page hero)
+- `fadeInScale` - Fade in with scale (feature cards)
+- `progressFill` - Progress bar fill animation
+- `milestonePulse` - Pulsing effect for milestone markers
+- **Accessibility**: Respects `prefers-reduced-motion` media query
+
+**Progress Visualization:**
+- **Milestone Celebration**: Triggers at 25%, 50%, 75%, 100% completion
+- **Detection**: Calculates percentage after each module completion
+- **Messages**: Spanish motivational messages per milestone
+- **Animation**: Confetti particles with staggered delays
+- **Component**: `CelebrationModal.tsx`
+
+**Landing Page Animations:**
+- **Hero Section**: Staggered fade-in on page load (title → subtitle → buttons)
+- **Features Grid**: Scroll-triggered fade-in with scale effect using Intersection Observer
+- **Value Proposition**: Scroll-triggered fade-in
+- **Timing**: Delays of 0ms, 150ms-200ms, 300ms-400ms for natural flow
+
+**Typography Enhancements:**
+- Module content headings have colored left borders
+- h1: 4px blue border, 2.5rem font size
+- h2: 3px blue border
+- h3: 2px light blue border
+- Better visual hierarchy and content organization
+
+**Section Color Coding:**
+- Each of 8 sections has a unique color (defined in `courseStructure.ts`)
+- Applied to: sidebar badges, active section backgrounds, module breadcrumbs
+- Active sections show colored badge and light background tint
+- Completed sections show green badge
+- CSS variables in `globals.css` define section colors
 
 ### UI Components
 
 **CourseSidebar (`src/components/CourseSidebar.tsx`):**
 - Collapsible navigation sidebar for course content
-- Shows sections with expand/collapse functionality
+- Shows sections with expand/collapse functionality (with section color coding)
 - Displays module completion status (checkmarks)
 - Progress bar in footer
 - Responsive: hamburger menu on mobile
 - Props: `completedModules`, `showBackLink`, `headerTitle`
+- **Section colors**: Each section badge uses its unique color when active
+
+**CelebrationModal (`src/components/CelebrationModal.tsx`):**
+- Animated modal for milestone achievements (25%, 50%, 75%, 100%)
+- Confetti animation with CSS keyframes
+- Spanish motivational messages
+- Auto-dismisses after 3 seconds
+- Props: `milestone`, `onClose`
+
+**Custom Hooks:**
+- `useInView` (`src/hooks/useInView.ts`): Intersection Observer hook for scroll-triggered animations
 
 **Color Scheme:**
 - Primary: Blue (`blue-600`, `blue-700`)
 - Success/Completed: Green (`green-500`, `green-600`)
 - Admin accent: Amber (`amber-500`, `amber-600`)
 - Background: Gray (`gray-50`, `gray-100`)
+
+**Section Colors (8 unique colors):**
+- Section 0 (Introducción): Blue (`blue-600`)
+- Section 1 (Análisis perfil): Emerald (`emerald-600`)
+- Section 2 (Conócete): Purple (`purple-600`)
+- Section 3 (Mercado laboral): Orange (`orange-600`)
+- Section 4 (CV): Rose (`rose-600`)
+- Section 5 (Entrevistas): Indigo (`indigo-600`)
+- Section 6 (Hacer ruido): Teal (`teal-600`)
+- Section 7 (Cierre): Amber (`amber-600`)
 
 ### Security
 - Middleware (`src/middleware.ts`) adds security headers and CSP to all routes
@@ -258,11 +319,14 @@ src/
 │   ├── curso/page.tsx            # Public course info page
 │   └── api/                      # API routes
 ├── components/
-│   ├── CourseSidebar.tsx         # Navigation sidebar for course
+│   ├── CourseSidebar.tsx         # Navigation sidebar (color-coded sections)
+│   ├── CelebrationModal.tsx      # Milestone celebration modal
 │   ├── Footer.tsx                # Global footer (included in layout)
 │   └── PaymentButton.tsx         # Stripe checkout button (currently disabled)
+├── hooks/
+│   └── useInView.ts              # Intersection Observer hook for scroll animations
 ├── data/
-│   ├── courseStructure.ts        # Section/module definitions
+│   ├── courseStructure.ts        # Section/module definitions with colors
 │   └── moduleContent/            # Module content files (module-X-Y.tsx)
 └── lib/
     ├── firebase.ts               # Client-side Firebase
@@ -272,6 +336,17 @@ src/
 ```
 
 ## Version History
+
+- **v1.1.0** (February 2026): Visual enhancements and animations
+  - Milestone celebration system (25%, 50%, 75%, 100% completion)
+  - Landing page animations (hero, features grid, scroll triggers)
+  - Section color coding system (8 unique colors)
+  - Typography enhancements with colored left borders
+  - CSS animation keyframes for smooth transitions
+  - Intersection Observer for scroll-triggered effects
+  - Enhanced shadows and border-radius throughout
+  - Accessibility support for reduced motion preferences
+  - Firebase Auth automated invitation emails
 
 - **v1.0.0** (January 2026): Production-ready release
   - Dashboard split by user type (admin/paid/unpaid)
