@@ -105,11 +105,20 @@ Router checks user type (localStorage: isAdmin, user.hasPaid)
 **Admin Flow (Invitation & Activation):**
 1. Admin goes to `/dashboard/admin`
 2. Admin enters user email in "Invitar Usuario" and clicks send
-3. Email client opens with pre-filled invitation to `/register`
-4. User receives email and creates account at `/register`
-5. Admin sees new user in admin panel (hasPaid: false)
-6. Admin clicks "Marcar Pagado" after receiving payment
-7. User logs out/in or refreshes to get updated access
+3. System automatically creates user account with Firebase Admin SDK
+4. Firebase sends professional branded password reset email to user
+5. User receives email and clicks link to set their password
+6. User sets password and logs in at `/login`
+7. Admin sees new user in admin panel (hasPaid: false)
+8. Admin clicks "Marcar Pagado" after receiving payment
+9. User logs out/in or refreshes to get updated access
+
+**Email Customization:**
+- Email templates configured in Firebase Console > Authentication > Templates
+- Template used: Password reset (acts as invitation)
+- Customizable: sender name, subject, message body, branding
+- Default sender: noreply@miprimertrabajocorporate.firebaseapp.com
+- Can configure custom domain for professional email address
 
 **Paid User Flow:**
 1. User logs in at `/login`
@@ -179,7 +188,8 @@ Router checks user type (localStorage: isAdmin, user.hasPaid)
                        Note: register endpoint exists but public registration is disabled
 /api/stripe/         - Payment (create-checkout-session, webhook) - Currently disabled
 /api/modules/        - Course progress (toggle-completion)
-/api/admin/          - Admin operations (users, validate)
+/api/admin/          - Admin operations (users, validate, invite-user)
+                       invite-user: Creates user account + sends Firebase Auth email
 ```
 
 ### Admin Configuration
