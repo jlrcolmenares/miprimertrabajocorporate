@@ -8,9 +8,11 @@ import {
   getSectionByModuleId,
   getNextModule,
   getPreviousModule,
+  getTotalModuleCount,
 } from "@/data/courseStructure";
 import { getModuleContent } from "@/data/moduleContent";
 import CourseSidebar from "@/components/CourseSidebar";
+import CelebrationModal from "@/components/CelebrationModal";
 
 interface User {
   uid: string;
@@ -29,6 +31,8 @@ export default function ModulePage() {
   const [loading, setLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
   const [toggleLoading, setToggleLoading] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [milestone, setMilestone] = useState<number | null>(null);
 
   const currentModule = getModuleById(moduleId);
   const section = getSectionByModuleId(moduleId);
@@ -80,7 +84,8 @@ export default function ModulePage() {
 
       if (response.ok) {
         const data = await response.json();
-        setIsCompleted(!isCompleted);
+        const newCompletedState = !isCompleted;
+        setIsCompleted(newCompletedState);
 
         // Update localStorage
         if (user) {
@@ -90,6 +95,19 @@ export default function ModulePage() {
           };
           setUser(updatedUser);
           localStorage.setItem("user", JSON.stringify(updatedUser));
+
+          // Check for milestones (only when completing, not uncompleting)
+          if (newCompletedState) {
+            const totalModules = getTotalModuleCount();
+            const completedCount = data.completedModules.length;
+            const percentage = Math.round((completedCount / totalModules) * 100);
+
+            // Check if we hit a milestone
+            if (percentage === 25 || percentage === 50 || percentage === 75 || percentage === 100) {
+              setMilestone(percentage);
+              setShowCelebration(true);
+            }
+          }
         }
       } else {
         alert("Error al actualizar el modulo");
@@ -280,6 +298,17 @@ export default function ModulePage() {
           </div>
         </div>
       </main>
+
+      {/* Celebration Modal */}
+      {showCelebration && milestone && (
+        <CelebrationModal
+          milestone={milestone}
+          onClose={() => {
+            setShowCelebration(false);
+            setMilestone(null);
+          }}
+        />
+      )}
     </div>
   );
 }
