@@ -23,6 +23,7 @@ import { module53Content } from "./module-5-3";
 import { module54Content } from "./module-5-4";
 import { module55Content } from "./module-5-5";
 import { module56Content } from "./module-5-6";
+import { module57Content } from "./module-5-7";
 import { module61Content } from "./module-6-1";
 import { module62Content } from "./module-6-2";
 import { module63Content } from "./module-6-3";
@@ -63,6 +64,7 @@ export const moduleContent: Record<string, React.ReactNode> = {
   "module-5-4": module54Content,
   "module-5-5": module55Content,
   "module-5-6": module56Content,
+  "module-5-7": module57Content,
   // Sesión 6: Hacer ruido en la web
   "module-6-1": module61Content,
   "module-6-2": module62Content,

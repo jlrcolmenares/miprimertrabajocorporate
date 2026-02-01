@@ -1,95 +1,77 @@
-// Módulo 5-6: Simular la entrevista
+// Módulo 5-6: Perfiles similares
 
 export const module56Content = (
   <>
-    <h2>Simular la entrevista</h2>
+    <h2>Perfiles similares</h2>
 
     <p>
-      Finalmente, con todas estas cosas preparadas, no hay nada que sea más
-      estresante que estar frente a una persona intentando contarle una historia
-      sobre lo bueno que eres.
+      Ya para este punto te estarás dando cuenta de que preparar una entrevista
+      es un proceso mucho más largo de lo que esperabas. Pero lo cierto es que
+      con la práctica puedes ver patrones más rápido y darte cuenta del estilo
+      de posiciones y de empresas que te suelen contactar.
+    </p>
+
+    <h3>El truco de LinkedIn</h3>
+
+    <p>
+      El siguiente truco que quiero darte es este: sobre todo en páginas como
+      LinkedIn, puedes ver públicamente{" "}
+      <strong>quién trabaja en una empresa</strong>.
     </p>
 
     <p>
-      Pero es ahí donde tienes que activar tu{" "}
-      <strong>instinto de vendedor</strong>. Al final, se trata de venderte a ti
-      mismo. Mi manera de verlo es que tú estás contando la historia de un
-      personaje, y ese personaje eres tú.
+      Puedes buscar cargos similares al tuyo y ver la formación de esas
+      personas. ¿Qué estudiaron? ¿Dónde trabajaron antes? ¿Qué habilidades
+      destacan?
     </p>
 
-    <h3>Practica antes del día real</h3>
-
-    <p>
-      Para ayudarte a preparar la entrevista, tengo preparado un prompt donde
-      puedes pasarle información similar a la anterior, pero esta vez{" "}
-      <strong>te hará preguntas difíciles</strong> como si fuera un
-      entrevistador real.
-    </p>
-
-    <div className="bg-gray-900 text-gray-100 rounded-lg p-4 my-6 overflow-x-auto">
-      <pre className="whitespace-pre-wrap text-sm font-mono m-0">{`*Objetivo:* Actuar como un Senior Hiring Manager con años de experiencia en el sector corporativo. Tu objetivo es evaluar la idoneidad del candidato mediante una conversación fluida, profesional y exigente, sin ser hostil ni artificial.
-
-*PERFIL DEL ENTREVISTADOR:*
-- Eres analítico y observador. Tu tono es educado y corporativo, pero no regalas cumplidos.
-- *Tu estilo de entrevista:* No dictas las reglas (no pides que el usuario use STAR), simplemente haces preguntas abiertas y esperas que el candidato sea capaz de estructurar su respuesta por sí solo.
-- *Detección de inconsistencias:* Si el candidato da una respuesta vaga o puramente creativa sin mencionar el impacto, tu siguiente pregunta será una "repregunta" sutil para buscar el dato: "Entiendo esa parte creativa, pero ¿cómo se tradujo eso en los indicadores de rendimiento del negocio?".
-
-*DATOS DE ENTRADA:*
-
-1. *INFORMACIÓN DE LA EMPRESA Y CARGO:*
-"""
-[PEGA AQUÍ: NOMBRE DE EMPRESA, DESCRIPCIÓN DEL PUESTO Y TAREAS CLAVE]
-"""
-
-2. *CV / EXPERIENCIA DEL CANDIDATO:*
-"""
-[PEGA AQUÍ TU CV O HISTORIA PROFESIONAL]
-"""
-
-*INSTRUCCIONES DE LA DINÁMICA:*
-1. *Inicio:* Saluda cordialmente y plantea la primera pregunta basada en un desafío real que la empresa pueda tener según la descripción del cargo.
-2. *Conversación:* Haz una pregunta a la vez. Escucha la respuesta y, si es necesario, profundiza en un punto específico antes de pasar al siguiente tema.
-3. *El Método STAR (Interno):* Utiliza el método STAR para evaluar mentalmente al candidato, pero *no menciones las siglas durante la entrevista*. Si el candidato olvida mencionar el "Resultado", tu siguiente pregunta debe enfocarse en obtenerlo de forma natural.
-
-*CIERRE Y EVALUACIÓN (Solo al final):*
-Cuando decidas terminar, di: "Muchas gracias por tu tiempo, hemos concluido la entrevista". Luego, genera un informe de feedback estructurado:
-- *Resumen de la impresión general:* (Fortalezas y debilidades percibidas).
-- *Análisis de Competencias:* ¿Demostró capacidad de ejecución, liderazgo y enfoque en resultados?
-- *Consejo Estratégico:* ¿Qué parte de su historia debería "vender" mejor o con qué datos debería respaldarla?
-
----
-*¿Estás listo? Por favor, inicia la sesión de forma profesional.*`}</pre>
-    </div>
-
-    <h3>Cómo funciona</h3>
-
-    <p>
-      Este prompt simula una entrevista real:
-    </p>
-
-    <ul>
-      <li>Te hace preguntas abiertas, una a la vez</li>
-      <li>
-        Si das respuestas vagas, te repregunta para obtener datos concretos
-      </li>
-      <li>
-        Al final, te da un informe con feedback sobre tu desempeño
-      </li>
-    </ul>
-
-    <div className="bg-amber-50 border-l-4 border-amber-500 p-4 my-6">
-      <p className="text-amber-800 m-0">
-        <strong>Tip:</strong> Haz esta simulación varias veces antes de la
-        entrevista real. Cada vez vas a mejorar tus respuestas y te vas a sentir
-        más seguro.
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+      <p className="text-blue-800 m-0">
+        En la mayoría de las veces, yo he visto personas de perfiles muy
+        distintos en el mismo cargo. Y eso me lleva a concluir que{" "}
+        <strong>yo puedo darle diversidad al equipo</strong> y que también
+        combino allí.
       </p>
     </div>
 
+    <h3>Cómo hacerlo</h3>
+
+    <ol>
+      <li>Ve a LinkedIn y busca la empresa</li>
+      <li>
+        Haz clic en &quot;Personas&quot; para ver quién trabaja ahí
+      </li>
+      <li>
+        Filtra por el cargo que te interesa o cargos similares
+      </li>
+      <li>
+        Revisa 3-5 perfiles: su formación, experiencia previa, habilidades
+      </li>
+    </ol>
+
+    <h3>¿Qué buscas?</h3>
+
+    <ul>
+      <li>
+        <strong>Patrones comunes</strong> — ¿Todos tienen un MBA? ¿Todos vienen
+        de consultoras? ¿O hay diversidad?
+      </li>
+      <li>
+        <strong>Tu diferenciador</strong> — ¿Qué puedes aportar tú que ellos no
+        tienen?
+      </li>
+      <li>
+        <strong>Validación</strong> — Si ves gente con perfiles similares al
+        tuyo, sabes que hay espacio para ti
+      </li>
+    </ul>
+
     <div className="bg-green-50 border-l-4 border-green-500 p-4 my-6">
       <p className="text-green-800 m-0">
-        <strong>Tu ejercicio:</strong> Usa este prompt con la misma vacante que
-        usaste en el módulo anterior. Haz la simulación completa y revisa el
-        feedback. Identifica qué respuestas necesitas mejorar.
+        <strong>Tu ejercicio:</strong> Para una de las empresas donde quieres
+        aplicar, busca en LinkedIn 3 personas que tengan el cargo que te
+        interesa. Anota qué tienen en común y qué podrías aportar tú que sea
+        diferente.
       </p>
     </div>
   </>
