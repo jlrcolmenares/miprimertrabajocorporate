@@ -13,6 +13,7 @@ export interface Section {
   title: string;
   description: string;
   order: number;
+  color: string; // Tailwind color class (e.g., "blue-600")
   modules: Module[];
 }
 
@@ -22,6 +23,7 @@ export const courseStructure: Section[] = [
     title: "Introducción",
     description: "Bienvenida al curso y presentación del taller",
     order: 0,
+    color: "blue-600",
     modules: [
       {
         id: "module-0-1",
@@ -37,6 +39,7 @@ export const courseStructure: Section[] = [
     title: "Análisis del perfil profesional",
     description: "Identifica tus fortalezas, habilidades y áreas de mejora para construir un perfil profesional sólido",
     order: 1,
+    color: "emerald-600",
     modules: [
       {
         id: "module-1-1",
@@ -66,6 +69,7 @@ export const courseStructure: Section[] = [
     title: "Conócete a ti mismo",
     description: "Identifica tus fortalezas, talentos y motivaciones para construir tu carrera",
     order: 2,
+    color: "purple-600",
     modules: [
       {
         id: "module-2-1",
@@ -102,6 +106,7 @@ export const courseStructure: Section[] = [
     title: "Análisis del mercado laboral",
     description: "Aprende a leer el mercado, identificar oportunidades y formarte para los puestos que te interesan",
     order: 3,
+    color: "orange-600",
     modules: [
       {
         id: "module-3-1",
@@ -138,6 +143,7 @@ export const courseStructure: Section[] = [
     title: "Preparación del CV",
     description: "Construye un currículum que te abra las puertas a la primera entrevista",
     order: 4,
+    color: "rose-600",
     modules: [
       {
         id: "module-4-1",
@@ -181,6 +187,7 @@ export const courseStructure: Section[] = [
     title: "Preparación de entrevistas",
     description: "Domina las técnicas para destacar en cualquier entrevista de trabajo",
     order: 5,
+    color: "indigo-600",
     modules: [
       {
         id: "module-5-1",
@@ -231,6 +238,7 @@ export const courseStructure: Section[] = [
     title: "Hacer ruido en la web",
     description: "Estrategias activas y pasivas para aumentar tu visibilidad profesional",
     order: 6,
+    color: "teal-600",
     modules: [
       {
         id: "module-6-1",
@@ -267,6 +275,7 @@ export const courseStructure: Section[] = [
     title: "Cierre",
     description: "Reflexiones finales, recursos adicionales y próximos pasos",
     order: 7,
+    color: "amber-600",
     modules: [
       {
         id: "module-7-1",
@@ -347,4 +356,10 @@ export function getPreviousModule(moduleId: string): Module | undefined {
     return undefined;
   }
   return allModules[currentIndex - 1];
+}
+
+// Helper function to get section color
+export function getSectionColor(sectionId: string): string {
+  const section = courseStructure.find((s) => s.id === sectionId);
+  return section?.color || "blue-600";
 }
