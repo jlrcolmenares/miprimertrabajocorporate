@@ -11,6 +11,53 @@ export const module56Content = (
       de posiciones y de empresas que te suelen contactar.
     </p>
 
+    <h3>La utilidad de la jerga</h3>
+
+    <p>
+      En su libro <em>&quot;Electronics for Earthlings&quot;</em>, Ken Amdahl
+      explica algo que aplica perfectamente al mundo corporativo: la jerga
+      cumple dos propósitos bastante útiles en la práctica.
+    </p>
+
+    <p>
+      <strong>Primero</strong>, es un atajo para las personas que la entienden.
+      Les permite comunicarse rápido y sonar como expertos.
+    </p>
+
+    <p>
+      A menos, claro está, que tú <strong>no</strong> entiendas el vocabulario.
+    </p>
+
+    <p>
+      Lo cual nos lleva al otro propósito útil de la jerga:{" "}
+      <strong>
+        puede usarse para confundir y excluir a las personas que no son miembros
+        del club
+      </strong>
+      . No saber utilizar la terminología de la posición a la que aplicas es
+      motivo de rechazo.
+    </p>
+
+    <div className="bg-gray-50 border-l-4 border-gray-400 p-4 my-6">
+      <p className="text-gray-800 m-0">
+        <strong>Ejemplo:</strong> Si aplicas a una posición de análisis
+        financiero y hablas de &quot;los ingresos anuales de la empresa&quot;,
+        puede ser correcto. Pero si hablas de <strong>ARR</strong> (Annual
+        Recurring Revenue), <strong>EBITDA</strong>, <strong>CAPEX</strong> o{" "}
+        <strong>OPEX</strong>, demuestras que conoces el lenguaje del sector. No
+        saber qué significan esas siglas te pone detrás de otros candidatos que
+        sí las conocen.
+      </p>
+    </div>
+
+    <p>
+      Por eso investigar perfiles similares al que buscas es tan valioso: te
+      permite <strong>aprender cómo hablan</strong>, qué terminología usan, y
+      cómo se presentan. No se trata de copiar. Se trata de aprender el idioma
+      del club para que cuando llegues a la entrevista, no seas el único que no
+      entiende de qué están hablando.
+    </p>
+
     <h3>El truco de LinkedIn</h3>
 
     <p>
@@ -57,6 +104,11 @@ export const module56Content = (
         de consultoras? ¿O hay diversidad?
       </li>
       <li>
+        <strong>Jerga y terminología</strong> — ¿Cómo describen lo que hacen?
+        ¿Qué palabras clave usan? ¿Cómo presentan sus logros? Anota esas frases
+        y terminología para incorporarlas en tu manera de hablar.
+      </li>
+      <li>
         <strong>Tu diferenciador</strong> — ¿Qué puedes aportar tú que ellos no
         tienen?
       </li>
@@ -67,11 +119,25 @@ export const module56Content = (
     </ul>
 
     <div className="bg-green-50 border-l-4 border-green-500 p-4 my-6">
-      <p className="text-green-800 m-0">
+      <p className="text-green-800 mb-3">
         <strong>Tu ejercicio:</strong> Para una de las empresas donde quieres
         aplicar, busca en LinkedIn 3 personas que tengan el cargo que te
-        interesa. Anota qué tienen en común y qué podrías aportar tú que sea
-        diferente.
+        interesa. Anota:
+      </p>
+      <ul className="text-green-800 m-0">
+        <li>Qué tienen en común estos perfiles</li>
+        <li>
+          <strong>Qué jerga y terminología usan</strong> para describir lo que
+          hacen
+        </li>
+        <li>
+          Cómo presentan sus logros (palabras clave, estructura de sus
+          descripciones)
+        </li>
+      </ul>
+      <p className="text-green-800 mt-3 mb-0">
+        Practica usar esa terminología en voz alta para que suene natural cuando
+        llegue la entrevista.
       </p>
     </div>
   </>
