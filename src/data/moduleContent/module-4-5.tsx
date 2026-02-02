@@ -126,6 +126,43 @@ export const module45Content = (
       normas de tu país (en algunos lugares es común incluir foto, en otros no).
     </p>
 
+    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+      <p className="text-blue-800 font-semibold mb-3">
+        Plantillas de CV para usar:
+      </p>
+      <div className="space-y-3">
+        <div>
+          <p className="text-blue-800 font-medium mb-1">CV Ejemplo 1 (con foto):</p>
+          <a
+            href="https://docs.google.com/document/d/1NI6ldJVWeE9C286S4GroxPw4F52FSwhf6US4T8apNHs/edit?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            Abrir plantilla con foto
+          </a>
+        </div>
+        <div>
+          <p className="text-blue-800 font-medium mb-1">CV Ejemplo 2 (sin foto):</p>
+          <a
+            href="https://docs.google.com/document/d/101Vtu2fjFNV_7vRHY4_n2YhpVCZus0plEAZBGLZ-sOM/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            Abrir plantilla sin foto
+          </a>
+        </div>
+      </div>
+      <p className="text-blue-800 mt-4 mb-0">
+        <strong>Cómo usar las plantillas:</strong> Al abrir cualquiera de los
+        dos documentos, ve al menú <strong>Archivo → Hacer una copia</strong>.
+        Esto creará una copia en tu propia cuenta de Google Drive que podrás
+        editar libremente. Desde ahí podrás cambiar los colores, el formato, y
+        personalizarlo como prefieras.
+      </p>
+    </div>
+
     <h3>Cierre de la sección</h3>
 
     <div className="bg-green-100 border-l-4 border-green-600 p-6 my-6">

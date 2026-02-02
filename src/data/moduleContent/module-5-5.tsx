@@ -121,6 +121,122 @@ export const module55Content = (
       Y. Me parece razonable.&quot;
     </p>
 
+    <h4>Cómo investigar salarios de mercado</h4>
+
+    <p>
+      Antes de cualquier entrevista, es <strong>fundamental</strong> que
+      investigues cuánto se paga en el mercado para la posición que buscas. No
+      puedes negociar si no sabes cuál es el rango justo.
+    </p>
+
+    <p>
+      Aquí están las mejores herramientas para investigar salarios:
+    </p>
+
+    <div className="bg-gray-50 border-l-4 border-gray-400 p-4 my-6">
+      <p className="text-gray-800 font-semibold mb-3">
+        Portales para investigar salarios:
+      </p>
+      <ul className="text-gray-800 m-0 space-y-2">
+        <li>
+          <strong>Glassdoor</strong> (
+          <a
+            href="https://www.glassdoor.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            glassdoor.com
+          </a>
+          ) — Información de salarios reportados por empleados reales. Busca por
+          cargo y ciudad.
+        </li>
+        <li>
+          <strong>LinkedIn Salary</strong> (
+          <a
+            href="https://www.linkedin.com/salary/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            linkedin.com/salary
+          </a>
+          ) — Datos de salarios basados en perfiles verificados.
+        </li>
+        <li>
+          <strong>Payscale</strong> (
+          <a
+            href="https://www.payscale.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            payscale.com
+          </a>
+          ) — Calculadora de salarios con filtros por experiencia, ciudad, y
+          empresa.
+        </li>
+        <li>
+          <strong>Salary.com</strong> (
+          <a
+            href="https://www.salary.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            salary.com
+          </a>
+          ) — Reportes detallados de compensación por industria.
+        </li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Cómo usar estas herramientas:</strong>
+    </p>
+
+    <ol>
+      <li>
+        <strong>Busca el cargo específico:</strong> Usa el título exacto de la
+        posición (ej. &quot;Customer Service Representative&quot;,
+        &quot;Financial Analyst&quot;).
+      </li>
+      <li>
+        <strong>Filtra por ubicación:</strong> Los salarios varían mucho según
+        la ciudad y el país. Asegúrate de buscar en tu zona geográfica.
+      </li>
+      <li>
+        <strong>Considera tu nivel de experiencia:</strong> Entry-level, mid-level,
+        o senior. No compares tu situación con alguien que tiene 10 años de
+        experiencia.
+      </li>
+      <li>
+        <strong>Mira varios portales:</strong> No te quedes con un solo dato.
+        Cruza información de 2-3 fuentes para tener un rango realista.
+      </li>
+      <li>
+        <strong>Anota el rango:</strong> Identifica el percentil 25 (bajo), 50
+        (medio), y 75 (alto). Tu objetivo debe estar entre el 50 y el 75 si
+        tienes las habilidades que piden.
+      </li>
+    </ol>
+
+    <div className="bg-amber-50 border-l-4 border-amber-500 p-4 my-6">
+      <p className="text-amber-800 m-0">
+        <strong>Importante:</strong> Algunos portales requieren que crees una
+        cuenta gratuita o que compartas tu propio salario para ver datos. Es un
+        intercambio justo si eso te ayuda a negociar mejor tu próxima oferta.
+      </p>
+    </div>
+
+    <p>
+      Una vez que tengas el rango, úsalo con confianza. Si te preguntan por tus
+      expectativas, puedes decir algo como: &quot;Según mi investigación en
+      Glassdoor y LinkedIn, veo que posiciones similares en esta zona están
+      entre [rango]. Dado mi experiencia en [X], creo que algo en el rango de
+      [Y] sería razonable.&quot;
+    </p>
+
     <h3>5. ¿Tienes otras ofertas en proceso?</h3>
 
     <div className="bg-red-50 border-l-4 border-red-500 p-4 my-6">

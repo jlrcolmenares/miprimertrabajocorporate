@@ -180,42 +180,32 @@ export default function AdminPanel() {
     }
   };
 
-  const sendInvitation = async () => {
+  const sendInvitation = () => {
     if (!inviteEmail) {
       alert("Introduce un email");
       return;
     }
 
-    try {
-      const user = auth.currentUser;
-      if (!user) return;
+    const baseUrl = window.location.origin;
+    const registroUrl = `${baseUrl}/register`;
 
-      const idToken = await user.getIdToken();
+    const subject = encodeURIComponent("Invitacion al curso Mi Primer Trabajo Corporate");
+    const body = encodeURIComponent(
+`Hola,
 
-      const response = await fetch("/api/admin/invite-user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({
-          email: inviteEmail,
-        }),
-      });
+Has sido invitado al curso "Mi Primer Trabajo Corporate".
 
-      if (response.ok) {
-        const data = await response.json();
-        alert(data.message);
-        setInviteEmail("");
-        fetchUsers(); // Refresh the user list
-      } else {
-        const error = await response.json();
-        alert(error.error || "Error al enviar la invitacion");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Error al enviar la invitacion");
-    }
+Para crear tu cuenta, haz clic en el siguiente enlace:
+${registroUrl}
+
+Una vez registrado, tu acceso sera activado y podras comenzar el curso.
+
+Saludos,
+Jose Luis Colmenares`
+    );
+
+    window.open(`mailto:${inviteEmail}?subject=${subject}&body=${body}`, "_blank");
+    setInviteEmail("");
   };
 
   if (loading) {
@@ -346,7 +336,7 @@ export default function AdminPanel() {
               </button>
             </div>
             <p className="mt-2 text-sm text-gray-500">
-              Se enviara automaticamente un email profesional con el enlace de invitacion.
+              Se abrira tu cliente de email con un mensaje pre-escrito. El usuario podra registrarse y elegir su nombre.
             </p>
           </div>
         </div>
