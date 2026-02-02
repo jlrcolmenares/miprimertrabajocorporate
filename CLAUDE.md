@@ -149,8 +149,8 @@ Router checks user type (localStorage: isAdmin, user.hasPaid)
 2. Conocete a ti mismo (4 modules)
 3. Analisis del mercado laboral (4 modules)
 4. Preparacion del CV (5 modules)
-5. Preparacion de entrevistas (6 modules)
-6. Hacer ruido en la web (4 modules)
+5. Preparacion de entrevistas (7 modules)
+6. Ser un lider de opinion (4 modules)
 7. Cierre (5 modules) - Closing, resources, and next steps
 
 **Helper Functions (courseStructure.ts):**

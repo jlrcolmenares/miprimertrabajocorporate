@@ -242,8 +242,8 @@ export const courseStructure: Section[] = [
   },
   {
     id: "section-6",
-    title: "Hacer ruido en la web",
-    description: "Estrategias activas y pasivas para aumentar tu visibilidad profesional",
+    title: "Ser un líder de opinión",
+    description: "Aporta valor desde tu conocimiento y construye tu marca profesional",
     order: 6,
     color: "teal-600",
     modules: [

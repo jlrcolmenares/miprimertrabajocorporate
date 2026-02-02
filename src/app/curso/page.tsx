@@ -200,7 +200,7 @@ export default function Curso() {
                 <div className="flex items-start">
                   <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0 mt-0.5">6</span>
                   <div>
-                    <p className="font-medium text-gray-900 text-sm sm:text-base">Hacer ruido en la web</p>
+                    <p className="font-medium text-gray-900 text-sm sm:text-base">Ser un líder de opinión</p>
                     <p className="text-gray-500 text-xs sm:text-sm">4 módulos</p>
                   </div>
                 </div>

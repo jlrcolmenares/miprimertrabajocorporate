@@ -50,8 +50,8 @@ export const module01Content = (
         destacar
       </li>
       <li>
-        <strong>Hacer ruido en la web:</strong> Aumentar tu visibilidad
-        profesional
+        <strong>Ser un líder de opinión:</strong> Aporta valor desde tu
+        conocimiento
       </li>
       <li>
         <strong>Cierre:</strong> Reflexiones finales y próximos pasos
