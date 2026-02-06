@@ -37,7 +37,7 @@ Unfortunately, Firebase doesn't support custom HTML templates directly through t
 #### Option A: Use Firebase Extensions (Email Customization)
 
 1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Select your project: `miprimertrabajocorporate`
+2. Select your project: `incorporate`
 3. Click **Extensions** in the left sidebar
 4. Search for "Trigger Email"
 5. Install the **Trigger Email** extension
@@ -74,7 +74,7 @@ Since custom HTML templates require additional setup, here's what I recommend:
 **Option 1: Use Firebase Default Templates**
 1. Go to Firebase Console → Authentication → Templates
 2. Customize the default templates with your:
-   - App name: "Mi Primer Trabajo Corporate"
+   - App name: "Incorporate"
    - Sender name: Your name or company
    - Reply-to email: Your support email
 
@@ -91,7 +91,7 @@ Since custom HTML templates require additional setup, here's what I recommend:
 
 1. **Go to Firebase Console**
    - Navigate to: https://console.firebase.google.com/
-   - Select: `miprimertrabajocorporate`
+   - Select: `incorporate`
 
 2. **Open Authentication Templates**
    - Click **Authentication** in left sidebar
@@ -108,12 +108,12 @@ Since custom HTML templates require additional setup, here's what I recommend:
 
    **Sender name:**
    ```
-   Mi Primer Trabajo Corporate
+   Incorporate
    ```
 
    **Sender email:**
    ```
-   noreply@miprimertrabajocorporate.firebaseapp.com
+   noreply@incorporate.firebaseapp.com
    ```
    (or use your custom domain if you have one)
 
@@ -125,27 +125,27 @@ Since custom HTML templates require additional setup, here's what I recommend:
 
    **Subject:**
    ```
-   Verifica tu correo electrónico - Mi Primer Trabajo Corporate
+   Verifica tu correo electrónico - Incorporate
    ```
 
    **Body (Spanish version):**
    ```
    Hola %DISPLAY_NAME%,
 
-   Gracias por registrarte en Mi Primer Trabajo Corporate.
+   Gracias por registrarte en Incorporate.
 
    Para completar tu registro y acceder a todo el contenido del curso, 
    verifica tu dirección de correo electrónico haciendo clic en el siguiente enlace:
 
    %LINK%
 
-   Si no creaste una cuenta en Mi Primer Trabajo Corporate, 
+   Si no creaste una cuenta en Incorporate, 
    puedes ignorar este correo de forma segura.
 
    Este enlace expirará en 24 horas.
 
    ¡Nos vemos pronto!
-   El equipo de Mi Primer Trabajo Corporate
+   El equipo de Incorporate
    ```
 
 4. **Customize Password Reset Template**
@@ -154,7 +154,7 @@ Since custom HTML templates require additional setup, here's what I recommend:
 
    **Subject:**
    ```
-   Restablece tu contraseña - Mi Primer Trabajo Corporate
+   Restablece tu contraseña - Incorporate
    ```
 
    **Body (Spanish version):**
@@ -173,7 +173,7 @@ Since custom HTML templates require additional setup, here's what I recommend:
    Este enlace expirará en 1 hora por motivos de seguridad.
 
    Saludos,
-   El equipo de Mi Primer Trabajo Corporate
+   El equipo de Incorporate
    ```
 
 5. **Save Changes**

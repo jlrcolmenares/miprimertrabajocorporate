@@ -25,7 +25,7 @@ The application now uses Firebase Authentication and Firestore for user manageme
 
 1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Click "Add project" or "Create a project"
-3. Enter project name: `miprimertrabajocorporate` (or your preferred name)
+3. Enter project name: `incorporate` (or your preferred name)
 4. **Disable Google Analytics** (not needed for this project)
 5. Click "Create project"
 6. Wait for project creation (~30 seconds)
@@ -73,7 +73,7 @@ The application now uses Firebase Authentication and Firestore for user manageme
 2. Click "Project settings"
 3. Scroll down to "Your apps"
 4. Click the **Web icon** `</>`
-5. Enter app nickname: `Mi Primer Trabajo Corporate Web`
+5. Enter app nickname: `Incorporate Web`
 6. **Don't check** "Also set up Firebase Hosting"
 7. Click "Register app"
 8. Copy the `firebaseConfig` object

@@ -12,19 +12,19 @@ Copy and paste these directly into Firebase Console → Authentication → Templ
 
 **Sender name:**
 ```
-Mi Primer Trabajo Corporate
+Incorporate
 ```
 
 **Subject:**
 ```
-✉️ Verifica tu correo - Mi Primer Trabajo Corporate
+✉️ Verifica tu correo - Incorporate
 ```
 
 **Email body:**
 ```
 ¡Hola %DISPLAY_NAME%! 👋
 
-Gracias por unirte a Mi Primer Trabajo Corporate. Estamos emocionados de tenerte con nosotros en este viaje hacia tu desarrollo profesional.
+Gracias por unirte a Incorporate. Estamos emocionados de tenerte con nosotros en este viaje hacia tu desarrollo profesional.
 
 Para completar tu registro y acceder a todo el contenido del curso, necesitamos verificar tu dirección de correo electrónico.
 
@@ -32,19 +32,19 @@ Para completar tu registro y acceder a todo el contenido del curso, necesitamos 
 %LINK%
 
 🔒 NOTA DE SEGURIDAD:
-Si no creaste una cuenta en Mi Primer Trabajo Corporate, puedes ignorar este correo de forma segura.
+Si no creaste una cuenta en Incorporate, puedes ignorar este correo de forma segura.
 
 ⏱️ Este enlace expirará en 24 horas por motivos de seguridad.
 
 ---
 ¡Nos vemos pronto!
-El equipo de Mi Primer Trabajo Corporate
+El equipo de Incorporate
 
 Tu guía para el éxito profesional 🚀
 
 ---
 Este es un correo automático, por favor no respondas a este mensaje.
-© 2025 Mi Primer Trabajo Corporate
+© 2025 Incorporate
 ```
 
 ---
@@ -55,19 +55,19 @@ Este es un correo automático, por favor no respondas a este mensaje.
 
 **Sender name:**
 ```
-Mi Primer Trabajo Corporate
+Incorporate
 ```
 
 **Subject:**
 ```
-🔐 Restablece tu contraseña - Mi Primer Trabajo Corporate
+🔐 Restablece tu contraseña - Incorporate
 ```
 
 **Email body:**
 ```
 Hola %DISPLAY_NAME%,
 
-Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Mi Primer Trabajo Corporate.
+Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Incorporate.
 
 Si solicitaste este cambio, haz clic en el siguiente enlace para crear una nueva contraseña:
 
@@ -85,13 +85,13 @@ Por tu seguridad, nunca compartas este enlace con nadie. Nuestro equipo nunca te
 
 ---
 Saludos,
-El equipo de Mi Primer Trabajo Corporate
+El equipo de Incorporate
 
 Tu guía para el éxito profesional 🚀
 
 ---
 Este es un correo automático, por favor no respondas a este mensaje.
-© 2025 Mi Primer Trabajo Corporate
+© 2025 Incorporate
 ```
 
 ---
@@ -102,12 +102,12 @@ Este es un correo automático, por favor no respondas a este mensaje.
 
 **Sender name:**
 ```
-Mi Primer Trabajo Corporate
+Incorporate
 ```
 
 **Subject:**
 ```
-📧 Confirma tu nuevo correo - Mi Primer Trabajo Corporate
+📧 Confirma tu nuevo correo - Incorporate
 ```
 
 **Email body:**
@@ -128,11 +128,11 @@ Si no solicitaste cambiar tu correo electrónico, contacta inmediatamente con nu
 
 ---
 Saludos,
-El equipo de Mi Primer Trabajo Corporate
+El equipo de Incorporate
 
 ---
 Este es un correo automático, por favor no respondas a este mensaje.
-© 2025 Mi Primer Trabajo Corporate
+© 2025 Incorporate
 ```
 
 ---
@@ -141,7 +141,7 @@ Este es un correo automático, por favor no respondas a este mensaje.
 
 ### Step 1: Go to Firebase Console
 1. Open: https://console.firebase.google.com/
-2. Select your project: **miprimertrabajocorporate**
+2. Select your project: **incorporate**
 
 ### Step 2: Navigate to Templates
 1. Click **Authentication** in the left sidebar
@@ -154,7 +154,7 @@ Este es un correo automático, por favor no respondas a este mensaje.
 
 ### Step 4: Configure Sender Settings
 1. In the same Templates section
-2. Set **Sender name**: `Mi Primer Trabajo Corporate`
+2. Set **Sender name**: `Incorporate`
 3. Set **Reply-to email**: Your support email (e.g., `support@yourdomain.com`)
 
 ---

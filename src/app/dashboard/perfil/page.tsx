@@ -113,7 +113,7 @@ export default function Perfil() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">Incorporate</h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">

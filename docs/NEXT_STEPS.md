@@ -1,4 +1,4 @@
-# 🎯 Next Steps - Mi Primer Trabajo Corporate
+# 🎯 Next Steps - Incorporate
 
 ## ✅ What's Already Implemented
 

@@ -5,26 +5,44 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Original project colors */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #dbeafe;
+  /* ========================================
+     INCORPORATE BRAND COLORS
+     ======================================== */
 
-  /* Section colors */
-  --section-0: #2563eb;  /* Blue - Introducción */
+  /* Primary - Dark Indigo */
+  --primary: #292C88;
+  --primary-hover: #1e2066;       /* Darker for hover */
+  --primary-light: #4a4da8;       /* Lighter shade */
+  --primary-50: #eef0ff;          /* Very light tint */
+  --primary-100: #d8dafe;         /* Light tint */
+
+  /* Secondary - Gold/Yellow */
+  --secondary-brand: #EDD278;
+  --secondary-hover: #e5c55a;     /* Darker for hover */
+  --secondary-light: #f5e4a8;     /* Lighter shade */
+
+  /* Accent - Light Blue */
+  --accent-brand: #DBEAFE;
+
+  /* Background */
+  --background-brand: #E8E9EB;
+  --background-white: #ffffff;
+
+  /* Section colors (course) */
+  --section-0: #292C88;  /* Primary - Introducción */
   --section-1: #059669;  /* Emerald - Análisis perfil */
   --section-2: #7c3aed;  /* Purple - Conócete */
   --section-3: #ea580c;  /* Orange - Mercado laboral */
   --section-4: #e11d48;  /* Rose - CV */
   --section-5: #4f46e5;  /* Indigo - Entrevistas */
   --section-6: #0d9488;  /* Teal - Hacer ruido */
-  --section-7: #d97706;  /* Amber - Cierre */
+  --section-7: #EDD278;  /* Secondary/Gold - Cierre */
 
   /* Landing page gradients */
-  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
-  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%);
-  --gradient-card: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  --gradient-primary: linear-gradient(135deg, #292C88 0%, #4a4da8 50%, #6366f1 100%);
+  --gradient-hero: linear-gradient(135deg, #1a1c54 0%, #292C88 50%, #3d4099 100%);
+  --gradient-accent: linear-gradient(135deg, #DBEAFE 0%, #292C88 100%);
+  --gradient-card: linear-gradient(135deg, rgba(41, 44, 136, 0.1) 0%, rgba(237, 210, 120, 0.1) 100%);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -238,7 +256,7 @@
 
 /* Landing Page Utility Classes */
 .landing-gradient-bg {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #312e81 50%, #1e3a5f 75%, #0f172a 100%);
+  background: linear-gradient(135deg, #1a1c54 0%, #292C88 25%, #3d4099 50%, #292C88 75%, #1a1c54 100%);
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
@@ -261,14 +279,14 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #4a4da8 0%, #EDD278 50%, #292C88 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-bright {
-  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #c4b5fd 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #DBEAFE 50%, #EDD278 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -303,7 +321,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+  background: linear-gradient(90deg, #292C88 0%, #EDD278 50%, #292C88 100%);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -315,7 +333,7 @@
 
 .feature-card:hover {
   transform: translateY(-12px);
-  box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(41, 44, 136, 0.25);
 }
 
 .feature-card .card-icon {
@@ -327,7 +345,7 @@
 }
 
 .btn-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #292C88 0%, #4a4da8 100%);
   background-size: 200% 200%;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -348,7 +366,7 @@
 .btn-gradient:hover {
   background-position: 100% 0;
   transform: translateY(-3px);
-  box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 40px -10px rgba(41, 44, 136, 0.5);
 }
 
 .btn-gradient:hover::after {
@@ -369,6 +387,26 @@
   box-shadow: 0 20px 40px -10px rgba(255, 255, 255, 0.2);
 }
 
+/* Navigation link hover with brand colors */
+.nav-link-hover:hover {
+  color: var(--primary);
+  background-color: var(--primary-50);
+}
+
+/* Primary background utility */
+.bg-primary-brand {
+  background-color: var(--primary);
+}
+
+.bg-primary-brand:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Background accent utility */
+.bg-accent-brand {
+  background-color: var(--accent-brand);
+}
+
 .animated-badge {
   animation: scaleIn 0.6s ease-out forwards;
   position: relative;
@@ -378,7 +416,7 @@
   content: '';
   position: absolute;
   inset: -2px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #292C88 0%, #EDD278 100%);
   border-radius: inherit;
   z-index: -1;
   opacity: 0;

@@ -30,7 +30,7 @@ export const module12Content = (
     </p>
 
     <p>
-      Mi objetivo con <strong>Mi Primer Trabajo Corporate</strong> es que te
+      Mi objetivo con <strong>Incorporate</strong> es que te
       sientas cómodo trabajando y estudiando para entrar en empresas
       corporativas, pero ten en cuenta que no es la única solución.
     </p>

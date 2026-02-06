@@ -7,20 +7,20 @@ export default function SobreMi() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--background-brand)' }}>
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-14 sm:h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-lg sm:text-2xl font-bold text-blue-600 cursor-pointer">Mi Primer Trabajo Corporate</h1>
+                <h1 className="text-lg sm:text-2xl font-bold cursor-pointer" style={{ color: 'var(--primary)' }}>Incorporate</h1>
               </Link>
             </div>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+              className="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 nav-link-hover"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Abrir menú"
             >
@@ -35,16 +35,16 @@ export default function SobreMi() {
 
             {/* Desktop menu */}
             <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
+              <Link href="/" className="text-gray-700 nav-link-hover px-3 py-2 text-sm font-medium rounded-lg">
                 Inicio
               </Link>
-              <Link href="/sobre-mi" className="text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-blue-600">
+              <Link href="/sobre-mi" className="px-3 py-2 text-sm font-medium border-b-2" style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
                 Sobre Mí
               </Link>
-              <Link href="/curso" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
+              <Link href="/curso" className="text-gray-700 nav-link-hover px-3 py-2 text-sm font-medium rounded-lg">
                 El Curso
               </Link>
-              <Link href="/login" className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium">
+              <Link href="/login" className="px-3 py-2 text-sm font-medium transition-colors" style={{ color: 'var(--primary)' }}>
                 Iniciar Sesión
               </Link>
             </div>
@@ -55,28 +55,30 @@ export default function SobreMi() {
             <div className="md:hidden border-t border-gray-200 py-2">
               <Link
                 href="/"
-                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                className="block px-4 py-3 text-base font-medium text-gray-700 nav-link-hover rounded-lg"
                 onClick={() => setMenuOpen(false)}
               >
                 Inicio
               </Link>
               <Link
                 href="/sobre-mi"
-                className="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-gray-50"
+                className="block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg"
+                style={{ color: 'var(--primary)' }}
                 onClick={() => setMenuOpen(false)}
               >
                 Sobre Mí
               </Link>
               <Link
                 href="/curso"
-                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                className="block px-4 py-3 text-base font-medium text-gray-700 nav-link-hover rounded-lg"
                 onClick={() => setMenuOpen(false)}
               >
                 El Curso
               </Link>
               <Link
                 href="/login"
-                className="block px-4 py-3 text-base font-medium text-blue-600 hover:text-blue-800 hover:bg-gray-50"
+                className="block px-4 py-3 text-base font-medium hover:bg-gray-50 rounded-lg"
+                style={{ color: 'var(--primary)' }}
                 onClick={() => setMenuOpen(false)}
               >
                 Iniciar Sesión
@@ -95,7 +97,7 @@ export default function SobreMi() {
 
           {/* Profile Section */}
           <div className="mb-8 sm:mb-12">
-            <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style={{ backgroundColor: 'var(--primary)' }}>
               JL
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
@@ -138,29 +140,29 @@ export default function SobreMi() {
           </div>
 
           {/* What You'll Learn Section */}
-          <div className="bg-blue-50 rounded-xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-12">
+          <div className="rounded-xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-12" style={{ backgroundColor: 'var(--accent-brand)' }}>
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               Lo que aprenderás en este curso
             </h3>
             <ul className="space-y-2 sm:space-y-3">
               <li className="flex items-start">
-                <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0" style={{ color: 'var(--primary)' }}>✓</span>
                 <span className="text-sm sm:text-base text-gray-700">Cómo prepararte para tu primer día en una empresa corporativa</span>
               </li>
               <li className="flex items-start">
-                <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0" style={{ color: 'var(--primary)' }}>✓</span>
                 <span className="text-sm sm:text-base text-gray-700">Estrategias para destacar y crecer profesionalmente</span>
               </li>
               <li className="flex items-start">
-                <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0" style={{ color: 'var(--primary)' }}>✓</span>
                 <span className="text-sm sm:text-base text-gray-700">Cómo navegar la cultura corporativa y las relaciones laborales</span>
               </li>
               <li className="flex items-start">
-                <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0" style={{ color: 'var(--primary)' }}>✓</span>
                 <span className="text-sm sm:text-base text-gray-700">Consejos prácticos basados en experiencias reales</span>
               </li>
               <li className="flex items-start">
-                <span className="text-blue-600 mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0">✓</span>
+                <span className="mr-2 sm:mr-3 text-lg sm:text-xl flex-shrink-0" style={{ color: 'var(--primary)' }}>✓</span>
                 <span className="text-sm sm:text-base text-gray-700">Y mucho más contenido valioso para tu desarrollo profesional</span>
               </li>
             </ul>
@@ -176,7 +178,10 @@ export default function SobreMi() {
             </p>
             <Link
               href="/curso"
-              className="inline-block bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+              className="inline-block text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors shadow-lg"
+              style={{ backgroundColor: 'var(--primary)' }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary-hover)')}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary)')}
             >
               Ver el Curso
             </Link>

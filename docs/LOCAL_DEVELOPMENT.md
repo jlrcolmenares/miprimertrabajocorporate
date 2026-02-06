@@ -32,7 +32,7 @@ DF
 ### 1. Install Dependencies
 
 ```bash
-cd miprimertrabajocorporate
+cd incorporate
 npm install
 ```
 
@@ -153,7 +153,7 @@ Look for:
 ## File Structure for Development
 
 ```
-miprimertrabajocorporate/
+incorporate/
 ├── .env.local              ← YOU CREATE THIS (not in git)
 ├── .next/                  ← Build cache (auto-generated)
 ├── node_modules/           ← Dependencies (auto-generated)

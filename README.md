@@ -1,6 +1,8 @@
-# Mi Primer Trabajo Corporate
+# Incorporate
 
 **Version 1.0.0** | Plataforma de curso online para preparar a personas para su primer trabajo en el mundo corporativo.
+
+**Dominio:** incorporate.training
 
 **Autor:** Jose Luis Colmenares (jlrcolmenares)
 

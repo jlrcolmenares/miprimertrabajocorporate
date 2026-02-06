@@ -1,6 +1,6 @@
 # 📚 Documentation Index
 
-Welcome to the Mi Primer Trabajo Corporate documentation!
+Welcome to the Incorporate documentation!
 
 ## 📖 Available Guides
 
