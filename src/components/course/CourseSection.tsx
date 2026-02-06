@@ -1,7 +1,7 @@
 "use client";
 
 import { Section } from "@/data/courseStructure";
-import ModuleCard from "@/components/ModuleCard";
+import ModuleCard from "@/components/course/ModuleCard";
 
 interface CourseSectionProps {
   section: Section;

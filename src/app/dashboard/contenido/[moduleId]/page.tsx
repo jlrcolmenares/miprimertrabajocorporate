@@ -11,7 +11,7 @@ import {
   getTotalModuleCount,
 } from "@/data/courseStructure";
 import { getModuleContent } from "@/data/moduleContent";
-import CourseSidebar from "@/components/CourseSidebar";
+import CourseSidebar from "@/components/course/CourseSidebar";
 import CelebrationModal from "@/components/CelebrationModal";
 
 interface User {

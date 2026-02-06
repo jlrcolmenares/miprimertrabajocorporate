@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import CourseSidebar from "@/components/CourseSidebar";
+import CourseSidebar from "@/components/course/CourseSidebar";
 import { courseStructure, getTotalModuleCount, getAllModules } from "@/data/courseStructure";
 
 interface User {
