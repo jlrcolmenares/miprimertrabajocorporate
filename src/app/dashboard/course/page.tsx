@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import CourseSidebar from "@/components/CourseSidebar";
+import CourseSidebar from "@/components/course/CourseSidebar";
 import { courseStructure, getTotalModuleCount, getAllModules } from "@/data/courseStructure";
 
 interface User {
@@ -56,9 +56,9 @@ export default function CourseDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background-brand)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto" style={{ borderColor: 'var(--primary)' }}></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -79,12 +79,12 @@ export default function CourseDashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: 'var(--background-brand)' }}>
       {/* Sidebar */}
       <CourseSidebar
         completedModules={user.completedModules || []}
         showBackLink={false}
-        headerTitle="Mi Primer Trabajo"
+        headerTitle="Incorporate"
       />
 
       {/* Main Content */}
@@ -136,12 +136,12 @@ export default function CourseDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Tu progreso</h2>
-              <span className="text-2xl font-bold text-blue-600">{progressPercent}%</span>
+              <span className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{progressPercent}%</span>
             </div>
             <div className="h-3 bg-gray-100 rounded-full overflow-hidden mb-4">
               <div
-                className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
-                style={{ width: `${progressPercent}%` }}
+                className="h-full transition-all duration-500"
+                style={{ width: `${progressPercent}%`, background: 'linear-gradient(to right, var(--primary-light), var(--primary))' }}
               />
             </div>
             <div className="flex items-center justify-between text-sm text-gray-600">
@@ -156,13 +156,14 @@ export default function CourseDashboard() {
 
           {/* Continue Learning Card */}
           {nextModule && (
-            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-sm p-6 mb-6 text-white">
-              <p className="text-blue-100 text-sm mb-2">Continuar aprendiendo</p>
+            <div className="rounded-xl shadow-sm p-6 mb-6 text-white" style={{ background: 'linear-gradient(to bottom right, var(--primary), var(--primary-hover))' }}>
+              <p className="text-sm mb-2" style={{ color: 'var(--primary-100)' }}>Continuar aprendiendo</p>
               <h3 className="text-xl font-semibold mb-3">{nextModule.title}</h3>
-              <p className="text-blue-100 text-sm mb-4">{nextModule.description}</p>
+              <p className="text-sm mb-4" style={{ color: 'var(--primary-100)' }}>{nextModule.description}</p>
               <Link
                 href={`/dashboard/contenido/${nextModule.id}`}
-                className="inline-flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors"
+                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg font-medium transition-colors hover:opacity-90"
+                style={{ color: 'var(--primary)' }}
               >
                 Continuar
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

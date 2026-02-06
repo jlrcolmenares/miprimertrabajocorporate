@@ -189,11 +189,11 @@ export default function AdminPanel() {
     const baseUrl = window.location.origin;
     const registroUrl = `${baseUrl}/register`;
 
-    const subject = encodeURIComponent("Invitacion al curso Mi Primer Trabajo Corporate");
+    const subject = encodeURIComponent("Invitacion al curso Incorporate");
     const body = encodeURIComponent(
 `Hola,
 
-Has sido invitado al curso "Mi Primer Trabajo Corporate".
+Has sido invitado al curso "Incorporate".
 
 Para crear tu cuenta, haz clic en el siguiente enlace:
 ${registroUrl}
@@ -210,9 +210,9 @@ Jose Luis Colmenares`
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background-brand)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto" style={{ borderColor: 'var(--primary)' }}></div>
           <p className="mt-4 text-gray-600">Verificando permisos...</p>
         </div>
       </div>
@@ -224,18 +224,18 @@ Jose Luis Colmenares`
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--background-brand)' }}>
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center gap-4">
               <Link href="/">
-                <h1 className="text-xl font-bold text-blue-600 cursor-pointer">
-                  Mi Primer Trabajo
+                <h1 className="text-xl font-bold cursor-pointer" style={{ color: 'var(--primary)' }}>
+                  Incorporate
                 </h1>
               </Link>
-              <span className="hidden sm:inline-block px-2 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded">
+              <span className="hidden sm:inline-block px-2 py-1 text-xs font-semibold rounded" style={{ backgroundColor: 'var(--secondary-light)', color: 'var(--primary-hover)' }}>
                 ADMIN
               </span>
             </div>

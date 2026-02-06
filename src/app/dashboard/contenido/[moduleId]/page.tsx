@@ -11,7 +11,7 @@ import {
   getTotalModuleCount,
 } from "@/data/courseStructure";
 import { getModuleContent } from "@/data/moduleContent";
-import CourseSidebar from "@/components/CourseSidebar";
+import CourseSidebar from "@/components/course/CourseSidebar";
 import CelebrationModal from "@/components/CelebrationModal";
 
 interface User {
@@ -122,9 +122,9 @@ export default function ModulePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background-brand)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto" style={{ borderColor: 'var(--primary)' }}></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -133,14 +133,15 @@ export default function ModulePage() {
 
   if (!currentModule || !content) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background-brand)' }}>
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Modulo no encontrado
           </h1>
           <Link
             href="/dashboard"
-            className="text-blue-600 hover:text-blue-700 font-semibold"
+            className="font-semibold"
+            style={{ color: 'var(--primary)' }}
           >
             ← Volver al dashboard
           </Link>
@@ -150,7 +151,7 @@ export default function ModulePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: 'var(--background-brand)' }}>
       {/* Sidebar */}
       <CourseSidebar completedModules={user?.completedModules || []} />
 
@@ -160,17 +161,10 @@ export default function ModulePage() {
           {/* Module Header */}
           <div className="mb-8">
             {section && (
-              <p className={`text-sm font-semibold mb-2 ${
-                section.color === "blue-600" ? "text-blue-600" :
-                section.color === "emerald-600" ? "text-emerald-600" :
-                section.color === "purple-600" ? "text-purple-600" :
-                section.color === "orange-600" ? "text-orange-600" :
-                section.color === "rose-600" ? "text-rose-600" :
-                section.color === "indigo-600" ? "text-indigo-600" :
-                section.color === "teal-600" ? "text-teal-600" :
-                section.color === "amber-600" ? "text-amber-600" :
-                "text-blue-600"
-              }`}>
+              <p
+                className="text-sm font-semibold mb-2"
+                style={{ color: `var(--section-${section.order})` }}
+              >
                 {section.title}
               </p>
             )}
@@ -264,7 +258,10 @@ export default function ModulePage() {
             {nextModule ? (
               <Link
                 href={`/dashboard/contenido/${nextModule.id}`}
-                className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-blue-600 rounded-lg text-white hover:bg-blue-700 transition-colors"
+                className="flex-1 inline-flex items-center justify-center px-6 py-3 rounded-lg text-white transition-colors"
+                style={{ backgroundColor: 'var(--primary)' }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary-hover)')}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary)')}
               >
                 <span className="hidden sm:inline">Siguiente:</span>
                 <span className="ml-1 truncate max-w-[150px]">

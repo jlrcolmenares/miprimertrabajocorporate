@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mi Primer Trabajo Corporate",
+  title: "Incorporate",
   description: "Todo lo que necesitas saber para triunfar en el mundo corporativo",
 };
 

@@ -71,12 +71,12 @@ export default function Registro() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: 'var(--background-brand)' }}>
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <Link href="/">
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-600 cursor-pointer mb-2">
-              Mi Primer Trabajo Corporate
+            <h1 className="text-2xl sm:text-3xl font-bold cursor-pointer mb-2" style={{ color: 'var(--primary)' }}>
+              Incorporate
             </h1>
           </Link>
           <p className="text-sm sm:text-base text-gray-600">
@@ -100,7 +100,8 @@ export default function Registro() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent text-base"
+                style={{ '--tw-ring-color': 'var(--primary)' } as React.CSSProperties}
                 placeholder="Tu nombre"
               />
             </div>
@@ -115,7 +116,8 @@ export default function Registro() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent text-base"
+                style={{ '--tw-ring-color': 'var(--primary)' } as React.CSSProperties}
                 placeholder="tu@email.com"
               />
             </div>
@@ -130,7 +132,8 @@ export default function Registro() {
                 required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent text-base"
+                style={{ '--tw-ring-color': 'var(--primary)' } as React.CSSProperties}
                 placeholder="Minimo 6 caracteres"
                 minLength={6}
               />
@@ -146,7 +149,8 @@ export default function Registro() {
                 required
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent text-base"
+                style={{ '--tw-ring-color': 'var(--primary)' } as React.CSSProperties}
                 placeholder="Repite tu contrasena"
                 minLength={6}
               />
@@ -155,7 +159,10 @@ export default function Registro() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full text-white px-6 sm:px-8 py-3 rounded-lg text-base sm:text-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ backgroundColor: 'var(--primary)' }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-hover)'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--primary)'}
             >
               {loading ? "Creando cuenta..." : "Crear Cuenta"}
             </button>
@@ -168,7 +175,8 @@ export default function Registro() {
             <div className="mt-3 text-center">
               <Link
                 href="/login"
-                className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                className="font-medium text-sm transition-colors"
+                style={{ color: 'var(--primary)' }}
               >
                 Iniciar sesion
               </Link>

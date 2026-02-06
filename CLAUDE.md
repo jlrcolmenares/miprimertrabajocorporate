@@ -6,9 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Version:** 1.0.0 (January 2026)
 
-Mi Primer Trabajo Corporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication, protected course content, and an admin panel for user management.
+Incorporate is a Spanish-language course platform built with Next.js 15 (App Router) for selling an online course about entering the corporate world. The platform includes user authentication, protected course content, and an admin panel for user management.
 
 **Author:** Jose Luis Colmenares (jlrcc991@hotmail.com)
+**Domain:** incorporate.training
 **Repository:** github.com/jlrcolmenares/miprimertrabajocorporate (public)
 **Production:** Deployed on Vercel (auto-deploys on push to main)
 
@@ -117,7 +118,7 @@ Router checks user type (localStorage: isAdmin, user.hasPaid)
 - Email templates configured in Firebase Console > Authentication > Templates
 - Template used: Password reset (acts as invitation)
 - Customizable: sender name, subject, message body, branding
-- Default sender: noreply@miprimertrabajocorporate.firebaseapp.com
+- Default sender: noreply@incorporate.firebaseapp.com
 - Can configure custom domain for professional email address
 
 **Paid User Flow:**

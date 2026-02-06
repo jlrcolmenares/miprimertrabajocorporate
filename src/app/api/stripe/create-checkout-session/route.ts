@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: CURRENCY.toLowerCase(),
             product_data: {
-              name: "Mi Primer Trabajo Corporate - Curso Completo",
+              name: "Incorporate - Curso Completo",
               description: "Acceso completo al curso de preparación para el mundo corporativo",
             },
             unit_amount: COURSE_PRICE,

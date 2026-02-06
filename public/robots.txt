@@ -1,4 +1,4 @@
-# Robots.txt for Mi Primer Trabajo Corporate
+# Robots.txt for Incorporate (incorporate.training)
 # Solo las páginas públicas deben ser indexadas
 
 User-agent: *
@@ -24,4 +24,4 @@ Disallow: /static/
 Disallow: /*?*
 
 # Sitemap
-# Sitemap: https://miprimertrabajocorporate.vercel.app/
+# Sitemap: https://incorporate.training/sitemap.xml

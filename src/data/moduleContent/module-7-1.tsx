@@ -10,7 +10,7 @@ export const module71Content = (
     </p>
 
     <p>
-      Como verás, el taller de <strong>&quot;Mi Primer Trabajo&quot;</strong> te ha dado
+      Como verás, el taller de <strong>&quot;Incorporate&quot;</strong> te ha dado
       herramientas, pero esto es solo el punto de entrada. Cada uno de los
       módulos forma parte de una caja de herramientas, y la idea es que los
       combines para poder acceder a ellos cuando los necesites.

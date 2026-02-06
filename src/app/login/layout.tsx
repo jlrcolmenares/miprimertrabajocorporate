@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Iniciar Sesión - Mi Primer Trabajo Corporate",
+  title: "Iniciar Sesión - Incorporate",
   robots: {
     index: false,
     follow: false,

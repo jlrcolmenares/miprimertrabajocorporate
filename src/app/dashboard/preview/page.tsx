@@ -53,11 +53,11 @@ export default function PreviewDashboard() {
   };
 
   const handleRequestAccess = () => {
-    const subject = encodeURIComponent("Solicitud de acceso - Mi Primer Trabajo Corporate");
+    const subject = encodeURIComponent("Solicitud de acceso - Incorporate");
     const body = encodeURIComponent(
 `Hola,
 
-Me gustaria solicitar acceso al curso "Mi Primer Trabajo Corporate".
+Me gustaria solicitar acceso al curso "Incorporate".
 
 Mis datos:
 - Nombre: ${user?.name || ""}
@@ -73,9 +73,9 @@ Saludos`
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--background-brand)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto" style={{ borderColor: 'var(--primary)' }}></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -85,15 +85,15 @@ Saludos`
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--background-brand)' }}>
       {/* Navigation */}
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-blue-600 cursor-pointer">
-                  Mi Primer Trabajo
+                <h1 className="text-2xl font-bold cursor-pointer" style={{ color: 'var(--primary)' }}>
+                  Incorporate
                 </h1>
               </Link>
             </div>
@@ -107,7 +107,7 @@ Saludos`
               </Link>
               <button
                 onClick={handleLogout}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                className="text-gray-700 px-3 py-2 text-sm font-medium nav-link-hover rounded-lg"
               >
                 Cerrar Sesion
               </button>
@@ -129,20 +129,20 @@ Saludos`
 
         {/* Course Preview */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-8 text-white">
-            <h2 className="text-2xl font-bold mb-2">Mi Primer Trabajo Corporate</h2>
-            <p className="text-blue-100">
+          <div className="p-8 text-white" style={{ background: 'linear-gradient(to right, var(--primary), var(--primary-hover))' }}>
+            <h2 className="text-2xl font-bold mb-2">Incorporate</h2>
+            <p style={{ color: 'var(--primary-100)' }}>
               El curso completo para conseguir tu primer empleo en el mundo corporativo
             </p>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <p className="text-3xl font-bold text-blue-600">{courseStructure.length}</p>
+              <div className="text-center p-4 rounded-lg" style={{ backgroundColor: 'var(--background-brand)' }}>
+                <p className="text-3xl font-bold" style={{ color: 'var(--primary)' }}>{courseStructure.length}</p>
                 <p className="text-sm text-gray-600">Secciones</p>
               </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <p className="text-3xl font-bold text-blue-600">{totalModules}</p>
+              <div className="text-center p-4 rounded-lg" style={{ backgroundColor: 'var(--background-brand)' }}>
+                <p className="text-3xl font-bold" style={{ color: 'var(--primary)' }}>{totalModules}</p>
                 <p className="text-sm text-gray-600">Modulos</p>
               </div>
             </div>
@@ -151,7 +151,7 @@ Saludos`
             <div className="space-y-2 mb-6">
               {courseStructure.map((section) => (
                 <div key={section.id} className="flex items-center gap-3 text-gray-700 p-2">
-                  <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-semibold">
+                  <span className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold" style={{ backgroundColor: 'var(--accent-brand)', color: 'var(--primary)' }}>
                     {section.order}
                   </span>
                   <span className="font-medium">{section.title}</span>
@@ -163,7 +163,7 @@ Saludos`
             </div>
 
             {/* Request Access Button */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <div className="rounded-lg p-6" style={{ backgroundColor: 'var(--accent-brand)', border: '1px solid var(--primary-100)' }}>
               <div className="text-center">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                   Solicita Acceso al Curso
@@ -173,7 +173,10 @@ Saludos`
                 </p>
                 <button
                   onClick={handleRequestAccess}
-                  className="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all shadow hover:shadow-md"
+                  className="w-full sm:w-auto text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow hover:shadow-md"
+                  style={{ backgroundColor: 'var(--primary)' }}
+                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary-hover)')}
+                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'var(--primary)')}
                 >
                   Solicitar Acceso
                 </button>
@@ -188,7 +191,7 @@ Saludos`
         {/* Profile Card */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold" style={{ backgroundColor: 'var(--primary)' }}>
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1">
@@ -197,7 +200,8 @@ Saludos`
             </div>
             <Link
               href="/dashboard/perfil"
-              className="text-blue-600 hover:text-blue-700 font-medium"
+              className="font-medium transition-colors"
+              style={{ color: 'var(--primary)' }}
             >
               Editar perfil
             </Link>

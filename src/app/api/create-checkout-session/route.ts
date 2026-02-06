@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency: process.env.NEXT_PUBLIC_CURRENCY?.toLowerCase() || "eur",
             product_data: {
-              name: "Mi Primer Trabajo Corporate - Curso Completo",
+              name: "Incorporate - Curso Completo",
               description: "Acceso completo y permanente al curso",
               images: [],
             },
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/curso`,
       metadata: {
-        course: "miprimertrabajocorporate",
+        course: "incorporate",
       },
     });
 
